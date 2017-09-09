@@ -1,22 +1,6 @@
 from django.db import models
-from jsonfield import JSONField
-
-"""
-User Model
-"""
-
-# Enum for roles of a user
-USER_ROLES = (
-    ('O', 'Organiser'),
-    ('P', 'Participant'),
-    ('V', 'Volunteer'),
-    ('M', 'Mentor'),
-)
-
-
-class User(models.Model):
-    id = models.EmailField(primary_key=True)
-
+from api.models.user_model import User, USER_ROLES
+from django.contrib.postgres.fields import JSONField
 
 """ 
 Hackathon Model

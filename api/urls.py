@@ -1,9 +1,8 @@
 from django.contrib import admin
 from django.conf.urls import url
-from api import views
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from api.models import Hackathon
-from api.serializers import HackathonSerializer
+from api.models.hackathon_model import Hackathon
+from api.serializers.hackathon_serializer import HackathonSerializer
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
