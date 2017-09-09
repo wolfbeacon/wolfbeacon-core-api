@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from api.models.hackathon_model import Hackathon
+from api.models.hackathon_model import User
+
+admin.site.register(Hackathon)
+admin.site.register(User)

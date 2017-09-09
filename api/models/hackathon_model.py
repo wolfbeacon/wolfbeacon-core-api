@@ -14,6 +14,9 @@ class Hackathon(models.Model):
     users = models.ManyToManyField(User, through='Membership')
     is_published = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ('id',)
+
 
 """
 Model for Membership
