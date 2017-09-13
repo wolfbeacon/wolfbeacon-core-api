@@ -8,30 +8,57 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
 
-# GET All Hackathons
-"""
-@apiVersion 0.0.1
-@api {get} /hackathons/ Get All Hackathons
-@apiName GetAllHackathons
-@ApiGroup Hackathons
-
-@apiParam {filter=featured} Gets Featured Hackathons
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
-"""
 
 # POST Hackathon
 """
 @apiVersion 0.0.1
-@api {get} /hackathons/ Get All Hackathons
+@api {post} /hackathons/ 1. Create Hackathon
 @apiName CreateHackathon
-@ApiGroup Hackathons
+@apiGroup Hackathons
+@apiDescription NOTE: Schema to send is in 'Request Data Sample'
+
+@apiParamExample {json} Request Data Example:
+{
+    "id": 1,
+    "data": {
+        "exampleHackathonData": {
+            "Name": "Penapps"
+        }
+    }
+}
+
 
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 201 OK
 """
 
+# GET All Hackathons
+"""
+@apiVersion 0.0.1
+@api {get} /hackathons/ 2. Get All Hackathons
+@apiName GetAllHackathons
+@apiGroup Hackathons
+@apiSuccessExample {json} Sample Success Response:
+
+[
+    {
+        "id": 1,
+        "data": {
+            ...
+        },
+        "is_published": false
+    },
+    {
+        "id": 5,
+        "data": {
+            ...
+        },
+        "is_published": false
+    }
+]
+
+Success Response Code: HTTP/1.1 200 OK
+"""
 
 class HackathonListAndCreate(generics.ListCreateAPIView):
     queryset = Hackathon.objects.all()
@@ -41,9 +68,9 @@ class HackathonListAndCreate(generics.ListCreateAPIView):
 # GET Hackathon
 """
 @apiVersion 0.0.1
-@api {get} /hackathon/:id Get Hackathon
+@api {get} /hackathon/:id 3. Get Hackathon
 @apiName GetHackathon
-@ApiGroup Hackathons
+@apiGroup Hackathons
 
 @apiParam {Number} id Hackathon unique ID.
 
@@ -54,9 +81,9 @@ HTTP/1.1 200 OK
 # PUT Hackathon
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:id Update Hackathon
+@api {put} /hackathon/:id 4. Update Hackathon
 @apiName UpdateHackathon
-@ApiGroup Hackathons
+@apiGroup Hackathons
 
 @apiParam {Number} id Hackathon unique ID.
 
@@ -67,9 +94,9 @@ HTTP/1.1 200 OK
 # DELETE Hackathon
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:id Delete Hackathon
+@api {delete} /hackathon/:id 5. Delete Hackathon
 @apiName DeleteHackathon
-@ApiGroup Hackathons
+@apiGroup Hackathons
 
 @apiParam {Number} id Hackathon unique ID.
 
@@ -84,28 +111,51 @@ class HackathonRUD(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = HackathonSerializer
 
 
-# GET All Hackathon Members
-"""
-@apiVersion 0.0.1
-@api {get} /hackathons/ Get All Hackathons
-@apiName GetAllMembersForHackathon
-@ApiGroup HackathonMembers
-
-@apiParam {role=o/p/m/v} Gets Organisers/Participants/Mentor/Volunteers
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
-"""
-
 # POST Members
 """
 @apiVersion 0.0.1
-@api {get} /hackathons/ Get All Hackathons
+@api {post} /hackathons/:id 1. Create Hackathon Member 
 @apiName CreateHackathonMember
-@ApiGroup HackathonMembers
+@apiGroup HackathonMembers
+@apiParam {Number} id Hackathon ID.
+@apiParam {String} role O(Organiser)/ M (Mentor)/ P (Participant)/ V (Volunteer)
+
+@apiParamExample {json} Request Data Example:
+{
+    "id": "github_12345",
+    "role": "M"
+}
+
 
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 201 Created
+"""
+
+# GET All Hackathon Members
+"""
+@apiVersion 0.0.1
+@api {get} /hackathons/:id 2. Get Hackathon Members 
+@apiName GetAllMembersForHackathon
+@apiGroup HackathonMembers
+
+@apiSuccessExample {json} Sample Success Response
+
+[
+    {
+        "hackathon": 1,
+        "member": "github_12345",
+        "role": "P"
+    },
+    .
+    .
+    {
+        "hackathon": 1,
+        "member": "facebook_4342",
+        "role": "M"
+    }
+]
+
+Success Response Code: HTTP/1.1 200 OK
 """
 
 
@@ -140,9 +190,11 @@ class MemberListAndCreate(APIView):
 # GET Hackathon Member
 """
 @apiVersion 0.0.1
-@api {get} /hackathon/:id Get Hackathon Member
+@api {get} /hackathon/:id/members/:user-id 3. Get Hackathon Member
 @apiName GetHackathonMember
-@ApiGroup HackathonMembers
+@apiGroup HackathonMembers
+@apiParam {Number} id Hackathon ID.
+@apiParam {Number} user-id User ID.
 
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
@@ -151,9 +203,12 @@ HTTP/1.1 200 OK
 # PUT Hackathon Member
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:id Update Hackathon
+@api {put} /hackathon/:id/members/:user-id 4. Update Hackathon
 @apiName UpdateHackathonMember
-@ApiGroup HackathonMembers
+@apiGroup HackathonMembers
+@apiParam {Number} id Hackathon ID.
+@apiParam {Number} user-id User ID.
+
 
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
@@ -162,9 +217,11 @@ HTTP/1.1 200 OK
 # DELETE Hackathon Member
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:id Delete Hackathon
+@api {delete} /hackathon/:id 5. Delete Hackathon
 @apiName DeleteHackathonMember
-@ApiGroup HackathonMembers
+@apiGroup HackathonMembers
+@apiParam {Number} id Hackathon ID.
+@apiParam {Number} user-id User ID.
 
 
 @apiSuccessExample {json} Success Response Code:
