@@ -46,6 +46,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='hackathon',
             name='users',
-            field=models.ManyToManyField(through='api.Membership', to='api.User'),
+            field=models.ManyToManyField(through='Member', to='api.User'),
         ),
     ]

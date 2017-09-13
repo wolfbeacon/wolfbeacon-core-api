@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from api.models.hackathon_model import Hackathon
+from api.models.hackathon_member_model import Hackathon
 
 
 class HackathonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hackathon
-        fields = ('id', 'data', 'organiser_email_id', 'is_published')
+        fields = ('id', 'data', 'is_published')

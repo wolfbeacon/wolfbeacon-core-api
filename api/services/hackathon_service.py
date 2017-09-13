@@ -1,10 +1,15 @@
-from api.models.hackathon_model import Hackathon
-from api.models.user_model import User
-from django.db.transaction import atomic
+from api.models.hackathon_member_model import Hackathon
+from django.db.models import Count
+
+"""
+SETTERS
+"""
+
+"""
+GETTERS
+"""
 
 
-@atomic
-def create_hackathon_upserting_user(serialized_hackathon, user_id):
-    serialized_hackathon.save()
-    User.objects.get_or_create(id=user_id)
-
+def get_featured_hackathons():
+    featured_hackathon = (Hackathon.objects.annotate(num_members=Count('members')).filter(members__gt=5))
+    return featured_hackathon
