@@ -13,6 +13,7 @@ RUN set -ex \
             linux-headers \
             pcre-dev \
             postgresql-dev \
+            bash \
     && pyvenv /venv \
     && /venv/bin/pip install -U pip \
     && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install --no-cache-dir -r /requirements.txt" \
@@ -27,20 +28,26 @@ RUN set -ex \
     && apk del .build-deps
 
 # Install npm for apidoc
-RUN apk add --update nodejs nodejs-npm
+RUN apk update && apk add nodejs
 RUN npm install apidoc -g
-
-# Run apidoc
-RUN apidoc -i api/routes -o docs
 
 # Copy application code to the container
 RUN mkdir /code/
 WORKDIR /code/
 ADD . /code/
 
+RUN ls
+
+RUN apk add python3-dev build-base linux-headers pcre-dev
+RUN pip install uwsgi
+
+RUN /venv/bin/pip install uwsgi
+
+# RUN apidoc -i api/routes -o docs/
+
 # Make DB Migrations
-RUN python manage.py makemigrations api
-RUN python manage.py migrate
+# RUN /venv/bin/python manage.py makemigrations api
+# RUN /venv/bin/python manage.py migrate
 
 # uWSGI will listen on this port
 EXPOSE 8000
