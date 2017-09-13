@@ -1,4 +1,4 @@
-docs/
+wolfbeacon/settings.py
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
@@ -151,4 +151,3 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-
