@@ -1,0 +1,12 @@
+click==6.7
+Django==1.11.5
+djangorestframework==3.6.4
+ecdsa==0.13
+future==0.16.0
+itsdangerous==0.24
+psycopg2==2.7.3.1
+pycrypto==2.6.1
+PyJWT==1.5.3
+python-jose==1.4.0
+pytz==2017.2
+six==1.10.0
