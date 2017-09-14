@@ -33,8 +33,13 @@ RUN set -ex \
 RUN apk update && apk add nodejs
 RUN npm install apidoc -g
 
-# Update API docs
-RUN apidoc -i api/routes -o docs/
+# Copy application code to the container
+RUN mkdir /code/
+WORKDIR /code/
+ADD . /code/
+
+# Update apidoc
+RUN apidoc -i api/views -o docs/
 
 # Make DB Migrations
 # RUN /venv/bin/python manage.py makemigrations api
