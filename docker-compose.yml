@@ -1,0 +1,22 @@
+# This is intended for local testing of your production environment only
+
+version: '2'
+
+services:
+  db:
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Admin123
+    restart: always
+    image: postgres:9.6
+    expose:
+      - "5432"
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    links:
+      - db:db
+    ports:
+      - "8000:8000"

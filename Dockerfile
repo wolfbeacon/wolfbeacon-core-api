@@ -9,9 +9,11 @@ RUN set -ex \
             gcc \
             make \
             libc-dev \
-            musl-dev \
+            python3-dev \
+            build-base \
             linux-headers \
             pcre-dev \
+            musl-dev \
             postgresql-dev \
             bash \
     && pyvenv /venv \
@@ -31,19 +33,8 @@ RUN set -ex \
 RUN apk update && apk add nodejs
 RUN npm install apidoc -g
 
-# Copy application code to the container
-RUN mkdir /code/
-WORKDIR /code/
-ADD . /code/
-
-RUN ls
-
-RUN apk add python3-dev build-base linux-headers pcre-dev
-RUN pip install uwsgi
-
-RUN /venv/bin/pip install uwsgi
-
-# RUN apidoc -i api/routes -o docs/
+# Update API docs
+RUN apidoc -i api/routes -o docs/
 
 # Make DB Migrations
 # RUN /venv/bin/python manage.py makemigrations api
