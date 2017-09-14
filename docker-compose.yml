@@ -1,11 +1,10 @@
 # This is intended for local testing of your production environment only
-# Unable to connect to postgres container atm
 
 
 version: '2'
 
 services:
-  db:   
+  postgres:   
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
@@ -19,11 +18,11 @@ services:
 
   app:
     depends_on:
-      - "db"
+      - postgres
     build:
       context: .
       dockerfile: ./Dockerfile
     links:
-      - db:db
+      - postgres
     ports:
       - "8000:8000"
