@@ -2,6 +2,7 @@ from api.models.hackathon_member_model import Hackathon
 from api.models.hackathon_member_model import Member
 from api.serializers.hackathon_serializer import HackathonSerializer
 from api.serializers.member_serializer import MemberSerializer
+from api.services import hackathon_service
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
@@ -14,8 +15,20 @@ from django.http import Http404
 class HackathonListAndCreate(generics.ListCreateAPIView):
     """
     List All Hackathon, Create a new Hackathon
+
+    Optional Parameters: featured=true
     """
-    queryset = Hackathon.objects.all()
+
+    def get_queryset(self):
+        queryset = Hackathon.objects.all()
+
+        # Featured Hackathons
+        featured = self.request.query_params.get('featured', None)
+        if featured == 'true':
+            queryset = hackathon_service.filter_featured_hackathons()
+
+        return queryset
+
     serializer_class = HackathonSerializer
 
 
