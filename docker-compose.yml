@@ -17,11 +17,13 @@ services:
       - "5432"
 
   app:
+    environment:
+      DATABASE_URL: postgres://postgres:Admin123@postgres/postgres
     depends_on:
       - postgres
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./prodtest-Dockerfile
     links:
       - postgres
     ports:

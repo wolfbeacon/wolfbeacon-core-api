@@ -8,7 +8,7 @@ Written in [Python](https://www.python.org/downloads/release/python-352/), power
 
 * [Install virtualenv supporting Python 3.5](https://stackoverflow.com/questions/29934032/virtualenv-python-3-ubuntu-14-04-64-bit) and activate it
 
- `virtualenv venv && source venv/bin/activate`
+  `virtualenv venv && source venv/bin/activate`
 * Make a *settings.py* file from the *settings.template.py file provided
 
   `cp wolfbeacon/settings.template.py wolfbeacon/settings.py`
@@ -20,7 +20,6 @@ Written in [Python](https://www.python.org/downloads/release/python-352/), power
 
  `python manage.py makemigrations api`
  `python manage.py migrate`
-
 * Run the development server
 
  `python manage.py runserver`
@@ -28,7 +27,7 @@ Written in [Python](https://www.python.org/downloads/release/python-352/), power
 
 ## Running with Docker in Production:
 
-Make sure [Docker](https://docs.docker.com/engine/installation/) is installed on your system. We run this API a Dockerized application in production. Assuming Postgres is already running in a separate container remotely accessible and the *settings.py* file is all configured and ready to go, we can simply build a docker image for this application and run it.
+Make sure [Docker](https://docs.docker.com/engine/installation/) is installed on your system. We run this API a Dockerized application in production. Assuming Postgres is already running in a separate container remotely accessible and the *settings.py* file is all configured, we are ready to go. Simply build a docker image for this application and run it.
 
 * `sudo docker build -t wolfbeacon-core-api .`
 * `sudo docker run -p 8000:8000 wolfbeacon-core-api`
@@ -36,6 +35,11 @@ Make sure [Docker](https://docs.docker.com/engine/installation/) is installed on
 This should have have your app up and running, also accessible from localhost:8000.
 
 ## Simulating Production Environment
-* `sudo docker service start`
-* `sudo docker build -t wolfbeacon-hackalist-api .`
-* `sudo docker run -p 8080:80 wolfbeacon-hackalist-api`
+
+We can simulate a production using the docker-compose file provided. It bundles the API and Postgres together.
+
+`sudo docker-compose up --build -d`
+
+To debug issues or sneak around, hop on inside the container
+
+`sudo docker exec -it <container_name_or_id> sh`
