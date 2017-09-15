@@ -18,8 +18,7 @@ Written in [Python](https://www.python.org/downloads/release/python-352/), power
   `sudo pip install -r requirements.txt`
 * Make the Database Migrations
 
-  `python manage.py makemigrations api`
-  `python manage.py migrate`
+  `python manage.py makemigrations api && python manage.py migrate`
 * Run the development server
 
   `python manage.py runserver`
