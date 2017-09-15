@@ -10,158 +10,26 @@ from django.http import Http404
 
 
 # POST Hackathon
-"""
-@apiVersion 0.0.1
-@api {post} /hackathons/ 1. Create Hackathon
-@apiName CreateHackathon
-@apiGroup Hackathons
-@apiDescription NOTE: Schema to send is in 'Request Data Sample'
-
-@apiParamExample {json} Request Data Example:
-{
-    "id": 1,
-    "data": {
-        "exampleHackathonData": {
-            "Name": "Penapps"
-        }
-    }
-}
-
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 201 OK
-"""
-
-# GET All Hackathons
-"""
-@apiVersion 0.0.1
-@api {get} /hackathons/ 2. Get All Hackathons
-@apiName GetAllHackathons
-@apiGroup Hackathons
-@apiSuccessExample {json} Sample Success Response:
-
-[
-    {
-        "id": 1,
-        "data": {
-            ...
-        },
-        "is_published": false
-    },
-    {
-        "id": 5,
-        "data": {
-            ...
-        },
-        "is_published": false
-    }
-]
-
-Success Response Code: HTTP/1.1 200 OK
-"""
 
 class HackathonListAndCreate(generics.ListCreateAPIView):
+    """
+    List All Hackathon, Create a new Hackathon
+    """
     queryset = Hackathon.objects.all()
     serializer_class = HackathonSerializer
-
-
-# GET Hackathon
-"""
-@apiVersion 0.0.1
-@api {get} /hackathon/:id 3. Get Hackathon
-@apiName GetHackathon
-@apiGroup Hackathons
-
-@apiParam {Number} id Hackathon unique ID.
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
-"""
-
-# PUT Hackathon
-"""
-@apiVersion 0.0.1
-@api {put} /hackathon/:id 4. Update Hackathon
-@apiName UpdateHackathon
-@apiGroup Hackathons
-
-@apiParam {Number} id Hackathon unique ID.
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
-"""
-
-# DELETE Hackathon
-"""
-@apiVersion 0.0.1
-@api {delete} /hackathon/:id 5. Delete Hackathon
-@apiName DeleteHackathon
-@apiGroup Hackathons
-
-@apiParam {Number} id Hackathon unique ID.
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 204 NO CONTENT
-
-"""
 
 
 class HackathonRUD(generics.RetrieveUpdateDestroyAPIView):
+    """
+    List a Hackathon, Update a Hackathon, Delete a Hackathon
+    """
     queryset = Hackathon.objects.all()
     serializer_class = HackathonSerializer
-
-
-# POST Members
-"""
-@apiVersion 0.0.1
-@api {post} /hackathons/:id 1. Create Hackathon Member 
-@apiName CreateHackathonMember
-@apiGroup HackathonMembers
-@apiParam {Number} id Hackathon ID.
-@apiParam {String} role O(Organiser)/ M (Mentor)/ P (Participant)/ V (Volunteer)
-
-@apiParamExample {json} Request Data Example:
-{
-    "id": "github_12345",
-    "role": "M"
-}
-
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 201 Created
-"""
-
-# GET All Hackathon Members
-"""
-@apiVersion 0.0.1
-@api {get} /hackathons/:id 2. Get Hackathon Members 
-@apiName GetAllMembersForHackathon
-@apiGroup HackathonMembers
-
-@apiSuccessExample {json} Sample Success Response
-
-[
-    {
-        "hackathon": 1,
-        "member": "github_12345",
-        "role": "P"
-    },
-    .
-    .
-    {
-        "hackathon": 1,
-        "member": "facebook_4342",
-        "role": "M"
-    }
-]
-
-Success Response Code: HTTP/1.1 200 OK
-"""
 
 
 class MemberListAndCreate(APIView):
     """
-    List all hackathons, or create a new hackathon.
+    List all Hackathon Members, Add a new Member to a Hackathon
     """
 
     def get(self, request, *args, **kwargs):
@@ -187,50 +55,11 @@ class MemberListAndCreate(APIView):
         return Response(serialized_member.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# GET Hackathon Member
-"""
-@apiVersion 0.0.1
-@api {get} /hackathon/:id/members/:user-id 3. Get Hackathon Member
-@apiName GetHackathonMember
-@apiGroup HackathonMembers
-@apiParam {Number} id Hackathon ID.
-@apiParam {Number} user-id User ID.
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
-"""
-
-# PUT Hackathon Member
-"""
-@apiVersion 0.0.1
-@api {put} /hackathon/:id/members/:user-id 4. Update Hackathon
-@apiName UpdateHackathonMember
-@apiGroup HackathonMembers
-@apiParam {Number} id Hackathon ID.
-@apiParam {Number} user-id User ID.
-
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
-"""
-
-# DELETE Hackathon Member
-"""
-@apiVersion 0.0.1
-@api {delete} /hackathon/:id 5. Delete Hackathon
-@apiName DeleteHackathonMember
-@apiGroup HackathonMembers
-@apiParam {Number} id Hackathon ID.
-@apiParam {Number} user-id User ID.
-
-
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 204 NO CONTENT
-
-"""
-
-
 class MemberRUD(APIView):
+    """
+    List details for a Hackathon Member, Update a Hackathon Member, Delete a Hackathon Member
+    """
+
     def get_object(self, hackathon_id, user_id):
         try:
             return Member.objects.get(hackathon=hackathon_id, member=user_id)

@@ -41,9 +41,9 @@ ADD . /code/
 # Update apidoc
 RUN apidoc -i api/views -o docs/
 
-# Make DB Migrations
-# RUN /venv/bin/python manage.py makemigrations api
-# RUN /venv/bin/python manage.py migrate
+# Make DB Migrations. Make sure DB is up
+RUN /venv/bin/python manage.py makemigrations api
+RUN /venv/bin/python manage.py migrate
 
 # uWSGI will listen on this port
 EXPOSE 8000

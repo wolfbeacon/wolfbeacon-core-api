@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from api.views.root_view import RootView
 from api.views.hackathon_view import HackathonListAndCreate, HackathonRUD, MemberListAndCreate, MemberRUD
@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     # Root
-    url(r'^$', RootView.as_view()),
+    url(r'^$', RootView.as_view())
 ]
