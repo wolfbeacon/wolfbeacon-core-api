@@ -22,8 +22,8 @@ services:
     depends_on:
       - postgres
     build:
-      context: .
-      dockerfile: ./prodtest-Dockerfile
+      context: ../
+      dockerfile: ./docker-prodtest/prodtest-Dockerfile
     links:
       - postgres
     ports:

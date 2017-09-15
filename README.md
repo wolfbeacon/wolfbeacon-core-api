@@ -38,7 +38,7 @@ This should have have your app up and running, also accessible from localhost:80
 
 We can simulate a production using the docker-compose file provided. It bundles the API and Postgres together.
 
-`sudo docker-compose up --build -d`
+`sudo docker-compose -f docker-prodtest/docker-compose.yml up --build -d`
 
 To debug issues or sneak around, hop on inside the container
 

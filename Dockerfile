@@ -29,17 +29,10 @@ RUN set -ex \
     && apk add --virtual .python-rundeps $runDeps \
     && apk del .build-deps
 
-# Install npm for apidoc
-RUN apk update && apk add nodejs
-RUN npm install apidoc -g
-
 # Copy application code to the container
 RUN mkdir /code/
 WORKDIR /code/
 ADD . /code/
-
-# Update apidoc
-RUN apidoc -i api/views -o docs/
 
 # Make DB Migrations. Make sure DB is up
 RUN /venv/bin/python manage.py makemigrations api

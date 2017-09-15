@@ -29,17 +29,11 @@ RUN set -ex \
     && apk add --virtual .python-rundeps $runDeps \
     && apk del .build-deps
 
-# Install npm for apidoc
-RUN apk update && apk add nodejs
-RUN npm install apidoc -g
 
 # Copy application code to the container
 RUN mkdir /code/
 WORKDIR /code/
 ADD . /code/
-
-# Update apidoc
-RUN apidoc -i api/views -o docs/
 
 # Wait for postgres to respond
 RUN until psql $DATABASE_URL -c '\l'; do \
@@ -56,6 +50,8 @@ EXPOSE 8000
 
 # uWSGI configuration:
 ENV UWSGI_VIRTUALENV=/venv UWSGI_WSGI_FILE=wolfbeacon/wsgi.py UWSGI_HTTP=:8000 UWSGI_MASTER=1 UWSGI_WORKERS=2 UWSGI_THREADS=8 UWSGI_UID=1000 UWSGI_GID=2000 UWSGI_LAZY_APPS=1 UWSGI_WSGI_ENV_BEHAVIOR=holy
+
+ENTRYPOINT ["/code/docker-prodtest/docker-prodtest-entrypoint.sh"]
 
 # Start uWSGI
 CMD ["/venv/bin/uwsgi", "--http-auto-chunked", "--http-keepalive"]
