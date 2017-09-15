@@ -4,13 +4,13 @@ from rest_framework.response import Response
 """
 @apiVersion 0.0.1
 @apiName HeadersRequired
-@api {headers} /*  To pass for API Authentication and Response
+@api {headers} all_endpoints  To pass for API Authentication and Response
 @apiGroup Headers
-@apiDescription These headers need to passed along with every API request
+@apiDescription Headers that need to passed with every API request. Clients require an Auth0 access_token for Authorisation  
 @apiHeaderExample {json} Headers:
 {
     "Content-Type": "application/json"
-    "Authorisation": "Bearer JWT_TOKEN"
+    "Authorisation": "Bearer AUTH0_JWT_ACCESS_TOKEN"
 }
 """
 
