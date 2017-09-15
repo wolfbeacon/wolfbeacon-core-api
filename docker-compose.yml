@@ -1,4 +1,4 @@
-# This is intended for local testing of your production environment only
+# INTENDED FOR LOCAL TESTING OF PRODUCTION ENVIRONMENT ONLY
 
 version: '2'
 
