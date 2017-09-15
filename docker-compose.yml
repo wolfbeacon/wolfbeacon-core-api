@@ -1,6 +1,5 @@
 # This is intended for local testing of your production environment only
 
-
 version: '2'
 
 services:
@@ -17,13 +16,11 @@ services:
       - "5432"
 
   app:
-    environment:
-      DATABASE_URL: postgres://postgres:Admin123@postgres/postgres
     depends_on:
       - postgres
     build:
-      context: ../
-      dockerfile: ./docker-prodtest/prodtest-Dockerfile
+      context: ""
+      dockerfile: docker-prodtest/prodtest-Dockerfile
     links:
       - postgres
     ports:
