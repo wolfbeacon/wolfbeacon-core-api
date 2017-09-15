@@ -2,14 +2,14 @@
 
 WolfBeacon's Core API for Mobile and Analytics.
 
-Written in [Python](https://www.python.org/downloads/release/python-352/), powered by [Django](https://www.djangoproject.com/), [DRF](http://www.django-rest-framework.org/) and [PostgreSQL](https://www.postgresql.org/). API usage docs available at `/docs`.
+Written in [Python](https://www.python.org/downloads/release/python-352/), powered by [Django](https://www.djangoproject.com/), [DRF](http://www.django-rest-framework.org/) and [PostgreSQL](https://www.postgresql.org/).
 
 ## Local Development Setup
 
 * [Install virtualenv supporting Python 3.5](https://stackoverflow.com/questions/29934032/virtualenv-python-3-ubuntu-14-04-64-bit) and activate it
 
   `virtualenv venv && source venv/bin/activate`
-* Make a *settings.py* file from the *settings.template.py file provided
+* Make a *settings.py* file from the *settings.template.py* file provided
 
   `cp wolfbeacon/settings.template.py wolfbeacon/settings.py`
 * Add the *SECRET_KEY*, *DATABASES* and *AUTH0* configuration in the *settings.py* file. *AUTH0* Token validation can be disabled by removing `'api.middleware.auth0.Auth0Middleware',` from *MIDDLEWARE*.
