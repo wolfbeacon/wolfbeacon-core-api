@@ -35,16 +35,6 @@ RUN mkdir /code/
 WORKDIR /code/
 ADD . /code/
 
-# Wait for postgres to respond
-RUN until psql $DATABASE_URL -c '\l'; do \
-      >&2 echo "Postgres is unavailable - sleeping" \
-      sleep 1
-    done
-
-# Make DB Migrations. Make sure DB is up
-RUN /venv/bin/python manage.py makemigrations api
-RUN /venv/bin/python manage.py migrate
-
 # uWSGI will listen on this port
 EXPOSE 8000
 
