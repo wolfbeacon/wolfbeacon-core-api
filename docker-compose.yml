@@ -20,7 +20,7 @@ services:
       - postgres
     build:
       context: ""
-      dockerfile: docker-prodtest/prodtest-Dockerfile
+      dockerfile: ./Dockerfile
     links:
       - postgres
     ports:
