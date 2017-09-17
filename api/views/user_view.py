@@ -35,7 +35,7 @@ class UserCreate(mixins.CreateModelMixin,
 # GET User
 """
 @apiVersion 0.0.1
-@api {get} /users/:id 2. Get User
+@api {get} /users/:id/ 2. Get User
 @apiName GetUser
 @ApiGroup Users
 @apiParam {Number} id User ID.
@@ -46,7 +46,7 @@ HTTP/1.1 200 OK
 # PUT User
 """
 @apiVersion 0.0.1
-@api {put} /users/:id 3. Update User
+@api {put} /users/:id/ 3. Update User
 @apiName UpdateUser
 @ApiGroup Users
 @apiParam {Number} id User ID.
@@ -57,7 +57,7 @@ HTTP/1.1 200 OK
 # DELETE User
 """
 @apiVersion 0.0.1
-@api {delete} /user/:id 4. Delete User
+@api {delete} /user/:id/ 4. Delete User
 @apiName DeleteUser
 @ApiGroup Users
 @apiParam {Number} id User ID.
@@ -78,7 +78,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 # GET User
 """
 @apiVersion 0.0.1
-@api {get} /users/:id/hackathons 5. Get all User Hackathons
+@api {get} /users/:id/hackathons/ 5. Get all User Hackathons
 @apiName GetUserHackathons
 @ApiGroup Users
 @apiParam {Number} id User ID.

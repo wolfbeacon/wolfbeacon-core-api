@@ -82,7 +82,7 @@ class HackathonListAndCreate(generics.ListCreateAPIView):
 # GET Hackathon
 """
 @apiVersion 0.0.1
-@api {get} /hackathon/:id 3. Get Hackathon
+@api {get} /hackathon/:id/ 3. Get Hackathon
 @apiName GetHackathon
 @apiGroup Hackathons
 @apiParam {Number} id Hackathon unique ID.
@@ -93,7 +93,7 @@ HTTP/1.1 200 OK
 # PUT Hackathon
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:id 4. Update Hackathon
+@api {put} /hackathon/:id/ 4. Update Hackathon
 @apiName UpdateHackathon
 @apiGroup Hackathons
 @apiParam {Number} id Hackathon unique ID.
@@ -104,7 +104,7 @@ HTTP/1.1 200 OK
 # DELETE Hackathon
 """
 @apiVersion 0.0.1
-@api {delete} /hackathon/:id 5. Delete Hackathon
+@api {delete} /hackathon/:id/ 5. Delete Hackathon
 @apiName DeleteHackathon
 @apiGroup Hackathons
 @apiParam {Number} id Hackathon unique ID.
@@ -124,7 +124,7 @@ class HackathonRUD(generics.RetrieveUpdateDestroyAPIView):
 # POST Members
 """
 @apiVersion 0.0.1
-@api {post} /hackathons/:id 1. Create Hackathon Member 
+@api {post} /hackathons/:id/ 1. Create Hackathon Member 
 @apiName CreateHackathonMember
 @apiGroup HackathonMembers
 @apiParam {Number} id Hackathon ID.
@@ -141,7 +141,7 @@ HTTP/1.1 201 Created
 # GET All Hackathon Members
 """
 @apiVersion 0.0.1
-@api {get} /hackathons/:id 2. Get Hackathon Members 
+@api {get} /hackathons/:id/ 2. Get Hackathon Members 
 @apiName GetAllMembersForHackathon
 @apiGroup HackathonMembers
 @apiSuccessExample {json} Sample Success Response
@@ -194,7 +194,7 @@ class MemberListAndCreate(APIView):
 # GET Hackathon Member
 """
 @apiVersion 0.0.1
-@api {get} /hackathon/:id/members/:user-id 3. Get Hackathon Member
+@api {get} /hackathon/:id/members/:user-id/ 3. Get Hackathon Member
 @apiName GetHackathonMember
 @apiGroup HackathonMembers
 @apiParam {Number} id Hackathon ID.
@@ -206,7 +206,7 @@ HTTP/1.1 200 OK
 # PUT Hackathon Member
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:id/members/:user-id 4. Update Hackathon
+@api {put} /hackathon/:id/members/:user-id/ 4. Update Hackathon
 @apiName UpdateHackathonMember
 @apiGroup HackathonMembers
 @apiParam {Number} id Hackathon ID.
@@ -218,7 +218,7 @@ HTTP/1.1 200 OK
 # DELETE Hackathon Member
 """
 @apiVersion 0.0.1
-@api {delete} /hackathon/:id 5. Delete Hackathon
+@api {delete} /hackathon/:id/ 5. Delete Hackathon
 @apiName DeleteHackathonMember
 @apiGroup HackathonMembers
 @apiParam {Number} id Hackathon ID.
