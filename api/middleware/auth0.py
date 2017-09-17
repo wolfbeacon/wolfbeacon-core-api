@@ -98,5 +98,5 @@ class Auth0Middleware(object):
                 return JsonResponse(data={"code": "invalid_header",
                                           "description": "Unable to find appropriate key"}, status=401)
 
-            response = self.get_response(request)
-            return response
+        response = self.get_response(request)
+        return response
