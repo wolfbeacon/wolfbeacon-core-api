@@ -34,8 +34,7 @@ RUN mkdir /code/
 WORKDIR /code/
 ADD . /code/
 
-# Make DB Migrations. Make sure DB is up
-RUN /venv/bin/python manage.py makemigrations api
+# Perform DB Migrations
 RUN /venv/bin/python manage.py migrate
 
 # uWSGI will listen on this port

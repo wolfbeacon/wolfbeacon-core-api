@@ -11,11 +11,41 @@ from rest_framework.response import Response
 @apiVersion 0.0.1
 @api {post} /users/ 1. Create User
 @apiName CreateUser
-@ApiGroup Users
+@apiGroup Users
+
+@apiParam {Number} id User ID.
+@apiParam {String{..50}} first_name First Name.
+@apiParam {String{..50}} last_name Last Name.
+@apiParam {String="male","female","other"} gender Gender 
+@apiParam {String} email Email Id 
+@apiParam {String} phone_number (Optional) Phone Number in the format example `+999999` with a max of 15 digits
+@apiParam {String="high-school","undergraduate","graduate","doctoral","other"} level_of_study Indicates Level of Study
+@apiParam {String{..50}} major_of_study College Major
+@apiParam {String{..50}} school_last_attended (Optional) Educational Institution Attended
+@apiParam {Number{1950-}} graduation_year (Optional) Year of Graduation
+@apiParam {Number{1-12}} graduation_month (Optional) Month of Graduation
+@apiParam {String="XS","S","M","L","XL","XXL"} tshirt_size T-Shirt Size
+@apiParam {String{..50}} country (Optional) Country
+@apiParam {String{..50}} city (Optional) City
+@apiParam {Number} pincode (Optional) Pincode
+@apiParam {String{..200}} street_address (Optional) Street Address
+@apiParam {String="YYYY-MM-DD"} birthday Date of Birth
+@apiParam {json} social_urls Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
+@apiParam {String="halal","vegetarian","vegan","gluten-free","lactose-intolerant","none"} dietary_restrictions Dietary Restrictions
+@apiParam {String} special_accommodations (Optional) Special Accommodations Required
+@apiParam {List} technical_interests (Optional) List of Technology sub categories Interested In
+@apiParam {List} technologies (Optional) List of Technologies Interested In
+@apiParam {String} about_me (Optional) Description of User and Interests
+@apiParam {List} sponsors_interested_in (Optional) List of Sponsors User would like to see
+@apiParam {List} prizes_interested_in (Optional) List of Prizes User would like to see
+@apiParam {List} prizes_interested_in (Optional) List of Prizes User would like to see
+@apiParam {List} badges_links (Optional) List of Badges User has won
+@apiParam {Number} experience_points (Optional) Experience points User has been awarded
+@apiParam {List} sticker_book_links (Optional) List of Links to pictures in User's Sticker Book
+
+
 @apiParamExample {json} Request Data Example:
-{
-    "id": "github_12345"
-}
+{"id":"facebook_1133","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"]}
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 201 Created
 """
@@ -37,7 +67,7 @@ class UserCreate(mixins.CreateModelMixin,
 @apiVersion 0.0.1
 @api {get} /users/:id/ 2. Get User
 @apiName GetUser
-@ApiGroup Users
+@apiGroup Users
 @apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
@@ -48,7 +78,8 @@ HTTP/1.1 200 OK
 @apiVersion 0.0.1
 @api {put} /users/:id/ 3. Update User
 @apiName UpdateUser
-@ApiGroup Users
+@apiGroup Users
+@apiDescription JSON field parameters remain the same as listed down in **1. Create User** 
 @apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
@@ -59,28 +90,39 @@ HTTP/1.1 200 OK
 @apiVersion 0.0.1
 @api {delete} /user/:id/ 4. Delete User
 @apiName DeleteUser
-@ApiGroup Users
+@apiGroup Users
 @apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 204 NO CONTENT
 """
 
 
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    List details for a User, Update a User, Delete a User
-    """
-
+class UserDetail(mixins.RetrieveModelMixin,
+                 mixins.UpdateModelMixin,
+                 mixins.DestroyModelMixin,
+                 generics.GenericAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
-# GET User
+    def put(self, request, *args, **kwargs):
+        # Extract id from URL and reinsert, for data safety
+        request.data['id'] = self.kwargs['pk']
+
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+# GET User Hackathons
 """
 @apiVersion 0.0.1
 @api {get} /users/:id/hackathons/ 5. Get all User Hackathons
 @apiName GetUserHackathons
-@ApiGroup Users
+@apiGroup Users
 @apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
@@ -96,6 +138,7 @@ class UserHackathons(APIView):
         # Get user id
         user_id = self.kwargs['pk']
 
-        # Fetch and return user hackathons
+        # Fetch user hackathons
         user_hackathons = user_service.get_user_hackathons(user_id)
+
         return Response(user_hackathons)

@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api.apps.ApiConfig',
 
+    'django.contrib.postgres',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -141,6 +142,6 @@ AUTH0 = {
 
     # Cache Public key here available at https://{AUTH0_DOMAIN}/.well-known/jwks.json
     'PUBLIC_KEY': {},
-    # Allow / ; /docs ; /docs/
-    'ALLOWED_PATHS_REGEX': re.compile("^((^\/$)|(^\/docs(\/)?))$")
+    # Allow /
+    'ALLOWED_PATHS_REGEX': re.compile("^\/$")
 }

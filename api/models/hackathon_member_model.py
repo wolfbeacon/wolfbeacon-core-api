@@ -1,6 +1,7 @@
 from django.db import models
 from api.models.user_model import User
 from django.contrib.postgres.fields import JSONField
+from api.utils.enums import MEMBER_ROLES
 
 """ 
 Hackathon Model
@@ -19,19 +20,16 @@ class Hackathon(models.Model):
 
 """
 Model for Membership
-Acts as Pivot Table
+Junction Table between Hackathon and User table
 """
-
-# Enum for roles of a Member
-MEMBER_ROLES = (
-    ('O', 'Organiser'),
-    ('P', 'Participant'),
-    ('V', 'Volunteer'),
-    ('M', 'Mentor'),
-)
 
 
 class Member(models.Model):
     hackathon = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
     member = models.ForeignKey(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=1, choices=MEMBER_ROLES)
+    role = models.TextField(choices=MEMBER_ROLES)
+
+    # new entity, add event entity id
+
+    class Meta:
+        unique_together = (("hackathon", "member"),)
