@@ -14,23 +14,23 @@ from rest_framework.response import Response
 @apiGroup Users
 
 @apiParam {Number} id User ID.
-@apiParam {String{..50}} first_name First Name.
-@apiParam {String{..50}} last_name Last Name.
+@apiParam {String{50 chars}} first_name First Name.
+@apiParam {String{50 chars}} last_name Last Name.
 @apiParam {String="male","female","other"} gender Gender 
 @apiParam {String} email Email Id 
 @apiParam {String} phone_number (Optional) Phone Number in the format example `+999999` with a max of 15 digits
 @apiParam {String="high-school","undergraduate","graduate","doctoral","other"} level_of_study Indicates Level of Study
-@apiParam {String{..50}} major_of_study College Major
-@apiParam {String{..50}} school_last_attended (Optional) Educational Institution Attended
+@apiParam {String{50 chars}} major_of_study College Major
+@apiParam {String{50 chars}} school_last_attended (Optional) Educational Institution Attended
 @apiParam {Number{1950-}} graduation_year (Optional) Year of Graduation
 @apiParam {Number{1-12}} graduation_month (Optional) Month of Graduation
 @apiParam {String="XS","S","M","L","XL","XXL"} tshirt_size T-Shirt Size
-@apiParam {String{..50}} country (Optional) Country
-@apiParam {String{..50}} city (Optional) City
+@apiParam {String{50 chars}} country (Optional) Country
+@apiParam {String{50 chars}} city (Optional) City
 @apiParam {Number} pincode (Optional) Pincode
-@apiParam {String{..200}} street_address (Optional) Street Address
+@apiParam {String{200 chars}} street_address (Optional) Street Address
 @apiParam {String="YYYY-MM-DD"} birthday Date of Birth
-@apiParam {json} social_urls Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
+@apiParam {JSON} social_urls Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
 @apiParam {String="halal","vegetarian","vegan","gluten-free","lactose-intolerant","none"} dietary_restrictions Dietary Restrictions
 @apiParam {String} special_accommodations (Optional) Special Accommodations Required
 @apiParam {List} technical_interests (Optional) List of Technology sub categories Interested In

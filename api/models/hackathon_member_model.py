@@ -9,7 +9,7 @@ Hackathon Model
 
 
 class Hackathon(models.Model):
-    id = models.PositiveIntegerField(primary_key=True)
+    id = models.TextField(primary_key=True)
     members = models.ManyToManyField(User, through='Member')
     is_published = models.BooleanField(default=False)
     data = JSONField()
@@ -20,16 +20,16 @@ class Hackathon(models.Model):
 
 """
 Model for Membership
-Junction Table between Hackathon and User table
+Acts as Junction Table between Hackathon and User table
 """
 
 
 class Member(models.Model):
-    hackathon = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
-    member = models.ForeignKey(User, on_delete=models.CASCADE)
+    hackathon_id = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     role = models.TextField(choices=MEMBER_ROLES)
 
-    # new entity, add event entity id
+    # TODO Add id link to 'events' entity
 
     class Meta:
-        unique_together = (("hackathon", "member"),)
+        unique_together = (("hackathon_id", "user_id"),)

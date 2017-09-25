@@ -17,14 +17,7 @@ from django.http import Http404
 @apiGroup Hackathons
 @apiDescription NOTE: Schema to send is in 'Request Data Sample'
 @apiParamExample {json} Request Data Example:
-{
-    "id": 1,
-    "data": {
-        "exampleHackathonData": {
-            "Name": "Penapps"
-        }
-    }
-}
+{"id":1,"data":{"exampleHackathonData":{"Name":"Penapps"}}}
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 201 OK
 """
@@ -36,25 +29,8 @@ HTTP/1.1 201 OK
 @apiName GetAllHackathons
 @apiGroup Hackathons
 @apiParam {boolean} featured Returns featured hackathons for featured=true
-
-
 @apiSuccessExample {json} Sample Success Response:
-[
-    {
-        "id": 1,
-        "data": {
-            ...
-        },
-        "is_published": false
-    },
-    {
-        "id": 5,
-        "data": {
-            ...
-        },
-        "is_published": false
-    }
-]
+[{"id":1,"data":{},"is_published":false},{"id":5,"data":{},"is_published":false}]
 Success Response Code: HTTP/1.1 200 OK
 """
 
@@ -124,16 +100,14 @@ class HackathonRUD(generics.RetrieveUpdateDestroyAPIView):
 # POST Members
 """
 @apiVersion 0.0.1
-@api {post} /hackathons/:id/ 1. Create Hackathon Member 
+@api {post} /hackathons/:hackathon-id/members/ 1. Create Hackathon Member 
 @apiName CreateHackathonMember
 @apiGroup HackathonMembers
-@apiParam {Number} id Hackathon ID.
-@apiParam {String} role O(Organiser)/ M (Mentor)/ P (Participant)/ V (Volunteer)
+@apiParam {String} user_id User ID of Member
+@apiParam {String} hackathon_id Hackathon Id Member is to attend
+@apiParam {String="organiser","volunteer","participant","mentor"} role Role of Member in Hackathon
 @apiParamExample {json} Request Data Example:
-{
-    "id": "github_12345",
-    "role": "M"
-}
+{"user_id":"github_12345","hackathon_id":"penapps_1","role":"organiser"}
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 201 Created
 """
@@ -141,24 +115,12 @@ HTTP/1.1 201 Created
 # GET All Hackathon Members
 """
 @apiVersion 0.0.1
-@api {get} /hackathons/:id/ 2. Get Hackathon Members 
+@api {get} /hackathons/:hackathon-id/members/ 2. Get Hackathon Members 
 @apiName GetAllMembersForHackathon
 @apiGroup HackathonMembers
+@apiParam {String} hackathon_id Hackathon Id Member is to attend
 @apiSuccessExample {json} Sample Success Response
-[
-    {
-        "hackathon": 1,
-        "member": "github_12345",
-        "role": "P"
-    },
-    .
-    .
-    {
-        "hackathon": 1,
-        "member": "facebook_4342",
-        "role": "M"
-    }
-]
+[{"hackathon_id":"penapps_1","user_id":"facebook_1133","role":"organiser"},{"hackathon_id":"bigreadhack_1","user_id":"github_1234","role":"volunteer"}]
 Success Response Code: HTTP/1.1 200 OK
 """
 
@@ -194,11 +156,11 @@ class MemberListAndCreate(APIView):
 # GET Hackathon Member
 """
 @apiVersion 0.0.1
-@api {get} /hackathon/:id/members/:user-id/ 3. Get Hackathon Member
+@api {get} /hackathon/:hackathon-id/members/:user-id/ 3. Get Hackathon Member
 @apiName GetHackathonMember
 @apiGroup HackathonMembers
-@apiParam {Number} id Hackathon ID.
-@apiParam {Number} user-id User ID.
+@apiParam {String} user_id User ID of Member
+@apiParam {String} hackathon_id Hackathon Id Member is to attend
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -206,11 +168,11 @@ HTTP/1.1 200 OK
 # PUT Hackathon Member
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:id/members/:user-id/ 4. Update Hackathon
+@api {put} /hackathon/:hackathon-id/members/:user-id/ 4. Update Hackathon Member
 @apiName UpdateHackathonMember
 @apiGroup HackathonMembers
-@apiParam {Number} id Hackathon ID.
-@apiParam {Number} user-id User ID.
+@apiParam {String} user_id User ID of Member
+@apiParam {String} hackathon_id Hackathon Id Member is to attend
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -218,11 +180,11 @@ HTTP/1.1 200 OK
 # DELETE Hackathon Member
 """
 @apiVersion 0.0.1
-@api {delete} /hackathon/:id/ 5. Delete Hackathon
+@api {delete} /hackathon/:hackathon-id/members/:user-id/ 5. Delete Hackathon Member
 @apiName DeleteHackathonMember
 @apiGroup HackathonMembers
-@apiParam {Number} id Hackathon ID.
-@apiParam {Number} user-id User ID.
+@apiParam {String} user_id User ID of Member
+@apiParam {String} hackathon_id Hackathon Id Member is to attend
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 204 NO CONTENT
 """
@@ -257,8 +219,8 @@ class MemberRUD(APIView):
 
         # Add hackathon and member details to data
         data = request.data
-        data['hackathon'] = hackathon_id
-        data['member'] = user_id
+        data['hackathon_id'] = hackathon_id
+        data['user_id'] = user_id
 
         serializer = MemberSerializer(member, data=data)
         if serializer.is_valid():

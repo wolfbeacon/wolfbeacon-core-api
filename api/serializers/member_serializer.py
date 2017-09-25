@@ -5,4 +5,4 @@ from api.models.hackathon_member_model import Member
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ('hackathon', 'member', 'role')
+        fields = ('hackathon_id', 'user_id', 'role')

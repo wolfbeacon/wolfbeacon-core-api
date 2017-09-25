@@ -8,9 +8,9 @@ from api.views.user_view import UserCreate, UserDetail, UserHackathons
 urlpatterns = [
 
     # Hackathons
-    url(r'^hackathons/(?P<pk>\d+)/members/(?P<fk>\w+)/$', MemberRUD.as_view()),
-    url(r'^hackathons/(?P<pk>\d+)/members/$', MemberListAndCreate.as_view()),
-    url(r'^hackathons/(?P<pk>\d+)/$', HackathonRUD.as_view()),
+    url(r'^hackathons/(?P<pk>\w+)/members/(?P<fk>\w+)/$', MemberRUD.as_view()),
+    url(r'^hackathons/(?P<pk>\w+)/members/$', MemberListAndCreate.as_view()),
+    url(r'^hackathons/(?P<pk>\w+)/$', HackathonRUD.as_view()),
     url(r'^hackathons/$', HackathonListAndCreate.as_view()),
 
     # Users
