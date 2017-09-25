@@ -9,13 +9,15 @@ Hackathon Model
 
 
 class Hackathon(models.Model):
-    id = models.TextField(primary_key=True)
-    members = models.ManyToManyField(User, through='Member')
-    is_published = models.BooleanField(default=False)
+    hackathon_id = models.AutoField(primary_key=True)
+    cms_id = models.TextField(unique=True)
     data = JSONField()
+    is_published = models.BooleanField(default=False)
+    members = models.ManyToManyField(User, through='Member')
 
     class Meta:
-        ordering = ('id',)
+        # Order they were created from the CMS
+        ordering = ('cms_id',)
 
 
 """

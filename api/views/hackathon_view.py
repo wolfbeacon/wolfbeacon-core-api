@@ -15,11 +15,15 @@ from django.http import Http404
 @api {post} /hackathons/ 1. Create Hackathon
 @apiName CreateHackathon
 @apiGroup Hackathons
-@apiDescription NOTE: Schema to send is in 'Request Data Sample'
+
+@apiParam {String} cms_id Unique ID given to Hackathon in CMS
+@apiParam {JSON} data Hackathon Data as JSON Object
+
 @apiParamExample {json} Request Data Example:
-{"id":1,"data":{"exampleHackathonData":{"Name":"Penapps"}}}
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 201 OK
+{"cms_id":1,"data":{"exampleHackathonData":{"Name":"Penapps"}}}
+
+@apiSuccessExample {json} Success Response (HTTP/1.1 201 OK):
+{"hackathon_id":1234,cms_id":1,"data":{"exampleHackathonData":{"Name":"Penapps"}}}
 """
 
 # GET All Hackathons
@@ -30,7 +34,6 @@ HTTP/1.1 201 OK
 @apiGroup Hackathons
 @apiParam {boolean} featured Returns featured hackathons for featured=true
 @apiSuccessExample {json} Sample Success Response:
-[{"id":1,"data":{},"is_published":false},{"id":5,"data":{},"is_published":false}]
 Success Response Code: HTTP/1.1 200 OK
 """
 
@@ -58,10 +61,10 @@ class HackathonListAndCreate(generics.ListCreateAPIView):
 # GET Hackathon
 """
 @apiVersion 0.0.1
-@api {get} /hackathon/:id/ 3. Get Hackathon
+@api {get} /hackathon/:hackathon-id/ 3. Get Hackathon
 @apiName GetHackathon
 @apiGroup Hackathons
-@apiParam {Number} id Hackathon unique ID.
+@apiParam {Number} hackathon-id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -69,10 +72,10 @@ HTTP/1.1 200 OK
 # PUT Hackathon
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:id/ 4. Update Hackathon
+@api {put} /hackathon/:hackathon-id/ 4. Update Hackathon
 @apiName UpdateHackathon
 @apiGroup Hackathons
-@apiParam {Number} id Hackathon unique ID.
+@apiParam {Number} hackathon-id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -80,10 +83,10 @@ HTTP/1.1 200 OK
 # DELETE Hackathon
 """
 @apiVersion 0.0.1
-@api {delete} /hackathon/:id/ 5. Delete Hackathon
+@api {delete} /hackathon/:hackathon-id/ 5. Delete Hackathon
 @apiName DeleteHackathon
 @apiGroup Hackathons
-@apiParam {Number} id Hackathon unique ID.
+@apiParam {Number} hackathon-id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 204 NO CONTENT
 """
@@ -141,7 +144,7 @@ class MemberListAndCreate(APIView):
 
         # Append Hackathon Id to data
         data = request.data
-        data['hackathon'] = hackathon_id
+        data['hackathon_id'] = hackathon_id
 
         # Create Membership
         serialized_member = MemberSerializer(data=data)

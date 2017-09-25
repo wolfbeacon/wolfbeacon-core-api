@@ -13,7 +13,7 @@ from rest_framework.response import Response
 @apiName CreateUser
 @apiGroup Users
 
-@apiParam {Number} id User ID.
+@apiParam {String} auth0_id Auth0 ID for User.
 @apiParam {String{50 chars}} first_name First Name.
 @apiParam {String{50 chars}} last_name Last Name.
 @apiParam {String="male","female","other"} gender Gender 
@@ -43,11 +43,11 @@ from rest_framework.response import Response
 @apiParam {Number} experience_points (Optional) Experience points User has been awarded
 @apiParam {List} sticker_book_links (Optional) List of Links to pictures in User's Sticker Book
 
-
 @apiParamExample {json} Request Data Example:
-{"id":"facebook_1133","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"]}
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 201 Created
+{"auth0_id":"facebook_1133","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"]}
+
+@apiSuccessExample {json} Success Response (HTTP/1.1 201 Created):
+{"user_id":2,"auth0_id":"github_1133","created_at":"2017-09-25T16:40:17.403123Z","updated_at":"2017-09-25T16:40:17.403151Z","first_name":"Johny","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[]}
 """
 
 
@@ -65,10 +65,10 @@ class UserCreate(mixins.CreateModelMixin,
 # GET User
 """
 @apiVersion 0.0.1
-@api {get} /users/:id/ 2. Get User
+@api {get} /users/:user-id/ 2. Get User
 @apiName GetUser
 @apiGroup Users
-@apiParam {Number} id User ID.
+@apiParam {Number} user-id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -76,11 +76,11 @@ HTTP/1.1 200 OK
 # PUT User
 """
 @apiVersion 0.0.1
-@api {put} /users/:id/ 3. Update User
+@api {put} /users/:user-id/ 3. Update User
 @apiName UpdateUser
 @apiGroup Users
 @apiDescription JSON field parameters remain the same as listed down in **1. Create User** 
-@apiParam {Number} id User ID.
+@apiParam {Number} user-id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -88,7 +88,7 @@ HTTP/1.1 200 OK
 # DELETE User
 """
 @apiVersion 0.0.1
-@api {delete} /user/:id/ 4. Delete User
+@api {delete} /user/:user-id/ 4. Delete User
 @apiName DeleteUser
 @apiGroup Users
 @apiParam {Number} id User ID.
