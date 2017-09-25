@@ -33,7 +33,7 @@ from django.http import Http404
 @apiName GetAllHackathons
 @apiGroup Hackathons
 @apiParam {boolean} featured Returns featured hackathons for featured=true
-@apiSuccessExample {json} Sample Success Response:
+@apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
 

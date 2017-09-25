@@ -59,7 +59,7 @@ from rest_framework.response import Response
 @apiDescription Note: Additional search parameters may be entered as per schema in **1. Create User**. <br> See Sample Request below
 
 @apiParamExample Sample Request 
-https://api.wolfbeacon.com/users?city="Washington"&graduation_year=2018
+https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
 
 @apiSuccessExample {json} Success Response:
 HTTP/1.1 200 OK
@@ -74,6 +74,13 @@ class UserListAndCreate(generics.ListCreateAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    filter_fields = (
+        'user_id', 'auth0_id', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email', 'phone_number',
+        'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year', 'graduation_month',
+        'tshirt_size', 'country', 'city', 'birthday', 'dietary_restrictions', 'special_accommodations',
+        'about_me', 'experience_points',
+    )
 
 
 # GET User
