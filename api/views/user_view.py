@@ -50,22 +50,36 @@ from rest_framework.response import Response
 {"user_id":2,"auth0_id":"github_1133","created_at":"2017-09-25T16:40:17.403123Z","updated_at":"2017-09-25T16:40:17.403151Z","first_name":"Johny","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[]}
 """
 
+# POST User
+"""
+@apiVersion 0.0.1
+@api {get} /users/ 2. Get all Users
+@apiName GetAllUser
+@apiGroup Users
+@apiDescription Note: Additional search parameters may be entered as per schema in **1. Create User**. <br> See Sample Request below
 
-class UserCreate(mixins.CreateModelMixin,
-                 generics.GenericAPIView):
+@apiParamExample Sample Request 
+https://api.wolfbeacon.com/users?city="Washington"&graduation_year=2018
+
+@apiSuccessExample {json} Success Response:
+HTTP/1.1 200 OK
+[{"user_id":1,"auth0_id":"facebook_1133","created_at":"2017-09-25T16:39:42.249020Z","updated_at":"2017-09-25T16:39:42.249047Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[]},{"user_id":2,"auth0_id":"github_1133","created_at":"2017-09-25T16:40:17.403123Z","updated_at":"2017-09-25T16:40:17.403151Z","first_name":"Johny","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["microsoft"],"prizes_interested_in":["oculus","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[]}]
+
+"""
+
+
+class UserListAndCreate(generics.ListCreateAPIView):
     """
-    Create a new User
+    List All Users, Create a new User
     """
+    queryset = User.objects.all()
     serializer_class = UserSerializer
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
 
 
 # GET User
 """
 @apiVersion 0.0.1
-@api {get} /users/:user-id/ 2. Get User
+@api {get} /users/:user-id/ 3. Get User
 @apiName GetUser
 @apiGroup Users
 @apiParam {Number} user-id User ID.
@@ -76,7 +90,7 @@ HTTP/1.1 200 OK
 # PUT User
 """
 @apiVersion 0.0.1
-@api {put} /users/:user-id/ 3. Update User
+@api {put} /users/:user-id/ 4. Update User
 @apiName UpdateUser
 @apiGroup Users
 @apiDescription JSON field parameters remain the same as listed down in **1. Create User** 
@@ -88,7 +102,7 @@ HTTP/1.1 200 OK
 # DELETE User
 """
 @apiVersion 0.0.1
-@api {delete} /user/:user-id/ 4. Delete User
+@api {delete} /user/:user-id/ 5. Delete User
 @apiName DeleteUser
 @apiGroup Users
 @apiParam {Number} id User ID.
@@ -120,7 +134,7 @@ class UserDetail(mixins.RetrieveModelMixin,
 # GET User Hackathons
 """
 @apiVersion 0.0.1
-@api {get} /users/:id/hackathons/ 5. Get all User Hackathons
+@api {get} /users/:id/hackathons/ 6. Get all User Hackathons
 @apiName GetUserHackathons
 @apiGroup Users
 @apiParam {Number} id User ID.
