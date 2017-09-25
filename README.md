@@ -18,7 +18,7 @@ Written in [Python](https://www.python.org/downloads/release/python-352/), power
   `sudo pip install -r requirements.txt`
 * Make the Database Migrations
 
-  `python manage.py makemigrations api && python manage.py migrate`
+  `python manage.py migrate`
 * Run the development server
 
   `python manage.py runserver`
@@ -37,7 +37,7 @@ This should have have your app up and running, also accessible from localhost:80
 
 We can simulate a production using the docker-compose file provided. It bundles the API and Postgres together. It is recommended to run migrations after both the containers start.
 
-* Comment out lines 38 from the Dockerfile which makes DB Migrations
+* Comment out line 38 from the Dockerfile which makes DB Migrations
 
   `# RUN /venv/bin/python manage.py migrate`
 
