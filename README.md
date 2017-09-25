@@ -38,9 +38,8 @@ This should have have your app up and running, also accessible from localhost:80
 We can simulate a production using the docker-compose file provided. It bundles the API and Postgres together. It is recommended to run migrations after both the containers start.
 
 * Comment out lines 38 from the Dockerfile which makes DB Migrations
-    ```
-    # RUN /venv/bin/python manage.py migrate`
-    ```
+
+  `# RUN /venv/bin/python manage.py migrate`
 
 * `sudo docker-compose up --build -d`
 
