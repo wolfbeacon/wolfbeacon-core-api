@@ -50,13 +50,16 @@ from rest_framework.response import Response
 {"user_id":2,"auth0_id":"github_1133","created_at":"2017-09-25T16:40:17.403123Z","updated_at":"2017-09-25T16:40:17.403151Z","first_name":"Johny","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[]}
 """
 
-# POST User
+# GET ALL Users
 """
 @apiVersion 0.0.1
 @api {get} /users/ 2. Get all Users
 @apiName GetAllUser
 @apiGroup Users
-@apiDescription Note: Additional search parameters may be entered as per schema in **1. Create User**. <br> See Sample Request below
+@apiDescription Allowed Additional search parameters are: <br><br>
+<i>user_id, auth0_id, first_name, last_name, gender, email, phone_number, level_of_study, 
+major_of_study, school_last_attended, graduation_year, graduation_month,tshirt_size, 
+country, city, birthday, dietary_restrictions, special_accommodations, experience_points</i><br><br>
 
 @apiParamExample Sample Request 
 https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
@@ -79,7 +82,7 @@ class UserListAndCreate(generics.ListCreateAPIView):
         'user_id', 'auth0_id', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email', 'phone_number',
         'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year', 'graduation_month',
         'tshirt_size', 'country', 'city', 'birthday', 'dietary_restrictions', 'special_accommodations',
-        'about_me', 'experience_points',
+        'experience_points',
     )
 
 
