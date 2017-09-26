@@ -61,7 +61,7 @@ class HackathonListAndCreate(generics.ListCreateAPIView):
 # GET Hackathon
 """
 @apiVersion 0.0.1
-@api {get} /hackathon/:hackathon-id/ 3. Get Hackathon
+@api {get} /hackathons/:hackathon-id/ 3. Get Hackathon
 @apiName GetHackathon
 @apiGroup Hackathons
 @apiParam {Number} hackathon-id Hackathon unique ID.
@@ -72,7 +72,7 @@ HTTP/1.1 200 OK
 # PUT Hackathon
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:hackathon-id/ 4. Update Hackathon
+@api {put} /hackathons/:hackathon-id/ 4. Update Hackathon
 @apiName UpdateHackathon
 @apiGroup Hackathons
 @apiParam {Number} hackathon-id Hackathon unique ID.
@@ -83,7 +83,7 @@ HTTP/1.1 200 OK
 # DELETE Hackathon
 """
 @apiVersion 0.0.1
-@api {delete} /hackathon/:hackathon-id/ 5. Delete Hackathon
+@api {delete} /hackathons/:hackathon-id/ 5. Delete Hackathon
 @apiName DeleteHackathon
 @apiGroup Hackathons
 @apiParam {Number} hackathon-id Hackathon unique ID.
@@ -159,7 +159,7 @@ class MemberListAndCreate(APIView):
 # GET Hackathon Member
 """
 @apiVersion 0.0.1
-@api {get} /hackathon/:hackathon-id/members/:user-id/ 3. Get Hackathon Member
+@api {get} /hackathons/:hackathon-id/members/:user-id/ 3. Get Hackathon Member
 @apiName GetHackathonMember
 @apiGroup HackathonMembers
 @apiParam {String} user_id User ID of Member
@@ -171,7 +171,7 @@ HTTP/1.1 200 OK
 # PUT Hackathon Member
 """
 @apiVersion 0.0.1
-@api {put} /hackathon/:hackathon-id/members/:user-id/ 4. Update Hackathon Member
+@api {put} /hackathons/:hackathon-id/members/:user-id/ 4. Update Hackathon Member
 @apiName UpdateHackathonMember
 @apiGroup HackathonMembers
 @apiParam {String} user_id User ID of Member
@@ -183,7 +183,7 @@ HTTP/1.1 200 OK
 # DELETE Hackathon Member
 """
 @apiVersion 0.0.1
-@api {delete} /hackathon/:hackathon-id/members/:user-id/ 5. Delete Hackathon Member
+@api {delete} /hackathons/:hackathon-id/members/:user-id/ 5. Delete Hackathon Member
 @apiName DeleteHackathonMember
 @apiGroup HackathonMembers
 @apiParam {String} user_id User ID of Member

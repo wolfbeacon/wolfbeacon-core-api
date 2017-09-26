@@ -4,7 +4,7 @@ from rest_framework.response import Response
 """
 @apiVersion 0.0.1
 @apiName HeadersRequired
-@api {headers} all_endpoints  To pass for API Authentication and Response
+@api {headers} /*all_endpoints*  To pass for API Authentication and Response
 @apiGroup Headers
 @apiDescription Headers that need to passed with every API request. Clients require an Auth0 access_token for Authorisation  
 
