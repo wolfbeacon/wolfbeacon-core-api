@@ -1,4 +1,4 @@
-from api.models.hackathon_member_model import Hackathon
+from api.models import Hackathon
 from django.db.models import Count
 
 """

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models.hackathon_member_model import Member
+from api.models import Member
 
 
 class MemberSerializer(serializers.ModelSerializer):

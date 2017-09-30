@@ -1,5 +1,5 @@
-from api.models.hackathon_member_model import Member
-from api.serializers.member_serializer import MemberSerializer
+from api.models import Member
+from api.serializers import MemberSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView

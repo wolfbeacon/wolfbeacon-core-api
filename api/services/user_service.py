@@ -1,4 +1,4 @@
-from api.models.hackathon_member_model import Hackathon, Member
+from api.models import Hackathon, Member
 
 """
 SETTERS

@@ -1,5 +1,5 @@
-from api.models.hackathon_member_model import Hackathon
-from api.serializers.hackathon_serializer import HackathonSerializer
+from api.models import Hackathon
+from api.serializers import HackathonSerializer
 from api.services import hackathon_service
 from rest_framework import viewsets
 
