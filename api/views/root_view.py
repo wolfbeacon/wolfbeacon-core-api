@@ -21,7 +21,7 @@ from rest_framework.response import Response
 
 class RootView(APIView):
     """
-    List all snippets, or create a new snippet.
+    Root of WolfBeacon API
     """
 
     def get(self, request, format=None):
