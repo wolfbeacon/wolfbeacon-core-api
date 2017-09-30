@@ -3,6 +3,7 @@ from django.contrib import admin
 from api.views.hackathon_view import HackathonViewSet
 from api.views.user_view import UserViewSet
 from api.views.member_view import MemberListAndCreate, MemberRUD
+from api.views.root_view import RootView
 from rest_framework.routers import DefaultRouter
 
 # Register CRUD Entities with Router
@@ -22,5 +23,8 @@ urlpatterns = [
 
     # Admin
     url(r'^admin/', admin.site.urls),
+
+    # Root
+    url(r'^$', RootView.as_view())
 
 ]
