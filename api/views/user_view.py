@@ -1,10 +1,6 @@
-from api.models.user_model import User
+from rest_framework import viewsets
 from api.serializers.user_serializer import UserSerializer
-from rest_framework import mixins
-from rest_framework.views import APIView
-from rest_framework import generics
-from api.services import user_service
-from rest_framework.response import Response
+from api.models.user_model import User
 
 # POST User
 """
@@ -70,22 +66,6 @@ HTTP/1.1 200 OK
 
 """
 
-
-class UserListAndCreate(generics.ListCreateAPIView):
-    """
-    List All Users, Create a new User
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-    filter_fields = (
-        'user_id', 'auth0_id', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email', 'phone_number',
-        'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year', 'graduation_month',
-        'tshirt_size', 'country', 'city', 'birthday', 'dietary_restrictions', 'special_accommodations',
-        'experience_points',
-    )
-
-
 # GET User
 """
 @apiVersion 0.0.1
@@ -120,27 +100,6 @@ HTTP/1.1 200 OK
 HTTP/1.1 204 NO CONTENT
 """
 
-
-class UserDetail(mixins.RetrieveModelMixin,
-                 mixins.UpdateModelMixin,
-                 mixins.DestroyModelMixin,
-                 generics.GenericAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        # Extract id from URL and reinsert, for data safety
-        request.data['id'] = self.kwargs['pk']
-
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-
-
 # GET User Hackathons
 """
 @apiVersion 0.0.1
@@ -153,16 +112,16 @@ HTTP/1.1 200 OK
 """
 
 
-class UserHackathons(APIView):
+class UserViewSet(viewsets.ModelViewSet):
     """
-    List All Hackathons User is a part of
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
     """
-
-    def get(self, request, *args, **kwargs):
-        # Get user id
-        user_id = self.kwargs['pk']
-
-        # Fetch user hackathons
-        user_hackathons = user_service.get_user_hackathons(user_id)
-
-        return Response(user_hackathons)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    filter_fields = (
+        'user_id', 'auth0_id', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email', 'phone_number',
+        'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year', 'graduation_month',
+        'tshirt_size', 'country', 'city', 'birthday', 'dietary_restrictions', 'special_accommodations',
+        'experience_points',
+    )

@@ -1,26 +1,26 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from api.views.root_view import RootView
-from api.views.hackathon_view import HackathonListAndCreate, HackathonRUD, MemberListAndCreate, MemberRUD
-from api.views.user_view import UserListAndCreate, UserDetail
+from api.views.hackathon_view import HackathonViewSet
+from api.views.user_view import UserViewSet
+from api.views.member_view import MemberListAndCreate, MemberRUD
+from rest_framework.routers import DefaultRouter
 
+# Register CRUD Entities with Router
+router = DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'hackathons', HackathonViewSet,
+                base_name='hackathon')  # Note: Mention base_name due to custom query_set
+
+# Additional URLs
 urlpatterns = [
 
-    # Members
-    url(r'^hackathons/(?P<pk>\d+)/members/(?P<fk>\d+)/$', MemberRUD.as_view()),
-    url(r'^hackathons/(?P<pk>\d+)/members/$', MemberListAndCreate.as_view()),
+    url(r'^', include(router.urls)),
 
     # Hackathons
-    url(r'^hackathons/(?P<pk>\d+)/$', HackathonRUD.as_view()),
-    url(r'^hackathons/$', HackathonListAndCreate.as_view()),
-
-    # Users
-    url(r'^users/(?P<pk>\d+)/$', UserDetail.as_view()),
-    url(r'^users/$', UserListAndCreate.as_view()),
+    url(r'^hackathons/(?P<pk>\d+)/members/(?P<fk>\d+)/$', MemberRUD.as_view()),
+    url(r'^hackathons/(?P<pk>\d+)/members/$', MemberListAndCreate.as_view()),
 
     # Admin
     url(r'^admin/', admin.site.urls),
 
-    # Root
-    url(r'^$', RootView.as_view())
 ]
