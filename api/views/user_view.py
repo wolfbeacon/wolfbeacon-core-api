@@ -100,17 +100,6 @@ HTTP/1.1 200 OK
 HTTP/1.1 204 NO CONTENT
 """
 
-# GET User Hackathons
-"""
-@apiVersion 0.0.1
-@api {get} /users/:user-id/hackathons/ 6. Get all User Hackathons
-@apiName GetUserHackathons
-@apiGroup Users
-@apiParam {Number} user-id User ID.
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
-"""
-
 
 class UserViewSet(viewsets.ModelViewSet):
     """
