@@ -1,9 +1,7 @@
 from api.models import Member
 from api.serializers import MemberSerializer
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from django.http import Http404
+
+from rest_framework import mixins, generics
 
 # POST Members
 """
@@ -33,32 +31,31 @@ Success Response Code: HTTP/1.1 200 OK
 """
 
 
-class MemberListAndCreate(APIView):
+class MemberListAndCreate(mixins.ListModelMixin,
+                          mixins.CreateModelMixin,
+                          generics.GenericAPIView):
     """
-    List all Hackathon Members, Add a new Member to a Hackathon
+    List All Users, Create a new Event
     """
+    serializer_class = MemberSerializer
 
-    def get(self, request, *args, **kwargs):
-        members = Member.objects.all()
-        serializer = MemberSerializer(members, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, *args, **kwargs):
-        # Get hackathon key from request
+    # Custom queryset
+    def get_queryset(self):
+        # Get Hackathon id
         hackathon_id = self.kwargs['pk']
 
-        # Append Hackathon Id to data
-        data = request.data
-        data['hackathon_id'] = hackathon_id
+        # Filter for Hackathon's members
+        queryset = Member.objects.filter(hackathon_id=hackathon_id)
+        return queryset
 
-        # Create Membership
-        serialized_member = MemberSerializer(data=data)
-        if serialized_member.is_valid():
-            serialized_member.save()
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
-            return Response(serialized_member.data, status=status.HTTP_201_CREATED)
+    def post(self, request, *args, **kwargs):
+        # Reinsert hackathon_id key for sanity
+        request.data['hackathon_id'] = self.kwargs['pk']
 
-        return Response(serialized_member.errors, status=status.HTTP_400_BAD_REQUEST)
+        return self.create(request, *args, **kwargs)
 
 
 # GET Hackathon Member
@@ -78,6 +75,20 @@ HTTP/1.1 200 OK
 @apiVersion 0.0.1
 @api {put} /hackathons/:hackathon-id/members/:user-id/ 4. Update Hackathon Member
 @apiName UpdateHackathonMember
+@apiDescription Supports Partial Update
+@apiGroup HackathonMembers
+@apiParam {String} user_id User ID of Member
+@apiParam {String} hackathon_id Hackathon Id Member is to attend
+@apiSuccessExample {json} Success Response Code:
+HTTP/1.1 200 OK
+"""
+
+# PUT Hackathon Member
+"""
+@apiVersion 0.0.1
+@api {patch} /hackathons/:hackathon-id/members/:user-id/ 5. Partially Update Hackathon Member
+@apiName PartiallyUpdateHackathonMember
+@apiDescription Supports Partial Update
 @apiGroup HackathonMembers
 @apiParam {String} user_id User ID of Member
 @apiParam {String} hackathon_id Hackathon Id Member is to attend
@@ -88,7 +99,7 @@ HTTP/1.1 200 OK
 # DELETE Hackathon Member
 """
 @apiVersion 0.0.1
-@api {delete} /hackathons/:hackathon-id/members/:user-id/ 5. Delete Hackathon Member
+@api {delete} /hackathons/:hackathon-id/members/:user-id/ 6. Delete Hackathon Member
 @apiName DeleteHackathonMember
 @apiGroup HackathonMembers
 @apiParam {String} user_id User ID of Member
@@ -98,49 +109,32 @@ HTTP/1.1 204 NO CONTENT
 """
 
 
-class MemberRUD(APIView):
+class MemberRUD(mixins.RetrieveModelMixin,
+                mixins.UpdateModelMixin,
+                mixins.DestroyModelMixin,
+                generics.GenericAPIView):
     """
-    List details for a Hackathon Member, Update a Hackathon Member, Delete a Hackathon Member
+    Get Visitor, Update Visitor, Delete Visitor
     """
-
-    def get_object(self, hackathon_id, user_id):
-        try:
-            return Member.objects.get(hackathon=hackathon_id, member=user_id)
-
-        except Member.DoesNotExist:
-            raise Http404
+    serializer_class = MemberSerializer
+    queryset = Member.objects.all()
 
     def get(self, request, *args, **kwargs):
-        # Get Member
-        hackathon_id = self.kwargs['pk']
-        user_id = self.kwargs['fk']
-        member = self.get_object(hackathon_id, user_id)
-
-        serializer = MemberSerializer(member)
-        return Response(serializer.data)
+        return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
-        # Get Member
-        hackathon_id = self.kwargs['pk']
-        user_id = self.kwargs['fk']
-        member = self.get_object(hackathon_id, user_id)
+        # Re-Insert keys for sanity
+        request.data['hackathon_id'] = self.kwargs['pk']
+        request.data['user_id'] = self.kwargs['fk']
 
-        # Add hackathon and member details to data
-        data = request.data
-        data['hackathon_id'] = hackathon_id
-        data['user_id'] = user_id
+        return self.update(request, *args, **kwargs)
 
-        serializer = MemberSerializer(member, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def patch(self, request, *args, **kwargs):
+        # Re-Insert keys for sanity
+        request.data['hackathon_id'] = self.kwargs['pk']
+        request.data['user_id'] = self.kwargs['fk']
+
+        return self.partial_update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        # Get Member
-        hackathon_id = self.kwargs['pk']
-        user_id = self.kwargs['fk']
-        member = self.get_object(hackathon_id, user_id)
-
-        member.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return self.destroy(request, *args, **kwargs)

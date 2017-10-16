@@ -47,6 +47,20 @@ HTTP/1.1 200 OK
 @apiVersion 0.0.1
 @api {put} /hackathons/:hackathon-id/ 4. Update Hackathon
 @apiName UpdateHackathon
+@apiDescription Complete Entity update, expects all mandatory fields
+@apiGroup Hackathons
+@apiParam {Number} hackathon-id Hackathon unique ID.
+@apiSuccessExample {json} Success Response Code:
+HTTP/1.1 200 OK
+"""
+
+
+# PATCH User
+"""
+@apiVersion 0.0.1
+@api {patch} /users/:user-id/ 5. Partially Update Hackathon
+@apiName PartiallyUpdateHackathon
+@apiDescription Supports partial updates.
 @apiGroup Hackathons
 @apiParam {Number} hackathon-id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
@@ -56,7 +70,7 @@ HTTP/1.1 200 OK
 # DELETE Hackathon
 """
 @apiVersion 0.0.1
-@api {delete} /hackathons/:hackathon-id/ 5. Delete Hackathon
+@api {delete} /hackathons/:hackathon-id/ 6. Delete Hackathon
 @apiName DeleteHackathon
 @apiGroup Hackathons
 @apiParam {Number} hackathon-id Hackathon unique ID.

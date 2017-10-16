@@ -9,9 +9,10 @@ from api.models.user_model import User
 @apiName CreateUser
 @apiGroup Users
 
-@apiParam {String} auth0_id Auth0 ID for User.
-@apiParam {String{50 chars}} first_name First Name.
-@apiParam {String{50 chars}} last_name Last Name.
+@apiParam {String} auth0_id Auth0 ID for User
+@apiParam {String{50 chars}} first_name First Name
+@apiParam {String{50 chars}} last_name Last Name
+@apiParam {String{30 chars}} username Username
 @apiParam {String="male","female","other"} gender Gender 
 @apiParam {String} email Email Id 
 @apiParam {String} phone_number (Optional) Phone Number in the format example `+999999` with a max of 15 digits
@@ -83,7 +84,19 @@ HTTP/1.1 200 OK
 @api {put} /users/:user-id/ 4. Update User
 @apiName UpdateUser
 @apiGroup Users
-@apiDescription JSON field parameters remain the same as listed down in **1. Create User** 
+@apiDescription Complete Entity update, expects all mandatory fields 
+@apiParam {Number} user-id User ID.
+@apiSuccessExample {json} Success Response Code:
+HTTP/1.1 200 OK
+"""
+
+# PATCH User
+"""
+@apiVersion 0.0.1
+@api {patch} /users/:user-id/ 5. Partially Update User
+@apiName PartiallyUpdateUser
+@apiGroup Users
+@apiDescription Supports partial updates 
 @apiParam {Number} user-id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
@@ -92,7 +105,7 @@ HTTP/1.1 200 OK
 # DELETE User
 """
 @apiVersion 0.0.1
-@api {delete} /user/:user-id/ 5. Delete User
+@api {delete} /user/:user-id/ 6. Delete User
 @apiName DeleteUser
 @apiGroup Users
 @apiParam {Number} id User ID.
@@ -109,8 +122,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_fields = (
-        'user_id', 'auth0_id', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email', 'phone_number',
-        'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year', 'graduation_month',
-        'tshirt_size', 'country', 'city', 'birthday', 'dietary_restrictions', 'special_accommodations',
-        'experience_points',
+        'user_id', 'auth0_id', 'username', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email',
+        'phone_number', 'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year',
+        'graduation_month', 'tshirt_size', 'country', 'city', 'zipcode', 'birthday', 'dietary_restrictions',
+        'special_accommodations', 'experience_points',
     )

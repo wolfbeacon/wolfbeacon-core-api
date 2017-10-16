@@ -3,7 +3,7 @@ from django.contrib.postgres.fields import JSONField
 from api.utils.enums import GENDER, LEVEL_OF_STUDY, TSHIRT_SIZES, DIETARY_RESTRICTIONS
 from django.contrib.postgres.fields import ArrayField
 from api.utils.constants import MEDIUM_FIELD_LIMIT, PHONE_FIELD_LIMIT, GRAD_YEAR_LOWER_LIMIT, LONG_FIELD_LIMIT, \
-    PHONE_NUMBER_ERR_MSG
+    PHONE_NUMBER_ERR_MSG, SHORT_FIELD_LIMIT
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.validators import RegexValidator
 
@@ -11,6 +11,7 @@ from django.core.validators import RegexValidator
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     auth0_id = models.TextField(unique=True)
+    username = models.CharField(max_length=SHORT_FIELD_LIMIT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     first_name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
@@ -27,7 +28,7 @@ class User(models.Model):
     tshirt_size = models.TextField(choices=TSHIRT_SIZES)
     country = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
     city = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
-    pincode = models.PositiveIntegerField(null=True)
+    zipcode = models.PositiveIntegerField(null=True)
     street_address = models.CharField(max_length=LONG_FIELD_LIMIT, null=True)
     birthday = models.DateField()
     social_urls = JSONField(null=True)
