@@ -12,13 +12,21 @@ Written in [Python 3](https://www.python.org/downloads/release/python-352/), pow
 * Make a *settings.py* file from the *settings.template.py* file provided
 
   `cp wolfbeacon/settings.template.py wolfbeacon/settings.py`
-* Add the *SECRET_KEY*, *DATABASES* and *AUTH0* configuration in the *settings.py* file. *AUTH0* Token validation can be disabled by removing `'api.middleware.auth0.Auth0Middleware',` from *MIDDLEWARE*.
+
+* Add the *SECRET_KEY*, *DATABASES* and *AUTH0* configuration in the *settings.py* file.
+
+  <br>
+
+  Adding the *AUTH0* configuration (used for [Auth0](https://auth0.com) Token Validation) is optional. Hence for local testing, disable it by removing `'api.middleware.auth0.Auth0Middleware',` from *MIDDLEWARE*.
+
 * Install the requirements
 
   `sudo pip install -r requirements.txt`
+
 * Make the Database Migrations
 
   `python manage.py migrate`
+
 * Run the development server
 
   `python manage.py runserver`
