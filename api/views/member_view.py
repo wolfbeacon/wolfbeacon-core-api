@@ -6,7 +6,7 @@ from rest_framework import mixins, generics
 # POST Members
 """
 @apiVersion 0.0.1
-@api {post} /hackathons/:hackathon-id/members/ 1. Create Hackathon Member 
+@api {post} /hackathons/:hackathon_id/members/ 1. Create Hackathon Member 
 @apiName CreateHackathonMember
 @apiGroup HackathonMembers
 @apiParam {String} user_id User ID of Member
@@ -21,7 +21,7 @@ HTTP/1.1 201 Created
 # GET All Hackathon Members
 """
 @apiVersion 0.0.1
-@api {get} /hackathons/:hackathon-id/members/ 2. Get Hackathon Members 
+@api {get} /hackathons/:hackathon_id/members/ 2. Get Hackathon Members 
 @apiName GetAllMembersForHackathon
 @apiGroup HackathonMembers
 @apiParam {String} hackathon_id Hackathon Id Member is to attend
@@ -61,7 +61,7 @@ class MemberListAndCreate(mixins.ListModelMixin,
 # GET Hackathon Member
 """
 @apiVersion 0.0.1
-@api {get} /hackathons/:hackathon-id/members/:user-id/ 3. Get Hackathon Member
+@api {get} /hackathons/:hackathon_id/members/:user_id/ 3. Get Hackathon Member
 @apiName GetHackathonMember
 @apiGroup HackathonMembers
 @apiParam {String} user_id User ID of Member
@@ -73,7 +73,7 @@ HTTP/1.1 200 OK
 # PUT Hackathon Member
 """
 @apiVersion 0.0.1
-@api {put} /hackathons/:hackathon-id/members/:user-id/ 4. Update Hackathon Member
+@api {put} /hackathons/:hackathon_id/members/:user_id/ 4. Update Hackathon Member
 @apiName UpdateHackathonMember
 @apiDescription Supports Partial Update
 @apiGroup HackathonMembers
@@ -86,7 +86,7 @@ HTTP/1.1 200 OK
 # PUT Hackathon Member
 """
 @apiVersion 0.0.1
-@api {patch} /hackathons/:hackathon-id/members/:user-id/ 5. Partially Update Hackathon Member
+@api {patch} /hackathons/:hackathon_id/members/:user_id/ 5. Partially Update Hackathon Member
 @apiName PartiallyUpdateHackathonMember
 @apiDescription Supports Partial Update
 @apiGroup HackathonMembers
@@ -99,7 +99,7 @@ HTTP/1.1 200 OK
 # DELETE Hackathon Member
 """
 @apiVersion 0.0.1
-@api {delete} /hackathons/:hackathon-id/members/:user-id/ 6. Delete Hackathon Member
+@api {delete} /hackathons/:hackathon_id/members/:user_id/ 6. Delete Hackathon Member
 @apiName DeleteHackathonMember
 @apiGroup HackathonMembers
 @apiParam {String} user_id User ID of Member

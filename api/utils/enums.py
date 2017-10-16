@@ -43,3 +43,10 @@ APPLICATION_STATUS = (
     ('applied', 'Applied'),
     ('rejected', 'Rejected'),
 )
+
+HACKATHON_TYPE = (
+    ('high-school', 'High School Hackathon'),
+    ('university', 'University Level Hackathon'),
+    ('corporate', 'Corporate Level Hackathon'),
+    ('other', 'Other')
+)

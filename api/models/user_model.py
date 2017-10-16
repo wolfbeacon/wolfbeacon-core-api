@@ -1,7 +1,6 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField, ArrayField
 from api.utils.enums import GENDER, LEVEL_OF_STUDY, TSHIRT_SIZES, DIETARY_RESTRICTIONS
-from django.contrib.postgres.fields import ArrayField
 from api.utils.constants import MEDIUM_FIELD_LIMIT, PHONE_FIELD_LIMIT, GRAD_YEAR_LOWER_LIMIT, LONG_FIELD_LIMIT, \
     PHONE_NUMBER_ERR_MSG, SHORT_FIELD_LIMIT
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -10,10 +9,11 @@ from django.core.validators import RegexValidator
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
-    auth0_id = models.TextField(unique=True)
-    username = models.CharField(max_length=SHORT_FIELD_LIMIT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    auth0_id = models.TextField(unique=True)
+    username = models.CharField(max_length=SHORT_FIELD_LIMIT)
     first_name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
     last_name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
     gender = models.TextField(choices=GENDER)
@@ -31,7 +31,7 @@ class User(models.Model):
     zipcode = models.PositiveIntegerField(null=True)
     street_address = models.CharField(max_length=LONG_FIELD_LIMIT, null=True)
     birthday = models.DateField()
-    social_urls = JSONField(null=True)
+    social_links = JSONField(null=True)
     dietary_restrictions = models.TextField(choices=DIETARY_RESTRICTIONS)
     special_accommodations = models.TextField(null=True)
     technical_interests = ArrayField(models.TextField(blank=False, null=False), blank=True, default=list)

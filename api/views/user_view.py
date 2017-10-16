@@ -27,7 +27,7 @@ from api.models.user_model import User
 @apiParam {Number} pincode (Optional) Pincode
 @apiParam {String{200 chars}} street_address (Optional) Street Address
 @apiParam {String="YYYY-MM-DD"} birthday Date of Birth
-@apiParam {JSON} social_urls Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
+@apiParam {JSON} social_links Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
 @apiParam {String="halal","vegetarian","vegan","gluten-free","lactose-intolerant","none"} dietary_restrictions Dietary Restrictions
 @apiParam {String} special_accommodations (Optional) Special Accommodations Required
 @apiParam {List} technical_interests (Optional) List of Technology sub categories Interested In
@@ -41,10 +41,10 @@ from api.models.user_model import User
 @apiParam {List} sticker_book_links (Optional) List of Links to pictures in User's Sticker Book
 
 @apiParamExample {json} Request Data Example:
-{"auth0_id":"facebook_1234","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"]}
+{"auth0_id":"facebook_1234","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"]}
 
-@apiSuccessExample {json} Success Response (HTTP/1.1 201 Created):
-{"user_id":7,"auth0_id":"facebook_1234","created_at":"2017-09-30T19:19:38.450302Z","updated_at":"2017-09-30T19:19:38.450330Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon_id":1}]}
+@apiSuccessExample {json} Success Response Code:
+HTTP/1.1 201 Created
 
 """
 
@@ -62,30 +62,29 @@ country, city, birthday, dietary_restrictions, special_accommodations, experienc
 @apiParamExample Sample Request 
 https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
 
-@apiSuccessExample {json} Success Response:
-HTTP/1.1 200 OK
-[{"user_id":1,"auth0_id":"facebook_1133","created_at":"2017-09-25T16:39:42.249020Z","updated_at":"2017-09-25T16:39:42.249047Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon_id":4}]},{"user_id":2,"auth0_id":"github_1133","created_at":"2017-09-25T16:40:17.403123Z","updated_at":"2017-09-25T16:40:17.403151Z","first_name":"Johny","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[]},{"user_id":3,"auth0_id":"github_1123313","created_at":"2017-09-25T19:15:08.059534Z","updated_at":"2017-09-25T19:15:08.059560Z","first_name":"Kaku","last_name":"Doe","gender":"male","email":"kaku.asdf@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"GQDG University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon_id":4}]},{"user_id":4,"auth0_id":"bakkki_1123313","created_at":"2017-09-25T19:18:38.255049Z","updated_at":"2017-09-25T19:18:38.255072Z","first_name":"Kaku","last_name":"Doe","gender":"male","email":"kaku.asdf@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"GQDG University","graduation_year":2019,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[]},{"user_id":5,"auth0_id":"baki_1123313","created_at":"2017-09-25T19:42:27.691278Z","updated_at":"2017-09-25T19:42:27.691326Z","first_name":"Kaku","last_name":"Doe","gender":"male","email":"kaku.asdf@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"GQDG University","graduation_year":2019,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Jonesboro","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[]},{"user_id":6,"auth0_id":"bki_1123313","created_at":"2017-09-25T19:43:18.990982Z","updated_at":"2017-09-25T19:43:18.991010Z","first_name":"Kaku","last_name":"Doe","gender":"male","email":"kaku.asdf@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"GQDG University","graduation_year":2014,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Jonesboro","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[]},{"user_id":7,"auth0_id":"facebook_1234","created_at":"2017-09-30T19:19:38.450302Z","updated_at":"2017-09-30T19:19:38.450330Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_urls":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon_id":1}]}]
+@apiSuccessExample {json} Success Response (HTTP/1.1 200 OK):
+[{"user_id":1,"auth0_id":"facebook_1133","created_at":"2017-09-25T16:39:42.249020Z","updated_at":"2017-09-25T16:39:42.249047Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon_id":4}]},{"user_id":2,"auth0_id":"github_1133","created_at":"2017-09-25T16:40:17.403123Z","updated_at":"2017-09-25T16:40:17.403151Z","first_name":"Johny","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[]}]
 """
 
 # GET User
 """
 @apiVersion 0.0.1
-@api {get} /users/:user-id/ 3. Get User
+@api {get} /users/:user_id/ 3. Get User
 @apiName GetUser
 @apiGroup Users
-@apiParam {Number} user-id User ID.
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
+@apiParam {Number} user_id User ID.
+@apiSuccessExample {json} Success Response (HTTP/1.1 200 OK):
+{"user_id":7,"auth0_id":"facebook_1234","created_at":"2017-09-30T19:19:38.450302Z","updated_at":"2017-09-30T19:19:38.450330Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon_id":1}]}
 """
 
 # PUT User
 """
 @apiVersion 0.0.1
-@api {put} /users/:user-id/ 4. Update User
+@api {put} /users/:user_id/ 4. Update User
 @apiName UpdateUser
 @apiGroup Users
 @apiDescription Complete Entity update, expects all mandatory fields 
-@apiParam {Number} user-id User ID.
+@apiParam {Number} user_id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -93,11 +92,11 @@ HTTP/1.1 200 OK
 # PATCH User
 """
 @apiVersion 0.0.1
-@api {patch} /users/:user-id/ 5. Partially Update User
+@api {patch} /users/:user_id/ 5. Partially Update User
 @apiName PartiallyUpdateUser
 @apiGroup Users
 @apiDescription Supports partial updates 
-@apiParam {Number} user-id User ID.
+@apiParam {Number} user_id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -105,7 +104,7 @@ HTTP/1.1 200 OK
 # DELETE User
 """
 @apiVersion 0.0.1
-@api {delete} /user/:user-id/ 6. Delete User
+@api {delete} /user/:user_id/ 6. Delete User
 @apiName DeleteUser
 @apiGroup Users
 @apiParam {Number} id User ID.
