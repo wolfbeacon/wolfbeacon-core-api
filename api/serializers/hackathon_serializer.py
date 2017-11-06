@@ -10,7 +10,7 @@ class HackathonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Hackathon
-        fields = ('hackathon_id', 'created_at', 'updated_at', 'is_published', 'name', 'version',
+        fields = ('id', 'created_at', 'updated_at', 'is_published', 'name', 'version',
                   'description', 'logo', 'hackathon_type', 'location', 'shipping_address',
                   'travel_reimbursements', 'social_links', 'university_name', 'contact_email',
                   'start_time', 'end_time', 'bus_routes', 'timetable', 'sponsors', 'judges',
@@ -19,16 +19,16 @@ class HackathonSerializer(serializers.ModelSerializer):
                   'no_of_organisers', 'no_of_volunteers', 'no_of_participants', 'no_of_mentors'
                   )
 
-        read_only_fields = ('hackathon_id', 'created_at', 'updated_at',)
+        read_only_fields = ('id', 'created_at', 'updated_at',)
 
     def get_no_of_organisers(self, obj):
-        return len(obj.member_set.filter(role='organiser'))
+        return len(obj.hacker_set.filter(role='organiser'))
 
     def get_no_of_volunteers(self, obj):
-        return len(obj.member_set.filter(role='volunteer'))
+        return len(obj.hacker_set.filter(role='volunteer'))
 
     def get_no_of_participants(self, obj):
-        return len(obj.member_set.filter(role='participant'))
+        return len(obj.hacker_set.filter(role='participant'))
 
     def get_no_of_mentors(self, obj):
-        return len(obj.member_set.filter(role='mentor'))
+        return len(obj.hacker_set.filter(role='mentor'))

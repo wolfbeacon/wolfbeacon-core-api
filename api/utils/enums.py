@@ -4,7 +4,7 @@ GENDER = (
     ('other', 'Other')
 )
 
-MEMBER_ROLES = (
+HACKER_ROLES = (
     ('organiser', 'Organiser'),
     ('participant', 'Participant'),
     ('volunteer', 'Volunteer'),
