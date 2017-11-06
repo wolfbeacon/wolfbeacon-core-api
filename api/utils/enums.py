@@ -50,3 +50,14 @@ HACKATHON_TYPE = (
     ('corporate', 'Corporate Level Hackathon'),
     ('other', 'Other')
 )
+
+EVENT_TYPE = (
+    ('mini-mlh-event', 'Mini MLH Event'),
+    ('general-workshop', 'General Workshop'),
+    ('company-workshop', 'Company Workshop'),
+    ('speaker-session', 'Speaker Session'),
+    ('fireside-chats', 'Fireside Chats'),
+    ('open-source-event', 'General Open Source Event'),
+    ('activity', 'General Activity'),
+)
+

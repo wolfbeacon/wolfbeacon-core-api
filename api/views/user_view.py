@@ -10,22 +10,22 @@ from api.models.user_model import User
 @apiGroup Users
 
 @apiParam {String} auth0_id Auth0 ID for User
-@apiParam {String{50 chars}} first_name First Name
-@apiParam {String{50 chars}} last_name Last Name
-@apiParam {String{30 chars}} username Username
+@apiParam {String{150 chars}} first_name First Name
+@apiParam {String{150 chars}} last_name Last Name
+@apiParam {String{50 chars}} username Username
 @apiParam {String="male","female","other"} gender Gender 
 @apiParam {String} email Email Id 
 @apiParam {String} phone_number (Optional) Phone Number in the format example `+999999` with a max of 15 digits
 @apiParam {String="high-school","undergraduate","graduate","doctoral","other"} level_of_study Indicates Level of Study
-@apiParam {String{50 chars}} major_of_study College Major
-@apiParam {String{50 chars}} school_last_attended (Optional) Educational Institution Attended
+@apiParam {String{150 chars}} major_of_study College Major
+@apiParam {String{150 chars}} school_last_attended (Optional) Educational Institution Attended
 @apiParam {Number{1950-}} graduation_year (Optional) Year of Graduation
 @apiParam {Number{1-12}} graduation_month (Optional) Month of Graduation
 @apiParam {String="XS","S","M","L","XL","XXL"} tshirt_size T-Shirt Size
-@apiParam {String{50 chars}} country (Optional) Country
-@apiParam {String{50 chars}} city (Optional) City
+@apiParam {String{150 chars}} country (Optional) Country
+@apiParam {String{150 chars}} city (Optional) City
 @apiParam {Number} pincode (Optional) Pincode
-@apiParam {String{200 chars}} street_address (Optional) Street Address
+@apiParam {String{350 chars}} street_address (Optional) Street Address
 @apiParam {String="YYYY-MM-DD"} birthday Date of Birth
 @apiParam {JSON} social_links Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
 @apiParam {String="halal","vegetarian","vegan","gluten-free","lactose-intolerant","none"} dietary_restrictions Dietary Restrictions
@@ -69,10 +69,9 @@ https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
 # GET User
 """
 @apiVersion 0.0.1
-@api {get} /users/:id/ 3. Get User
+@api {get} /users/:user-id/ 3. Get User
 @apiName GetUser
 @apiGroup Users
-@apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response (HTTP/1.1 200 OK):
 {"id":7,"auth0_id":"facebook_1234","created_at":"2017-09-30T19:19:38.450302Z","updated_at":"2017-09-30T19:19:38.450330Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon":1}]}
 """
@@ -80,11 +79,10 @@ https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
 # PUT User
 """
 @apiVersion 0.0.1
-@api {put} /users/:id/ 4. Update User
+@api {put} /users/:user-id/ 4. Update User
 @apiName UpdateUser
 @apiGroup Users
 @apiDescription Complete Entity update, expects all mandatory fields 
-@apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -92,11 +90,10 @@ HTTP/1.1 200 OK
 # PATCH User
 """
 @apiVersion 0.0.1
-@api {patch} /users/:id/ 5. Partially Update User
+@api {patch} /users/:user-id/ 5. Partially Update User
 @apiName PartiallyUpdateUser
 @apiGroup Users
 @apiDescription Supports partial updates 
-@apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -104,7 +101,7 @@ HTTP/1.1 200 OK
 # DELETE User
 """
 @apiVersion 0.0.1
-@api {delete} /user/:id/ 6. Delete User
+@api {delete} /user/:user-id/ 6. Delete User
 @apiName DeleteUser
 @apiGroup Users
 @apiParam {Number} id User ID.

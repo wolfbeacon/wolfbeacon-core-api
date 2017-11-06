@@ -10,13 +10,13 @@ from rest_framework import viewsets
 @apiName CreateHackathon
 @apiGroup Hackathons 
 
-@apiParam {String{50 chars}} name Name/Title of Hackathon
+@apiParam {String{150 chars}} name Name/Title of Hackathon
 @apiParam {String} version Denotes which iteration of this hackathon
 @apiParam {String} description Short note about the uniqueness of the Hackathon
 @apiParam {String} logo (Optional) Link to Logo of Hackathon
 @apiParam {String="high-school","university","corporate","other"} hackathon_type Type of Hackathon denoting audience
-@apiParam {String{200 chars}} location Location of Hackathon Example: EX: 756 Finch Ave, Toronto, Canada
-@apiParam {String{200 chars}} shipping_address Address for contact or shipping goodies. Example: Apt # 708, 1365 Military Trail	
+@apiParam {String{350 chars}} location Location of Hackathon Example: EX: 756 Finch Ave, Toronto, Canada
+@apiParam {String{350 chars}} shipping_address Address for contact or shipping goodies. Example: Apt # 708, 1365 Military Trail	
 @apiParam {String} travel_reimbursements Note about travel reimbursements
 @apiParam {String} university_name (Optional) For University MLH Rankings
 @apiParam {String} contact_email Email Id to reach out to hackathon organisers
@@ -56,10 +56,9 @@ https://api.wolfbeacon.com/hackathons?featured=true&hackathon_type=university
 # GET Hackathon
 """
 @apiVersion 0.0.1
-@api {get} /hackathons/:id/ 3. Get Hackathon
+@api {get} /hackathons/:hackathon-id/ 3. Get Hackathon
 @apiName GetHackathon
 @apiGroup Hackathons
-@apiParam {Number} id Hackathon unique ID.
 
 @apiSuccessExample {json} Success Response (HTTP/1.1 200 OK):
 {"id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"twitter":"https://twitter.com/hackthevalley","facebook":"https://facebook.com/htv"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-04T06:00:00+08:00","end_time":"2017-09-05T06:00:00+08:00","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":0,"no_of_volunteers":0,"no_of_participants":0,"no_of_mentors":0}
@@ -68,11 +67,10 @@ https://api.wolfbeacon.com/hackathons?featured=true&hackathon_type=university
 # PUT Hackathon
 """
 @apiVersion 0.0.1
-@api {put} /hackathons/:id/ 4. Update Hackathon
+@api {put} /hackathons/:hackathon-id/ 4. Update Hackathon
 @apiName UpdateHackathon
 @apiDescription Complete Entity update, expects all mandatory fields
 @apiGroup Hackathons
-@apiParam {Number} id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -80,11 +78,10 @@ HTTP/1.1 200 OK
 # PATCH User
 """
 @apiVersion 0.0.1
-@api {patch} hackathons/:id/ 5. Partially Update Hackathon
+@api {patch} hackathons/:hackathon-id/ 5. Partially Update Hackathon
 @apiName PartiallyUpdateHackathon
 @apiDescription Supports partial updates.
 @apiGroup Hackathons
-@apiParam {Number} id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -92,10 +89,9 @@ HTTP/1.1 200 OK
 # DELETE Hackathon
 """
 @apiVersion 0.0.1
-@api {delete} /hackathons/:id/ 6. Delete Hackathon
+@api {delete} /hackathons/:hackathon-id/ 6. Delete Hackathon
 @apiName DeleteHackathon
 @apiGroup Hackathons
-@apiParam {Number} id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 204 NO CONTENT
 """
