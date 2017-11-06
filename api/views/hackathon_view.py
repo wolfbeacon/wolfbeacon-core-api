@@ -8,7 +8,7 @@ from rest_framework import viewsets
 @apiVersion 0.0.1
 @api {post} /hackathons/ 1. Create Hackathon
 @apiName CreateHackathon
-@apiGroup Hackathons
+@apiGroup Hackathons 
 
 @apiParam {String{50 chars}} name Name/Title of Hackathon
 @apiParam {String} version Denotes which iteration of this hackathon
@@ -31,7 +31,7 @@ from rest_framework import viewsets
 @apiParam {json} prizes Prizes
 
 @apiParamExample {json} Request Data Example:
-{"hackathon_id":"hackthevalley_1","name":"Hack The Valley","description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-04 06:00:00+0800","end_time":"2017-09-05 06:00:00+0800","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{}}
+{"hackathon":"hackthevalley_1","name":"Hack The Valley","description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-04 06:00:00+0800","end_time":"2017-09-05 06:00:00+0800","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{}}
 
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 201 Created
@@ -43,36 +43,36 @@ HTTP/1.1 201 Created
 @api {get} /hackathons/ 2. Get All Hackathons
 @apiName GetAllHackathons
 @apiGroup Hackathons
-@apiDescription Allowed additional search parameters are <br><br> <i>hackathon_id, created_at, updated_at, is_published, name, version, description, hackathon_type, location, shipping_address, university_name, contact_email, start_time, end_time,</i> <br><br>
+@apiDescription Allowed additional search parameters are <br><br> <i>id, created_at, updated_at, is_published, name, version, description, hackathon_type, location, shipping_address, university_name, contact_email, start_time, end_time,</i> <br><br>
 @apiParam {boolean=true,false} featured Returns featured hackathons for featured=true
 
 @apiParamExample Sample Request 
 https://api.wolfbeacon.com/hackathons?featured=true&hackathon_type=university
 
 @apiSuccessExample {json} Success Response Code (HTTP/1.1 200 OK):
-[{"hackathon_id":1,"created_at":"2017-10-16T16:27:27.403807Z","updated_at":"2017-10-16T16:27:27.403856Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-03T22:00:00Z","end_time":"2017-09-04T22:00:00Z","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":1,"no_of_volunteers":0,"no_of_participants":750,"no_of_mentors":0},{"hackathon_id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Noth","version":1,"description":"Hackathon at University of Waterloo","logo":"hello://google.com","hackathon_type":"university","location":"Waterloo, Canada","shipping_address":"Road 123, Waterloo, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"university_name":"University Of Waterloo","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-03T22:00:00Z","end_time":"2017-09-04T22:00:00Z","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":2,"no_of_volunteers":0,"no_of_participants":1200,"no_of_mentors":0}]
+[{"id":1,"created_at":"2017-10-16T16:27:27.403807Z","updated_at":"2017-10-16T16:27:27.403856Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-03T22:00:00Z","end_time":"2017-09-04T22:00:00Z","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":1,"no_of_volunteers":0,"no_of_participants":750,"no_of_mentors":0},{"id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Noth","version":1,"description":"Hackathon at University of Waterloo","logo":"hello://google.com","hackathon_type":"university","location":"Waterloo, Canada","shipping_address":"Road 123, Waterloo, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"university_name":"University Of Waterloo","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-03T22:00:00Z","end_time":"2017-09-04T22:00:00Z","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":2,"no_of_volunteers":0,"no_of_participants":1200,"no_of_mentors":0}]
 """
 
 # GET Hackathon
 """
 @apiVersion 0.0.1
-@api {get} /hackathons/:hackathon_id/ 3. Get Hackathon
+@api {get} /hackathons/:id/ 3. Get Hackathon
 @apiName GetHackathon
 @apiGroup Hackathons
-@apiParam {Number} hackathon_id Hackathon unique ID.
+@apiParam {Number} id Hackathon unique ID.
 
 @apiSuccessExample {json} Success Response (HTTP/1.1 200 OK):
-{"hackathon_id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"twitter":"https://twitter.com/hackthevalley","facebook":"https://facebook.com/htv"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-04T06:00:00+08:00","end_time":"2017-09-05T06:00:00+08:00","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":0,"no_of_volunteers":0,"no_of_participants":0,"no_of_mentors":0}
+{"id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"twitter":"https://twitter.com/hackthevalley","facebook":"https://facebook.com/htv"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-04T06:00:00+08:00","end_time":"2017-09-05T06:00:00+08:00","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":0,"no_of_volunteers":0,"no_of_participants":0,"no_of_mentors":0}
 """
 
 # PUT Hackathon
 """
 @apiVersion 0.0.1
-@api {put} /hackathons/:hackathon_id/ 4. Update Hackathon
+@api {put} /hackathons/:id/ 4. Update Hackathon
 @apiName UpdateHackathon
 @apiDescription Complete Entity update, expects all mandatory fields
 @apiGroup Hackathons
-@apiParam {Number} hackathon_id Hackathon unique ID.
+@apiParam {Number} id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -80,11 +80,11 @@ HTTP/1.1 200 OK
 # PATCH User
 """
 @apiVersion 0.0.1
-@api {patch} hackathons/:hackathon_id/ 5. Partially Update Hackathon
+@api {patch} hackathons/:id/ 5. Partially Update Hackathon
 @apiName PartiallyUpdateHackathon
 @apiDescription Supports partial updates.
 @apiGroup Hackathons
-@apiParam {Number} hackathon_id Hackathon unique ID.
+@apiParam {Number} id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -92,10 +92,10 @@ HTTP/1.1 200 OK
 # DELETE Hackathon
 """
 @apiVersion 0.0.1
-@api {delete} /hackathons/:hackathon_id/ 6. Delete Hackathon
+@api {delete} /hackathons/:id/ 6. Delete Hackathon
 @apiName DeleteHackathon
 @apiGroup Hackathons
-@apiParam {Number} hackathon_id Hackathon unique ID.
+@apiParam {Number} id Hackathon unique ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 204 NO CONTENT
 """
@@ -119,7 +119,7 @@ class HackathonViewSet(viewsets.ModelViewSet):
 
     serializer_class = HackathonSerializer
     filter_fields = (
-        'hackathon_id', 'created_at', 'updated_at', 'is_published', 'name', 'version',
+        'id', 'created_at', 'updated_at', 'is_published', 'name', 'version',
         'description', 'hackathon_type', 'location', 'shipping_address', 'university_name',
         'contact_email', 'start_time', 'end_time',
     )

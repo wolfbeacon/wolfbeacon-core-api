@@ -63,28 +63,28 @@ country, city, birthday, dietary_restrictions, special_accommodations, experienc
 https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
 
 @apiSuccessExample {json} Success Response (HTTP/1.1 200 OK):
-[{"user_id":1,"auth0_id":"facebook_1133","created_at":"2017-09-25T16:39:42.249020Z","updated_at":"2017-09-25T16:39:42.249047Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon_id":4}]},{"user_id":2,"auth0_id":"github_1133","created_at":"2017-09-25T16:40:17.403123Z","updated_at":"2017-09-25T16:40:17.403151Z","first_name":"Johny","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[]}]
+[{"user_id":1,"auth0_id":"facebook_1133","created_at":"2017-09-25T16:39:42.249020Z","updated_at":"2017-09-25T16:39:42.249047Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon":4}]},{"user_id":2,"auth0_id":"github_1133","created_at":"2017-09-25T16:40:17.403123Z","updated_at":"2017-09-25T16:40:17.403151Z","first_name":"Johny","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[]}]
 """
 
 # GET User
 """
 @apiVersion 0.0.1
-@api {get} /users/:user_id/ 3. Get User
+@api {get} /users/:id/ 3. Get User
 @apiName GetUser
 @apiGroup Users
-@apiParam {Number} user_id User ID.
+@apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response (HTTP/1.1 200 OK):
-{"user_id":7,"auth0_id":"facebook_1234","created_at":"2017-09-30T19:19:38.450302Z","updated_at":"2017-09-30T19:19:38.450330Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon_id":1}]}
+{"id":7,"auth0_id":"facebook_1234","created_at":"2017-09-30T19:19:38.450302Z","updated_at":"2017-09-30T19:19:38.450330Z","first_name":"John","last_name":"Doe","gender":"male","email":"john.doe@gmail.com","phone_number":"+999999999","level_of_study":"undergraduate","major_of_study":"Computer Science and Engineering","school_last_attended":"XYZ University","graduation_year":2018,"graduation_month":6,"tshirt_size":"XL","country":"USA","city":"Washington","birthday":"1196-04-19","social_links":{"github":"https://github.com/bholagabbar"},"dietary_restrictions":"vegetarian","special_accommodations":"Well, nothing as such","technical_interests":["Backend","Databases"],"technologies":["Java","Python"],"about_me":"ADIDAC - All Day I Dream About Coding","sponsors_interested_in":["github","digitalocean","facebook","microsoft"],"prizes_interested_in":["holo lens","2000$ AWS Credits"],"badges_links":[],"experience_points":0,"sticker_book_links":[],"hackathons":[{"hackathon":1}]}
 """
 
 # PUT User
 """
 @apiVersion 0.0.1
-@api {put} /users/:user_id/ 4. Update User
+@api {put} /users/:id/ 4. Update User
 @apiName UpdateUser
 @apiGroup Users
 @apiDescription Complete Entity update, expects all mandatory fields 
-@apiParam {Number} user_id User ID.
+@apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -92,11 +92,11 @@ HTTP/1.1 200 OK
 # PATCH User
 """
 @apiVersion 0.0.1
-@api {patch} /users/:user_id/ 5. Partially Update User
+@api {patch} /users/:id/ 5. Partially Update User
 @apiName PartiallyUpdateUser
 @apiGroup Users
 @apiDescription Supports partial updates 
-@apiParam {Number} user_id User ID.
+@apiParam {Number} id User ID.
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -104,7 +104,7 @@ HTTP/1.1 200 OK
 # DELETE User
 """
 @apiVersion 0.0.1
-@api {delete} /user/:user_id/ 6. Delete User
+@api {delete} /user/:id/ 6. Delete User
 @apiName DeleteUser
 @apiGroup Users
 @apiParam {Number} id User ID.
@@ -121,7 +121,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_fields = (
-        'user_id', 'auth0_id', 'username', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email',
+        'id', 'auth0_id', 'username', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email',
         'phone_number', 'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year',
         'graduation_month', 'tshirt_size', 'country', 'city', 'zipcode', 'birthday', 'dietary_restrictions',
         'special_accommodations', 'experience_points',

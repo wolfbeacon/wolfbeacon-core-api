@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'user_id', 'auth0_id', 'username', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email',
+            'id', 'auth0_id', 'username', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email',
             'phone_number', 'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year',
             'graduation_month', 'tshirt_size', 'country', 'city', 'zipcode', 'street_address', 'birthday',
             'social_links', 'dietary_restrictions', 'special_accommodations', 'technical_interests',
@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 
             'hackathons'
         )
-        read_only_fields = ('user_id', 'created_at', 'updated_at',)
+        read_only_fields = ('id', 'created_at', 'updated_at',)
 
     def get_hackathons(self, obj):
-        return obj.member_set.all().values('hackathon_id', 'role')
+        return obj.hacker_set.all().values('id', 'role')
