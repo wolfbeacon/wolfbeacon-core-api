@@ -6,6 +6,12 @@ from api.utils.constants import MEDIUM_FIELD_LIMIT, PHONE_FIELD_LIMIT, GRAD_YEAR
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.validators import RegexValidator
 
+""" 
+User Model
+- User profile. More permanent data is stored here. 
+- Every User has a different Hacker entity profile for different Hackathons 
+"""
+
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)

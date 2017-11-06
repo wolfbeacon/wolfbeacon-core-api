@@ -3,7 +3,9 @@ from api.models import Hackathon, User
 from api.utils.enums import HACKER_ROLES
 
 """ 
-Hackathon Model
+Hacker Model
+- Hackers are users attending the event. Every Hackathon has it's own set of Hackers
+- Hackers are linked to users and hackathon by respective foreign keys
 """
 
 
