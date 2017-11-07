@@ -104,7 +104,7 @@ def add_hacker():
 
 
 def add_hacker_to_event():
-    url = BASE_URL + 'hackathons/1/events/hackers/'
+    url = BASE_URL + 'hackathons/1/events/1/hackers/'
     res = requests.post(url, json={
         "hacker": 1
     })
