@@ -1,8 +1,8 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
-from api.views import RootView, HackathonViewSet, UserViewSet, HackerListAndCreate, HackerRUD, \
-    EventListAndCreate, EventRUD, EventHackerListAndCreate
+from api.views import RootView, HackathonViewSet, UserViewSet, HackerCreate, HackerList, HackerRUD, \
+    EventList, EventCreate, EventRUD, EventHackerAdd
 
 # Register CRUD Entities with Router
 router = DefaultRouter()
@@ -28,12 +28,17 @@ urlpatterns = [
 
     # Hacker Entity
     url(r'^hackathons/(?P<fk>\d+)/hackers/(?P<pk>\d+)/$', HackerRUD.as_view()),
-    url(r'^hackathons/(?P<fk>\d+)/hackers/$', HackerListAndCreate.as_view()),
+    url(r'^hackathons/(?P<fk>\d+)/hackers/$', HackerCreate.as_view()),
+    url(r'^hackathons/(?P<fk>\d+)/events/(?P<pk>\d+)/hackers/$', EventHackerAdd.as_view()),
+
+    # List Hackers with search params
+    url(r'^hackers/$', HackerList.as_view()),
 
     # Event Entity
     url(r'^hackathons/(?P<fk>\d+)/events/(?P<pk>\d+)/$', EventRUD.as_view()),
-    url(r'^hackathons/(?P<fk>\d+)/events/$', EventListAndCreate.as_view()),
+    url(r'^hackathons/(?P<fk>\d+)/events/$', EventCreate.as_view()),
 
-    # Event Hacker Entities
-    url(r'^hackathons/(?P<fk>\d+)/events/(?P<pk>\d+)/hackers/$', EventHackerListAndCreate.as_view()),
+    # List Events with search params
+    url(r'^events/$', EventList.as_view()),
+
 ]

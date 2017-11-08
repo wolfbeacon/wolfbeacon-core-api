@@ -2,6 +2,57 @@ from api.models import Hacker
 from api.serializers import HackerSerializer
 
 from rest_framework import mixins, generics
+from rest_framework.response import Response
+from rest_framework import status
+
+# GET All Hackers
+"""
+@apiVersion 0.0.1
+@api {get} /hackathons/:hackathon-id/hackers/ 2. Get Hackers 
+@apiName GetAllHackersForHackathon
+@apiGroup Hackers
+
+
+@apiParam {Integer} hackathon ID of Hackathon this Event is a part of
+@apiParam {Integer} event ID of Event
+@apiParam (String) role Role of Hacker
+
+@apiParamExample Sample Request 
+https://api.wolfbeacon.com/hackers?hackathon=1
+
+Success Response Code
+HTTP/1.1 200 OK
+"""
+
+
+class HackerList(mixins.ListModelMixin,
+
+                 generics.GenericAPIView):
+    """
+    List All Hackers
+    """
+    serializer_class = HackerSerializer
+
+    filter_fields = (
+        'id', 'hackathon', 'user', 'role'
+    )
+
+    def get_queryset(self):
+        queryset = Hacker.objects.all()
+
+        # Filter for Hackers at events
+        try:
+            event_id = int(self.request.query_params.get('event', None))
+            queryset = queryset.filter(event__id=event_id)
+
+        except Exception as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
 
 # POST Hackers
 """
@@ -19,40 +70,17 @@ from rest_framework import mixins, generics
 {"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","role":"organiser"}
 """
 
-# GET All Hackers
-"""
-@apiVersion 0.0.1
-@api {get} /hackathons/:hackathon-id/hackers/ 2. Get Hackers 
-@apiName GetAllHackersForHackathon
-@apiGroup Hackers
-@apiSuccessExample {json} Sample Success Response
-[{"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","role":"volunteer"},{"id":2,"hackathon":1,"user":2,"created_at":"2017-11-06T12:42:00.335711Z","updated_at":"2017-11-06T12:42:00.335746Z","role":"organiser"}]
-Success Response Code: HTTP/1.1 200 OK
-"""
 
-
-class HackerListAndCreate(mixins.ListModelMixin,
-                          mixins.CreateModelMixin,
-                          generics.GenericAPIView):
+class HackerCreate(mixins.CreateModelMixin,
+                   generics.GenericAPIView):
     """
-    List All Users, Create a new Event
+    Create a new Hacker
     """
     serializer_class = HackerSerializer
-
-    # Custom queryset
-    def get_queryset(self):
-        # Get Hackathon id
-        hackathon = self.kwargs['fk']
-
-        # Filter for Hackathon's hackers
-        queryset = Hacker.objects.filter(hackathon=hackathon)
-        return queryset
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    queryset = Hacker.objects.all()
 
     def post(self, request, *args, **kwargs):
-        # Reinsert hackathon key for sanity
+        # Insert hackathon key for sanity
         request.data['hackathon'] = self.kwargs['fk']
 
         return self.create(request, *args, **kwargs)
@@ -115,14 +143,14 @@ class HackerRUD(mixins.RetrieveModelMixin,
         return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
-        # Re-Insert keys for sanity
+        # Insert keys for sanity
         request.data['hackathon'] = self.kwargs['fk']
         request.data['id'] = self.kwargs['pk']
 
         return self.update(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
-        # Re-Insert keys for sanity
+        # Insert keys for sanity
         request.data['hackathon'] = self.kwargs['fk']
         request.data['id'] = self.kwargs['pk']
 
