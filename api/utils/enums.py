@@ -61,3 +61,15 @@ EVENT_TYPE = (
     ('activity', 'General Activity'),
 )
 
+RATING_FOR = (
+    ('hackathon', 'Rating for Hackathon'),
+    ('event', 'Rating for Event at Hackathon'),
+)
+
+RATING_NUMS = (
+    (1, 'Poor'),
+    (2, 'Fair'),
+    (3, 'Good'),
+    (4, 'Very Good'),
+    (5, 'Excellent'),
+)
