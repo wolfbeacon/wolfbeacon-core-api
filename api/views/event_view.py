@@ -63,7 +63,7 @@ class EventListAndCreate(mixins.ListModelMixin,
 
     def post(self, request, *args, **kwargs):
         # Reinsert hackathon key for sanity
-        request.data['kk'] = self.kwargs['fk']
+        request.data['hackathon'] = self.kwargs['fk']
 
         return self.create(request, *args, **kwargs)
 
