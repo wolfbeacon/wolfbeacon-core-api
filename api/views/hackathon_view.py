@@ -5,7 +5,7 @@ from rest_framework import viewsets
 
 # POST Hackathon
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {post} /hackathons/ 1. Create Hackathon
 @apiName CreateHackathon
 @apiGroup Hackathons 
@@ -39,7 +39,7 @@ HTTP/1.1 201 Created
 
 # GET All Hackathons
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /hackathons/ 2. Get All Hackathons
 @apiName GetAllHackathons
 @apiGroup Hackathons
@@ -55,7 +55,7 @@ https://api.wolfbeacon.com/hackathons?featured=true&hackathon_type=university
 
 # GET Hackathon
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /hackathons/:hackathon-id/ 3. Get Hackathon
 @apiName GetHackathon
 @apiGroup Hackathons
@@ -66,7 +66,7 @@ https://api.wolfbeacon.com/hackathons?featured=true&hackathon_type=university
 
 # PUT Hackathon
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {put} /hackathons/:hackathon-id/ 4. Update Hackathon
 @apiName UpdateHackathon
 @apiDescription Complete Entity update, expects all mandatory fields
@@ -77,7 +77,7 @@ HTTP/1.1 200 OK
 
 # PATCH User
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {patch} hackathons/:hackathon-id/ 5. Partially Update Hackathon
 @apiName PartiallyUpdateHackathon
 @apiDescription Supports partial updates.
@@ -88,7 +88,7 @@ HTTP/1.1 200 OK
 
 # DELETE Hackathon
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {delete} /hackathons/:hackathon-id/ 6. Delete Hackathon
 @apiName DeleteHackathon
 @apiGroup Hackathons

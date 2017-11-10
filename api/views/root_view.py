@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @apiName HeadersRequired
 @api {headers} /*all_endpoints*  To pass for API Authentication and Response
 @apiGroup Headers

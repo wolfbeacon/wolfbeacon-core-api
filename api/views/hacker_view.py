@@ -5,7 +5,7 @@ from rest_framework import mixins, generics
 
 # POST Hackers
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {post} /hackathons/:hackathon-id/hackers/ 1. Create Hacker 
 @apiName CreateHacker
 @apiDescription Users are added to Hackathons as Hackers. Every Hackathon has it's own set of Hackers.
@@ -21,7 +21,7 @@ from rest_framework import mixins, generics
 
 # GET All Hackers
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /hackathons/:hackathon-id/hackers/ 2. Get Hackers 
 @apiName GetAllHackersForHackathon
 @apiGroup Hackers
@@ -60,7 +60,7 @@ class HackerListAndCreate(mixins.ListModelMixin,
 
 # GET Hacker
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /hackathons/:hackathon-id/hackers/:hacker-id/ 3. Get Hacker
 @apiName GetHacker
 @apiGroup Hackers
@@ -70,7 +70,7 @@ HTTP/1.1 200 OK
 
 # PUT Hacker
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {put} /hackathons/:hackathon-id/hackers/:hacker-id/ 4. Update Hacker
 @apiName UpdateHacker
 @apiDescription Supports Partial Update
@@ -81,7 +81,7 @@ HTTP/1.1 200 OK
 
 # PUT Hacker
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {patch} /hackathons/:hackathon-id/hackers/:hacker-id/ 5. Partially Update Hacker
 @apiName PartiallyUpdateHacker
 @apiDescription Supports Partial Update
@@ -92,7 +92,7 @@ HTTP/1.1 200 OK
 
 # DELETE Hacker
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {delete} /hackathons/:hackathon-id/hackers/:hacker-id/ 6. Delete Hacker
 @apiName DeleteHacker
 @apiGroup Hackers

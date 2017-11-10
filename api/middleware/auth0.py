@@ -7,7 +7,7 @@ AUTH0_PUBLIC_KEY = AUTH0['PUBLIC_KEY']
 AUTH0_DOMAIN = AUTH0['AUTH0_DOMAIN']
 API_AUDIENCE = AUTH0['API_AUDIENCE']
 ALGORITHMS = AUTH0['ALGORITHM']
-ALLOWED_PATHS = AUTH0['ALLOWED_PATHS_REGEX']
+BLOCKED_PATHS = AUTH0['BLOCKED_PATHS_REGEX']
 
 
 class Auth0Middleware(object):
@@ -19,8 +19,8 @@ class Auth0Middleware(object):
         url = request.build_absolute_uri()
         path = urlparse(url).path
 
-        # Allow access to open paths in ALLOWED_PATHS
-        if ALLOWED_PATHS.match(path) is None:
+        # Block access to paths that require Auth and verify
+        if BLOCKED_PATHS.match(path):
 
             # GET TOKEN
             auth = request.META.get('HTTP_AUTHORIZATION')
