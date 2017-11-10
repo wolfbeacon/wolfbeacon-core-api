@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from api.views import HackathonViewSet, UserViewSet, HackerListAndCreate, HackerRUD, \
-    EventListAndCreate, EventRUD, EventHackerListAndCreate, RatingViewSet
+    EventListAndCreate, EventRUD, EventHackerList, EventHackerAddRemove, RatingViewSet
 
 # Register CRUD Entities with Router
 router = DefaultRouter()
@@ -28,7 +28,8 @@ urlpatterns = [
     url(r'^hackathons/(?P<fk>\d+)/events/$', EventListAndCreate.as_view()),
 
     # HACKERS AT EVENTS
-    url(r'^hackathons/(?P<fk>\d+)/events/(?P<pk>\d+)/hackers/$', EventHackerListAndCreate.as_view()),
+    url(r'^hackathons/(?P<fk>\d+)/events/(?P<pk>\d+)/hackers/$', EventHackerList.as_view()),
+    url(r'^hackathons/(?P<fk2>\d+)/events/(?P<fk>\d+)/hackers/(?P<pk>\d+)/$', EventHackerAddRemove.as_view()),
 
     # Router URLs
     url(r'^', include(router.urls)),

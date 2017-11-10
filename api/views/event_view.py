@@ -142,20 +142,6 @@ class EventRUD(mixins.RetrieveModelMixin,
         return self.destroy(request, *args, **kwargs)
 
 
-# POST Hacker to Event
-"""
-@apiVersion 1.0.0
-@api {post} /hackathons/:hackathon-id/events/:event-id/hackers/ 7. Add Hacker to Event 
-@apiName AddHackerToEvent
-@apiDescription Users are added to Hackathons as Events. Every Hackathon has it's own set of Events.
-@apiGroup Events
-@apiParam {Integer} hacker ID of Hacker to be added to this event
-@apiParamExample {json} Request Data Example:
-{"hacker":1}
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 201 CREATED
-"""
-
 # GET All Hackers of an Event
 """
 @apiVersion 1.0.0
@@ -167,7 +153,7 @@ HTTP/1.1 201 CREATED
 """
 
 
-class EventHackerListAndCreate(APIView):
+class EventHackerList(APIView):
     """
     List all Event Hackers, Add Hacker to Event
     """
@@ -182,20 +168,64 @@ class EventHackerListAndCreate(APIView):
 
         return Response(hackers, status=status.HTTP_200_OK)
 
-    def post(self, request, *args, **kwargs):
-        request.data['hackathon'] = self.kwargs['fk']
-        request.data['event'] = self.kwargs['pk']
 
-        hacker_id = request.data['hacker']
-        event_id = request.data['event']
+# ADD Hacker to Event
+"""
+@apiVersion 1.0.0
+@api {post} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 7. Add Hacker to Event
+@apiDescription This endpoint simply adds a Hacker attending a Hackathon to an Event of that Hackathon. Since no new Entity is being created, the request body is empty but with an HTTP 201 CREATED status code
+@apiName AddHackerToEvent
+@apiGroup Events
+@apiSuccessExample {json} Success Response Code:
+HTTP/1.1 201 CREATED
+"""
+
+# DELETE Hacker from Event
+"""
+@apiVersion 1.0.0
+@api {post} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 8. Remove Hacker from Event 
+@apiName RemoveHackerFromEvent
+@apiGroup Events
+@apiSuccessExample {json} Success Response Code:
+HTTP/1.1 204 NO CONTENT
+"""
+
+
+class EventHackerAddRemove(APIView):
+    """
+    List all Event Hackers, Add Hacker to Event
+    """
+
+    def put(self, request, *args, **kwargs):
+
+        hackathon_id = self.kwargs['fk2']
+        event_id = self.kwargs['fk']
+        hacker_id = self.kwargs['pk']
 
         try:
-            event = Event.objects.get(id=event_id)
+            event = Event.objects.get(hackathon=hackathon_id, id=event_id)
             hacker = Hacker.objects.get(id=hacker_id)
 
             event.hackers.add(hacker)
 
-            return Response({'hacker': hacker_id}, status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, *args, **kwargs):
+
+        hackathon_id = self.kwargs['fk2']
+        event_id = self.kwargs['fk']
+        hacker_id = self.kwargs['pk']
+
+        try:
+            event = Event.objects.get(hackathon=hackathon_id, id=event_id)
+            hacker = Hacker.objects.get(id=hacker_id)
+
+            event.hackers.remove(hacker)
+
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
         except Exception as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
