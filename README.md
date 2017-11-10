@@ -8,7 +8,9 @@ Written in [Python 3](https://www.python.org/downloads/release/python-352/), pow
 
 API Documentation is available at **[https://api.wolfbeacon.com/docs](https://api.wolfbeacon.com/docs)**.
 
-Docs are generated using [apiDoc](http://apidocjs.com/). Doc strings are present in views under the `/api/views` directory.
+Docs are generated using [apidoc](http://apidocjs.com/). Doc strings are present in views under the `/api/views` directory.
+
+Documentation is served separately by the [wolfbeacon-apidoc-gen](https://github.com/wolfbeacon-apidoc-gen) service.
 
 
 ## Local Development Setup
@@ -37,14 +39,14 @@ Docs are generated using [apiDoc](http://apidocjs.com/). Doc strings are present
   `python manage.py runserver`
 
 
-## Running with Docker in Production:
+## Running in Production with Docker
 
 Make sure [Docker](https://docs.docker.com/engine/installation/) is installed on your system. We run this API a Dockerized application in production. Assuming Postgres is already running in a separate container remotely accessible and the *settings.py* file is all configured, we are ready to go. Simply build a docker image for this application and run it.
 
 * `sudo docker build -t wolfbeacon-core-api .`
 * `sudo docker run -p 8000:8000 wolfbeacon-core-api`
 
-This should have have your app up and running, also accessible from localhost:8000.
+This should have have your app up and running, accessible on port 8000.
 
 ## Simulating Production Environment
 
