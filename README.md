@@ -4,6 +4,13 @@ WolfBeacon's Core API for Mobile and Analytics.
 
 Written in [Python 3](https://www.python.org/downloads/release/python-352/), powered by [Django](https://www.djangoproject.com/), [DRF](http://www.django-rest-framework.org/) and [PostgreSQL](https://www.postgresql.org/).
 
+## API Documentation
+
+API Documentation is available at **[https://api.wolfbeacon.com/docs](https://api.wolfbeacon.com/docs)**.
+
+Docs are generated using [apiDoc](http://apidocjs.com/). Doc strings are present in views under the `/api/views` directory.
+
+
 ## Local Development Setup
 
 * [Install virtualenv supporting Python 3.5](https://stackoverflow.com/questions/29934032/virtualenv-python-3-ubuntu-14-04-64-bit) and activate it
