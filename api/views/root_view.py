@@ -25,4 +25,5 @@ class RootView(APIView):
     """
 
     def get(self, request, format=None):
-        return Response({"message": "Welcome to WolfBeacon API."}, status=200)
+        return Response({"message": "Welcome to WolfBeacon API. Documentation at https://api.wolfbeacon.com/docs/"
+                         }, status=200)
