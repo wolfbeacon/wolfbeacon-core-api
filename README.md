@@ -8,9 +8,7 @@ Written in [Python 3](https://www.python.org/downloads/release/python-352/), pow
 
 API Documentation is available at **[https://api.wolfbeacon.com/docs](https://api.wolfbeacon.com/docs)**.
 
-Docs are generated using [apidoc](http://apidocjs.com/). Doc strings are present in views under the `/api/views` directory.
-
-Documentation is served separately by the [wolfbeacon-apidoc-gen](https://github.com/wolfbeacon-apidoc-gen) service.
+Docs are generated using [apidoc](http://apidocjs.com/). Doc strings are present in views under the `/api/views` directory. Documentation is served separately by the [wolfbeacon-apidoc-gen](https://github.com/wolfbeacon-apidoc-gen) service.
 
 
 ## Local Development Setup
