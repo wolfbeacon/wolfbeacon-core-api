@@ -4,7 +4,7 @@ from rest_framework import viewsets
 
 # POST Rating
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {post} /ratings/ 1. Create Rating
 @apiName CreateRating
 @apiGroup Ratings 
@@ -25,7 +25,7 @@ from rest_framework import viewsets
 
 # GET All Ratings
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /ratings/ 2. Get All Ratings
 @apiName GetAllRatings
 @apiGroup Ratings
@@ -40,7 +40,7 @@ https://api.wolfbeacon.com/ratings?hackathon=1&user=1&hacker=1
 
 # GET Rating
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /ratings/:rating-id/ 3. Get Rating
 @apiName GetRating
 @apiGroup Ratings
@@ -51,7 +51,7 @@ HTTP/1.1 200 OK
 
 # PUT Rating
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {put} /ratings/:rating-id/ 4. Update Rating
 @apiName UpdateRating
 @apiDescription Complete Entity update, expects all mandatory fields
@@ -62,7 +62,7 @@ HTTP/1.1 200 OK
 
 # PATCH User
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {patch} ratings/:rating-id/ 5. Partially Update Rating
 @apiName PartiallyUpdateRating
 @apiDescription Supports partial updates.
@@ -73,7 +73,7 @@ HTTP/1.1 200 OK
 
 # DELETE Rating
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {delete} /ratings/:rating-id/ 6. Delete Rating
 @apiName DeleteRating
 @apiGroup Ratings

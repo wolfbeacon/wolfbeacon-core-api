@@ -8,7 +8,7 @@ from rest_framework import status
 
 # POST Events
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {post} /hackathons/:hackathon-id/events/ 1. Create Event 
 @apiName CreateEvent
 @apiDescription Users are added to Hackathons as Events. Every Hackathon has it's own set of Events.
@@ -31,7 +31,7 @@ from rest_framework import status
 
 # GET All Events
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /hackathons/:hackathon-id/events/ 2. Get Events 
 @apiName GetAllEventsForHackathon
 @apiGroup Events
@@ -70,7 +70,7 @@ class EventListAndCreate(mixins.ListModelMixin,
 
 # GET Event
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /hackathons/:hackathon-id/events/:event-id/ 3. Get Event
 @apiName GetEvent
 @apiGroup Events
@@ -80,7 +80,7 @@ HTTP/1.1 200 OK
 
 # PUT Event
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {put} /hackathons/:hackathon-id/events/:event-id/ 4. Update Event
 @apiName UpdateEvent
 @apiDescription Supports Partial Update
@@ -91,7 +91,7 @@ HTTP/1.1 200 OK
 
 # PUT Event
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {patch} /hackathons/:hackathon-id/events/:event-id/ 5. Partially Update Event
 @apiName PartiallyUpdateEvent
 @apiDescription Supports Partial Update
@@ -102,7 +102,7 @@ HTTP/1.1 200 OK
 
 # DELETE Event
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {delete} /hackathons/:hackathon-id/events/:event-id/ 6. Delete Event
 @apiName DeleteEvent
 @apiGroup Events
@@ -144,7 +144,7 @@ class EventRUD(mixins.RetrieveModelMixin,
 
 # POST Hacker to Event
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {post} /hackathons/:hackathon-id/events/:event-id/hackers/ 7. Add Hacker to Event 
 @apiName AddHackerToEvent
 @apiDescription Users are added to Hackathons as Events. Every Hackathon has it's own set of Events.
@@ -158,7 +158,7 @@ HTTP/1.1 201 CREATED
 
 # GET All Hackers of an Event
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {post} /hackathons/:hackathon-id/events/:event-id/hackers/ 8. List all Hackers of an Event 
 @apiName GetAllEventHackers
 @apiGroup Events

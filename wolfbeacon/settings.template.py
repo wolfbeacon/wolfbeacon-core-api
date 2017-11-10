@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'your_secret_key'
+SECRET_KEY = 'YOUR_SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -73,10 +73,10 @@ WSGI_APPLICATION = 'wolfbeacon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'your_db_name',
-        'USER': 'your_username',
-        'PASSWORD': 'your_password',
-        'HOST': 'your_host',
+        'NAME': 'YOUR_DB_NAME',
+        'USER': 'YOUR_USERNAME',
+        'PASSWORD': 'YOUR_PASSWORD',
+        'HOST': 'YOUR_HOST',
         'PORT': '5432',
     }
 }
@@ -135,12 +135,12 @@ X_FRAME_OPTIONS = 'DENY'
 # Auth0 Configuration
 
 AUTH0 = {
-    'AUTH0_DOMAIN': 'your_auth0_domain',
-    'API_AUDIENCE': 'your_auth0_audience',
+    'AUTH0_DOMAIN': 'YOUR_AUTH0_DOMAIN',
+    'API_AUDIENCE': 'YOUR_AUTH0_AUDIENCE',
     'ALGORITHM': ["RS256"],
 
     # Cache Public key here available at https://{AUTH0_DOMAIN}/.well-known/jwks.json
     'PUBLIC_KEY': {},
-    # Allow /
-    'ALLOWED_PATHS_REGEX': re.compile("^\/$")
+    # Block all /v1/
+    'BLOCKED_PATHS_REGEX': re.compile("^\/v1\/*")
 }
