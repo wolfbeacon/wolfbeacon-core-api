@@ -4,7 +4,7 @@ from api.models.user_model import User
 
 # POST User
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {post} /users/ 1. Create User
 @apiName CreateUser
 @apiGroup Users
@@ -50,7 +50,7 @@ HTTP/1.1 201 Created
 
 # GET ALL Users
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /users/ 2. Get all Users
 @apiName GetAllUser
 @apiGroup Users
@@ -68,7 +68,7 @@ https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
 
 # GET User
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {get} /users/:user-id/ 3. Get User
 @apiName GetUser
 @apiGroup Users
@@ -78,7 +78,7 @@ https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
 
 # PUT User
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {put} /users/:user-id/ 4. Update User
 @apiName UpdateUser
 @apiGroup Users
@@ -89,7 +89,7 @@ HTTP/1.1 200 OK
 
 # PATCH User
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {patch} /users/:user-id/ 5. Partially Update User
 @apiName PartiallyUpdateUser
 @apiGroup Users
@@ -100,7 +100,7 @@ HTTP/1.1 200 OK
 
 # DELETE User
 """
-@apiVersion 0.0.1
+@apiVersion 1.0.0
 @api {delete} /user/:user-id/ 6. Delete User
 @apiName DeleteUser
 @apiGroup Users
