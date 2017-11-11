@@ -145,7 +145,7 @@ class EventRUD(mixins.RetrieveModelMixin,
 # GET All Hackers of an Event
 """
 @apiVersion 1.0.0
-@api {post} /hackathons/:hackathon-id/events/:event-id/hackers/ 8. List all Hackers of an Event 
+@api {get} /hackathons/:hackathon-id/events/:event-id/hackers/ 7. List all Hackers of an Event 
 @apiName GetAllEventHackers
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code(HTTP/1.1 200 OK):
@@ -172,7 +172,7 @@ class EventHackerList(APIView):
 # ADD Hacker to Event
 """
 @apiVersion 1.0.0
-@api {post} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 7. Add Hacker to Event
+@api {put} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 8. Add Hacker to Event
 @apiDescription This endpoint simply adds a Hacker attending a Hackathon to an Event of that Hackathon. Since no new Entity is being created, the request body is empty but with an HTTP 201 CREATED status code
 @apiName AddHackerToEvent
 @apiGroup Events
@@ -183,7 +183,7 @@ HTTP/1.1 201 CREATED
 # DELETE Hacker from Event
 """
 @apiVersion 1.0.0
-@api {post} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 8. Remove Hacker from Event 
+@api {delete} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 8. Remove Hacker from Event 
 @apiName RemoveHackerFromEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
