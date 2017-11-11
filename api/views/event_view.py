@@ -183,7 +183,7 @@ HTTP/1.1 201 CREATED
 # DELETE Hacker from Event
 """
 @apiVersion 1.0.0
-@api {delete} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 8. Remove Hacker from Event 
+@api {delete} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 9. Remove Hacker from Event 
 @apiName RemoveHackerFromEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
