@@ -2,7 +2,7 @@
 
 WolfBeacon's Core API for Mobile and Analytics.
 
-Written in [Python 3](https://www.python.org/downloads/release/python-352/), powered by [Django](https://www.djangoproject.com/), [DRF](http://www.django-rest-framework.org/) and [PostgreSQL](https://www.postgresql.org/).
+Written in [Python 3](https://www.python.org/downloads/release/python-352/), powered by [Django](https://www.djangoproject.com/), [Django Rest Framework](http://www.django-rest-framework.org/), [PostgreSQL](https://www.postgresql.org/) and [Auth0](https://auth0.com).
 
 ## API Documentation
 
