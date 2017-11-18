@@ -55,7 +55,6 @@ For testing purposes, a production environment can be simulated using the *docke
 It uses a slightly modified Dockerfile alongwith an entrypoint, both located in `/.docker-compose/`
 
 * `cp wolfbeacon/settings.docker-compose.py wolfbeacon/settings.py`
-
 * `sudo docker-compose up --build -d`
 
 
