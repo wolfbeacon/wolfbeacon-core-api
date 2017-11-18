@@ -44,7 +44,10 @@ ENV UWSGI_VIRTUALENV=/venv UWSGI_WSGI_FILE=wolfbeacon/wsgi.py UWSGI_HTTP=:8000 U
 RUN /venv/bin/python manage.py collectstatic --noinput
 
 # Perform DB Migrations
-RUN /venv/bin/python manage.py migrate
+# RUN /venv/bin/python manage.py migrate
+
+# Script entry to check postgres health and apply migrations
+ENTRYPOINT ["/code/.docker-compose/entrypoint.sh"]
 
 # Start uWSGI
 CMD ["/venv/bin/uwsgi", "--http-auto-chunked", "--http-keepalive"]
