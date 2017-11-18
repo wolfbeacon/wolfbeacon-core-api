@@ -39,7 +39,9 @@ Docs are generated using [apidoc](http://apidocjs.com/). Doc strings are present
 
 ## Running in Production with Docker
 
-Make sure [Docker](https://docs.docker.com/engine/installation/) is installed on your system. We run this API a Dockerized application in production. Assuming Postgres is already running in a separate container remotely accessible and the *settings.py* file is all configured, we are ready to go. Simply build a docker image for this application and run it.
+Make sure [Docker](https://docs.docker.com/engine/installation/) is installed on your system. We run this API a Dockerized application in production.
+
+Assuming Postgres is already running in a separate container remotely accessible and the *settings.py* file is all configured, we are ready to go. Simply build a docker image for this application and run it.
 
 * `sudo docker build -t wolfbeacon-core-api .`
 * `sudo docker run -p 8000:8000 wolfbeacon-core-api`
@@ -48,15 +50,12 @@ This should have have your app up and running, accessible on port 8000.
 
 ## Simulating Production Environment
 
-We can simulate a production using the docker-compose file provided. It bundles the API and Postgres together. It is recommended to run migrations after both the containers start.
+For testing purposes, a production environment can be simulated using the *docker-compose* file provided which bundles the API and Postgres together.
 
-* Comment out line 38 from the Dockerfile which makes DB Migrations
+It uses a slightly modified Dockerfile alongwith an entrypoint, both located in `/.docker-compose/`
 
-  `# RUN /venv/bin/python manage.py migrate`
+* `cp wolfbeacon/settings.docker-compose.py wolfbeacon/settings.py`
 
 * `sudo docker-compose up --build -d`
 
-* `sudo docker exec -it <container_name_or_id> sh`
-
-* `/venv/bin/python manage.py migrate`
 
