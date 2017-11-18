@@ -11,7 +11,7 @@ from rest_framework import status
 @apiVersion 1.0.0
 @api {post} /hackathons/:hackathon-id/events/ 1. Create Event 
 @apiName CreateEvent
-@apiDescription Users are added to Hackathons as Events. Every Hackathon has it's own set of Events.
+@apiDescription Events are a part of Hackathons
 @apiGroup Events
 
 @apiParam {Integer} hackathon ID of Hackathon this Event is a part of
@@ -29,49 +29,60 @@ from rest_framework import status
 {"id":3,"created_at":"2017-11-06T19:41:30.644678Z","updated_at":"2017-11-06T19:41:30.644721Z","hackathon":1,"type":"general-workshop","name":"Test Name","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt","no_of_attendees":0,"rating":0}
 """
 
-# GET All Events
-"""
-@apiVersion 1.0.0
-@api {get} /hackathons/:hackathon-id/events/ 2. Get Events 
-@apiName GetAllEventsForHackathon
-@apiGroup Events
-@apiSuccessExample {json} Sample Success Response
-[{"id":3,"created_at":"2017-11-06T19:41:30.644678Z","updated_at":"2017-11-06T19:41:30.644721Z","hackathon":1,"type":"general-workshop","name":"Test Name","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt","no_of_attendees":0,"rating":0},{"id":2,"created_at":"2017-11-06T19:41:30.439853Z","updated_at":"2017-11-06T19:41:30.439882Z","hackathon":1,"type":"general-workshop","name":"Test Name","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt","no_of_attendees":0,"rating":0}]Success Response Code: HTTP/1.1 200 OK
-"""
 
-
-class EventListAndCreate(mixins.ListModelMixin,
-                         mixins.CreateModelMixin,
-                         generics.GenericAPIView):
-    """
-    List All Users, Create a new Event
-    """
+class EventCreate(mixins.CreateModelMixin,
+                  generics.GenericAPIView):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
 
-    # Custom queryset
-    def get_queryset(self):
-        # Get Hackathon id
-        hackathon = self.kwargs['fk']
-
-        # Filter for Hackathon's events
-        queryset = Event.objects.filter(hackathon=hackathon)
-        return queryset
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
     def post(self, request, *args, **kwargs):
-        # Reinsert hackathon key for sanity
+        # assert
         request.data['hackathon'] = self.kwargs['fk']
 
         return self.create(request, *args, **kwargs)
 
 
+# List Events
+"""
+@apiVersion 1.0.0
+@api {get} /hackathons/? 2. List Events 
+@apiName ListEvents
+@apiGroup Events
+
+@apiParam {Number} hackathon Hackathon ID Event if a part of
+
+@apiParamExample Sample Request 
+https://api.wolfbeacon.com/v1/events?hackathon=1
+
+@apiSuccessExample {json} Sample Success Response
+[{"id":3,"created_at":"2017-11-06T19:41:30.644678Z","updated_at":"2017-11-06T19:41:30.644721Z","hackathon":1,"type":"general-workshop","name":"Test Name","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt","no_of_attendees":0,"rating":0},{"id":2,"created_at":"2017-11-06T19:41:30.439853Z","updated_at":"2017-11-06T19:41:30.439882Z","hackathon":1,"type":"general-workshop","name":"Test Name","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt","no_of_attendees":0,"rating":0}]Success Response Code: HTTP/1.1 200 OK
+"""
+
+
+class EventList(mixins.ListModelMixin,
+                mixins.CreateModelMixin,
+                generics.GenericAPIView):
+    serializer_class = EventSerializer
+
+    # Custom queryset
+    def get_queryset(self):
+        queryset = Event.objects.all()
+
+        # Filter for Hackathons
+        hackathon = self.request.query_params.get('hackathon', None)
+        if hackathon:
+            queryset = queryset.filter(hackathon=hackathon)
+
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
 # GET Event
 """
 @apiVersion 1.0.0
-@api {get} /hackathons/:hackathon-id/events/:event-id/ 3. Get Event
+@api {get} /events/:event-id/ 3. GetEvent
 @apiName GetEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
@@ -81,19 +92,18 @@ HTTP/1.1 200 OK
 # PUT Event
 """
 @apiVersion 1.0.0
-@api {put} /hackathons/:hackathon-id/events/:event-id/ 4. Update Event
-@apiName UpdateEvent
-@apiDescription Supports Partial Update
+@api {put} /events/:event-id/ 4. Replace Event
+@apiName ReplaceEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
 
-# PUT Event
+# PATCH Event
 """
 @apiVersion 1.0.0
-@api {patch} /hackathons/:hackathon-id/events/:event-id/ 5. Partially Update Event
-@apiName PartiallyUpdateEvent
+@api {patch} /events/:event-id/ 5. Update Event
+@apiName UpdateEvent
 @apiDescription Supports Partial Update
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
@@ -103,7 +113,7 @@ HTTP/1.1 200 OK
 # DELETE Event
 """
 @apiVersion 1.0.0
-@api {delete} /hackathons/:hackathon-id/events/:event-id/ 6. Delete Event
+@api {delete} /events/:event-id/ 6. Delete Event
 @apiName DeleteEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
@@ -116,7 +126,7 @@ class EventRUD(mixins.RetrieveModelMixin,
                mixins.DestroyModelMixin,
                generics.GenericAPIView):
     """
-    Get Visitor, Update Visitor, Delete Visitor
+    Get Visitor, ReplaceVisitor, Delete Visitor
     """
     serializer_class = EventSerializer
     queryset = Event.objects.all()
@@ -126,14 +136,12 @@ class EventRUD(mixins.RetrieveModelMixin,
 
     def put(self, request, *args, **kwargs):
         # Re-Insert keys for sanity
-        request.data['hackathon'] = self.kwargs['fk']
         request.data['id'] = self.kwargs['pk']
 
         return self.update(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
         # Re-Insert keys for sanity
-        request.data['hackathon'] = self.kwargs['fk']
         request.data['id'] = self.kwargs['pk']
 
         return self.partial_update(request, *args, **kwargs)
@@ -142,37 +150,10 @@ class EventRUD(mixins.RetrieveModelMixin,
         return self.destroy(request, *args, **kwargs)
 
 
-# GET All Hackers of an Event
-"""
-@apiVersion 1.0.0
-@api {get} /hackathons/:hackathon-id/events/:event-id/hackers/ 7. List all Hackers of an Event 
-@apiName GetAllEventHackers
-@apiGroup Events
-@apiSuccessExample {json} Success Response Code(HTTP/1.1 200 OK):
-[{"user_id":1,"hackathon_id":1,"id":1,"updated_at":"2017-11-06T18:52:25.955828Z","role":"organiser","created_at":"2017-11-06T18:52:25.955790Z"}]
-"""
-
-
-class EventHackerList(APIView):
-    """
-    List all Event Hackers, Add Hacker to Event
-    """
-
-    def get(self, request, *args, **kwargs):
-        hackathon_id = self.kwargs['fk']
-        event_id = self.kwargs['pk']
-
-        event = Event.objects.get(hackathon=hackathon_id, id=event_id)
-
-        hackers = event.hackers.all().values()
-
-        return Response(hackers, status=status.HTTP_200_OK)
-
-
 # ADD Hacker to Event
 """
 @apiVersion 1.0.0
-@api {put} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 8. Add Hacker to Event
+@api {post} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 7. Add Hacker to Event
 @apiDescription This endpoint simply adds a Hacker attending a Hackathon to an Event of that Hackathon. Since no new Entity is being created, the request body is empty but with an HTTP 201 CREATED status code
 @apiName AddHackerToEvent
 @apiGroup Events
@@ -183,7 +164,7 @@ HTTP/1.1 201 CREATED
 # DELETE Hacker from Event
 """
 @apiVersion 1.0.0
-@api {delete} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 9. Remove Hacker from Event 
+@api {delete} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 8. Remove Hacker from Event 
 @apiName RemoveHackerFromEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
@@ -196,7 +177,7 @@ class EventHackerAddRemove(APIView):
     List all Event Hackers, Add Hacker to Event
     """
 
-    def put(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
         hackathon_id = self.kwargs['fk2']
         event_id = self.kwargs['fk']

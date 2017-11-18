@@ -51,8 +51,8 @@ HTTP/1.1 201 Created
 # GET ALL Users
 """
 @apiVersion 1.0.0
-@api {get} /users/ 2. Get all Users
-@apiName GetAllUser
+@api {get} /users/ 2. List Users
+@apiName ListUser
 @apiGroup Users
 @apiDescription Allowed Additional search parameters are: <br><br>
 <i>user_id, auth0_id, first_name, last_name, gender, email, phone_number, level_of_study, 
@@ -79,8 +79,8 @@ https://api.wolfbeacon.com/users?city=Washington&graduation_year=2018
 # PUT User
 """
 @apiVersion 1.0.0
-@api {put} /users/:user-id/ 4. Update User
-@apiName UpdateUser
+@api {put} /users/:user-id/ 4. Replace User
+@apiName ReplaceUser
 @apiGroup Users
 @apiDescription Complete Entity update, expects all mandatory fields 
 @apiSuccessExample {json} Success Response Code:
@@ -90,8 +90,8 @@ HTTP/1.1 200 OK
 # PATCH User
 """
 @apiVersion 1.0.0
-@api {patch} /users/:user-id/ 5. Partially Update User
-@apiName PartiallyUpdateUser
+@api {patch} /users/:user-id/ 5. Update User
+@apiName UpdateUser
 @apiGroup Users
 @apiDescription Supports partial updates 
 @apiSuccessExample {json} Success Response Code:

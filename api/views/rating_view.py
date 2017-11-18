@@ -23,11 +23,11 @@ from rest_framework import viewsets
 
 """
 
-# GET All Ratings
+# List Ratings
 """
 @apiVersion 1.0.0
-@api {get} /ratings/ 2. Get All Ratings
-@apiName GetAllRatings
+@api {get} /ratings/ 2. List Ratings
+@apiName ListRatings
 @apiGroup Ratings
 @apiDescription Additional search parameters can be <br><br> <i>id, hackathon, hacker, rating_for, event, rating</i> <br><br>
 
@@ -52,8 +52,8 @@ HTTP/1.1 200 OK
 # PUT Rating
 """
 @apiVersion 1.0.0
-@api {put} /ratings/:rating-id/ 4. Update Rating
-@apiName UpdateRating
+@api {put} /ratings/:rating-id/ 4. Replace Rating
+@apiName ReplaceRating
 @apiDescription Complete Entity update, expects all mandatory fields
 @apiGroup Ratings
 @apiSuccessExample {json} Success Response Code:
@@ -63,8 +63,8 @@ HTTP/1.1 200 OK
 # PATCH User
 """
 @apiVersion 1.0.0
-@api {patch} ratings/:rating-id/ 5. Partially Update Rating
-@apiName PartiallyUpdateRating
+@api {patch} ratings/:rating-id/ 5. Update Rating
+@apiName UpdateRating
 @apiDescription Supports partial updates.
 @apiGroup Ratings
 @apiSuccessExample {json} Success Response Code:

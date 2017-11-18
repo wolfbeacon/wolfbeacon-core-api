@@ -19,51 +19,70 @@ from rest_framework import mixins, generics
 {"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","role":"organiser"}
 """
 
-# GET All Hackers
+
+class HackerCreate(mixins.CreateModelMixin,
+                   generics.GenericAPIView):
+    serializer_class = HackerSerializer
+    queryset = Hacker.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        # assert
+        request.data['hackathon'] = self.kwargs['fk']
+
+        return self.create(request, *args, **kwargs)
+
+
+# GET Hackers
 """
 @apiVersion 1.0.0
-@api {get} /hackathons/:hackathon-id/hackers/ 2. Get Hackers 
-@apiName GetAllHackersForHackathon
+@api {get} /hackers/? 2. List Hackers 
+@apiName ListHackers
 @apiGroup Hackers
+
+@apiParam {Number} hackathon Hackathon ID hacker is part of
+@apiParam {Number} event Event ID Hacker is part
+
+@apiParamExample Sample Request 
+https://api.wolfbeacon.com/v1/hackers?hackathon=1&event=2
+
 @apiSuccessExample {json} Sample Success Response
 [{"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","role":"volunteer"},{"id":2,"hackathon":1,"user":2,"created_at":"2017-11-06T12:42:00.335711Z","updated_at":"2017-11-06T12:42:00.335746Z","role":"organiser"}]
 Success Response Code: HTTP/1.1 200 OK
 """
 
 
-class HackerListAndCreate(mixins.ListModelMixin,
-                          mixins.CreateModelMixin,
-                          generics.GenericAPIView):
-    """
-    List All Users, Create a new Event
-    """
+class HackerList(mixins.ListModelMixin,
+                 mixins.CreateModelMixin,
+                 generics.GenericAPIView):
     serializer_class = HackerSerializer
 
     # Custom queryset
     def get_queryset(self):
-        # Get Hackathon id
-        hackathon = self.kwargs['fk']
 
-        # Filter for Hackathon's hackers
-        queryset = Hacker.objects.filter(hackathon=hackathon)
+        queryset = Hacker.objects.all()
+
+        # Filter for Hackathons
+        hackathon = self.request.query_params.get('hackathon', None)
+        if hackathon:
+            queryset = queryset.filter(hackathon=hackathon)
+
+        # Filter for Events
+        event = self.request.query_params.get('event', None)
+        if event:
+            queryset = queryset.filter(event__id=event)
+
         return queryset
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        # Reinsert hackathon key for sanity
-        request.data['hackathon'] = self.kwargs['fk']
-
-        return self.create(request, *args, **kwargs)
-
 
 # GET Hacker
 """
 @apiVersion 1.0.0
-@api {get} /hackathons/:hackathon-id/hackers/:hacker-id/ 3. Get Hacker
-@apiName GetHacker
-@apiGroup Hackers
+@api {get} /events/:event-id/ 3. GetEvent
+@apiName GetEvent
+@apiGroup Events
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """
@@ -71,19 +90,18 @@ HTTP/1.1 200 OK
 # PUT Hacker
 """
 @apiVersion 1.0.0
-@api {put} /hackathons/:hackathon-id/hackers/:hacker-id/ 4. Update Hacker
+@api {put} /hackers/:hacker-id/ 4. Replace Hacker
+@apiName ReplaceHacker
+@apiGroup Hackers
+@apiSuccessExample {json} Success Response Code:
+HTTP/1.1 200 OK
+"""
+
+# PATCH Hacker
+"""
+@apiVersion 1.0.0
+@api {patch} /hackers/:hacker-id/ 5. Update Hacker
 @apiName UpdateHacker
-@apiDescription Supports Partial Update
-@apiGroup Hackers
-@apiSuccessExample {json} Success Response Code:
-HTTP/1.1 200 OK
-"""
-
-# PUT Hacker
-"""
-@apiVersion 1.0.0
-@api {patch} /hackathons/:hackathon-id/hackers/:hacker-id/ 5. Partially Update Hacker
-@apiName PartiallyUpdateHacker
 @apiDescription Supports Partial Update
 @apiGroup Hackers
 @apiSuccessExample {json} Success Response Code:
@@ -93,7 +111,7 @@ HTTP/1.1 200 OK
 # DELETE Hacker
 """
 @apiVersion 1.0.0
-@api {delete} /hackathons/:hackathon-id/hackers/:hacker-id/ 6. Delete Hacker
+@api {delete} /hackers/:hacker-id/ 6. Delete Hacker
 @apiName DeleteHacker
 @apiGroup Hackers
 @apiSuccessExample {json} Success Response Code:
@@ -105,9 +123,6 @@ class HackerRUD(mixins.RetrieveModelMixin,
                 mixins.UpdateModelMixin,
                 mixins.DestroyModelMixin,
                 generics.GenericAPIView):
-    """
-    Get Visitor, Update Visitor, Delete Visitor
-    """
     serializer_class = HackerSerializer
     queryset = Hacker.objects.all()
 
@@ -116,14 +131,12 @@ class HackerRUD(mixins.RetrieveModelMixin,
 
     def put(self, request, *args, **kwargs):
         # Re-Insert keys for sanity
-        request.data['hackathon'] = self.kwargs['fk']
         request.data['id'] = self.kwargs['pk']
 
         return self.update(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
         # Re-Insert keys for sanity
-        request.data['hackathon'] = self.kwargs['fk']
         request.data['id'] = self.kwargs['pk']
 
         return self.partial_update(request, *args, **kwargs)

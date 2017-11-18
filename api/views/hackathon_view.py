@@ -37,11 +37,11 @@ from rest_framework import viewsets
 HTTP/1.1 201 Created
 """
 
-# GET All Hackathons
+# List Hackathons
 """
 @apiVersion 1.0.0
-@api {get} /hackathons/ 2. Get All Hackathons
-@apiName GetAllHackathons
+@api {get} /hackathons/ 2. List Hackathons
+@apiName ListHackathons
 @apiGroup Hackathons
 @apiDescription Allowed additional search parameters are <br><br> <i>id, created_at, updated_at, is_published, name, version, description, hackathon_type, location, shipping_address, university_name, contact_email, start_time, end_time,</i> <br><br>
 @apiParam {boolean=true,false} featured Returns featured hackathons for featured=true
@@ -67,8 +67,8 @@ https://api.wolfbeacon.com/hackathons?featured=true&hackathon_type=university
 # PUT Hackathon
 """
 @apiVersion 1.0.0
-@api {put} /hackathons/:hackathon-id/ 4. Update Hackathon
-@apiName UpdateHackathon
+@api {put} /hackathons/:hackathon-id/ 4. Replace Hackathon
+@apiName ReplaceHackathon
 @apiDescription Complete Entity update, expects all mandatory fields
 @apiGroup Hackathons
 @apiSuccessExample {json} Success Response Code:
@@ -78,8 +78,8 @@ HTTP/1.1 200 OK
 # PATCH User
 """
 @apiVersion 1.0.0
-@api {patch} hackathons/:hackathon-id/ 5. Partially Update Hackathon
-@apiName PartiallyUpdateHackathon
+@api {patch} hackathons/:hackathon-id/ 5. Update Hackathon
+@apiName UpdateHackathon
 @apiDescription Supports partial updates.
 @apiGroup Hackathons
 @apiSuccessExample {json} Success Response Code:
