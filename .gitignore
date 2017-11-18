@@ -1,6 +1,7 @@
 .idea
 wolfbeacon/settings.py
 doc/
+static/
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
