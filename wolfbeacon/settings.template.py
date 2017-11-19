@@ -116,7 +116,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 # Additional Security Settings
 # python manage.py check --deploy
@@ -142,6 +144,6 @@ AUTH0 = {
 
     # Cache Public key here available at https://{AUTH0_DOMAIN}/.well-known/jwks.json
     'PUBLIC_KEY': {},
-    # Block all /v1/
-    'BLOCKED_PATHS_REGEX': re.compile("^\/v1\/*")
+    # Protect all /v1/ with auth
+    'PROTECTED_PATHS_REGEX': re.compile("^\/v1\/*")
 }
