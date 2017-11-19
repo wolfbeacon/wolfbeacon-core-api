@@ -4,11 +4,13 @@ WolfBeacon's Core API for Mobile and Analytics.
 
 Written in [Python 3](https://www.python.org/downloads/release/python-352/), powered by [Django](https://www.djangoproject.com/), [Django Rest Framework](http://www.django-rest-framework.org/), [PostgreSQL](https://www.postgresql.org/) and [Auth0](https://auth0.com).
 
-## API Documentation
+## API Usage and Documentation
 
-API Documentation is available at **[https://api.wolfbeacon.com/docs](https://api.wolfbeacon.com/docs)**.
+#### API Documentation is available at [https://api.wolfbeacon.com/docs](https://api.wolfbeacon.com/docs)
 
 Docs are generated using [apidoc](http://apidocjs.com/). Doc strings are present in views under the `/api/views` directory. Documentation is served separately by the [wolfbeacon-apidoc-gen](https://github.com/wolfbeacon/wolfbeacon-apidoc-gen) service.
+
+There were some interesting problems we faced when building this API while trying to keep things RESTful and making it easy for devs to work with as well. [WolfBeacon Core API - Design and Conventions Explained](https://github.com/wolfbeacon/wolfbeacon-core-api/wiki/API-Design-and-Conventions-used-Explained) makes for an interesting read and justifies some of these decisions.
 
 
 ## Local Development Setup
