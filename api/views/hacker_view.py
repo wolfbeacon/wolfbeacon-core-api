@@ -81,9 +81,9 @@ class HackerList(mixins.ListModelMixin,
 # GET Hacker
 """
 @apiVersion 1.0.0
-@api {get} /events/:event-id/ 3. GetEvent
-@apiName GetEvent
-@apiGroup Events
+@api {get} /hackers/:hacker-id/ 3. Get Hacker
+@apiName GetHacker
+@apiGroup Hackers
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 200 OK
 """

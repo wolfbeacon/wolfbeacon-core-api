@@ -83,7 +83,7 @@ class EventList(mixins.ListModelMixin,
 # GET Event
 """
 @apiVersion 1.0.0
-@api {get} /events/:event-id/ 3. GetEvent
+@api {get} /events/:event-id/ 3. Get Event
 @apiName GetEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
