@@ -1,5 +1,6 @@
 from api.models import Hacker
 from api.serializers import HackerSerializer
+from api.utils import keys_validation
 
 from rest_framework import mixins, generics
 
@@ -130,14 +131,13 @@ class HackerRUD(mixins.RetrieveModelMixin,
         return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
-        # Re-Insert keys for sanity
-        request.data['id'] = self.kwargs['pk']
+        keys_validation.validate_keys([request.data['id']], [self.kwargs['pk']])
 
         return self.update(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
         # Re-Insert keys for sanity
-        request.data['id'] = self.kwargs['pk']
+        keys_validation.validate_keys([request.data['id']], [self.kwargs['pk']])
 
         return self.partial_update(request, *args, **kwargs)
 

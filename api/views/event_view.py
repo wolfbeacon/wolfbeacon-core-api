@@ -1,5 +1,6 @@
 from api.models import Event, Hacker
 from api.serializers import EventSerializer
+from api.utils import keys_validation
 
 from rest_framework import mixins, generics
 from rest_framework.views import APIView
@@ -135,14 +136,12 @@ class EventRUD(mixins.RetrieveModelMixin,
         return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
-        # Re-Insert keys for sanity
-        request.data['id'] = self.kwargs['pk']
+        keys_validation.validate_keys([request.data['id']], [self.kwargs['pk']])
 
         return self.update(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
-        # Re-Insert keys for sanity
-        request.data['id'] = self.kwargs['pk']
+        keys_validation.validate_keys([request.data['id']], [self.kwargs['pk']])
 
         return self.partial_update(request, *args, **kwargs)
 
