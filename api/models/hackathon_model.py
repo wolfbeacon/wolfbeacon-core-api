@@ -1,11 +1,19 @@
 from django.db import models
+from django.db.models import Count
 from django.contrib.postgres.fields import JSONField
-from api.utils.constants import MEDIUM_FIELD_LIMIT, LONG_FIELD_LIMIT
+from api.utils.constants import MEDIUM_FIELD_LIMIT, LONG_FIELD_LIMIT, HACKATHON_FEATURED_LIMIT
 from api.utils.enums import HACKATHON_TYPE
 
 """ 
 Hackathon Model
 """
+
+
+class HackathonManager(models.Manager):
+    # Featured Hackathons have 50 members or more
+    def featured(self):
+        return self.get_queryset().annotate(num_hackers=Count('hacker')).filter(
+            num_hackers__gte=HACKATHON_FEATURED_LIMIT)
 
 
 class Hackathon(models.Model):
@@ -35,4 +43,4 @@ class Hackathon(models.Model):
     speakers = JSONField()
     prizes = JSONField()
 
-
+    objects = HackathonManager()

@@ -5,6 +5,8 @@ LONG_FIELD_LIMIT = 350
 
 PHONE_FIELD_LIMIT = 15
 
+HACKATHON_FEATURED_LIMIT = 50
+
 # Misc Constants
 GRAD_YEAR_LOWER_LIMIT = 1950
 PHONE_NUMBER_ERR_MSG = "Phone number format: '+999999999'. Max 15 digits allowed."

@@ -1,6 +1,5 @@
 from api.models import Hackathon
 from api.serializers import HackathonSerializer
-from api.services import hackathon_service
 from rest_framework import viewsets
 
 # POST Hackathon
@@ -109,7 +108,7 @@ class HackathonViewSet(viewsets.ModelViewSet):
         # Featured Hackathons
         featured = self.request.query_params.get('featured', None)
         if featured == 'true':
-            queryset = hackathon_service.filter_featured_hackathons()
+            queryset = Hackathon.objects.featured()
 
         return queryset
 

@@ -3,6 +3,7 @@ from api.models import Hackathon
 
 
 class HackathonSerializer(serializers.ModelSerializer):
+    # Additional Fields
     no_of_organisers = serializers.SerializerMethodField()
     no_of_volunteers = serializers.SerializerMethodField()
     no_of_participants = serializers.SerializerMethodField()
@@ -22,13 +23,13 @@ class HackathonSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'created_at', 'updated_at',)
 
     def get_no_of_organisers(self, obj):
-        return len(obj.hacker_set.filter(role='organiser'))
+        return len(obj.hacker_set.all().filter(role='organiser'))
 
     def get_no_of_volunteers(self, obj):
-        return len(obj.hacker_set.filter(role='volunteer'))
+        return len(obj.hacker_set.all().filter(role='volunteer'))
 
     def get_no_of_participants(self, obj):
-        return len(obj.hacker_set.filter(role='participant'))
+        return len(obj.hacker_set.all().filter(role='participant'))
 
     def get_no_of_mentors(self, obj):
-        return len(obj.hacker_set.filter(role='mentor'))
+        return len(obj.hacker_set.all().filter(role='mentor'))
