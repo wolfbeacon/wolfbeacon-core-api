@@ -27,6 +27,7 @@ class Rating(models.Model):
     # Rating scale from 1 to 5
     rating = models.IntegerField(choices=RATING_NUMS)
 
+    # TODO find fix
     # One Hacker and a Hackathon cannot have more than one rating for the same 'rating_for'
-    class Meta:
-        unique_together = (("hacker", "hackathon", "rating_for"),)
+    # class Meta:
+    #     unique_together = (("hacker", "hackathon", "rating_for"),)
