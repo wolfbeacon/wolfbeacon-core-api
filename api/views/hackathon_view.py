@@ -105,10 +105,10 @@ class HackathonViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Hackathon.objects.all()
 
-        # Featured Hackathons
+        # Check for featured hackathon params
         featured = self.request.query_params.get('featured', None)
         if featured == 'true':
-            queryset = Hackathon.objects.featured()
+            queryset = queryset.featured()
 
         return queryset
 

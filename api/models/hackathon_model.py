@@ -9,11 +9,18 @@ Hackathon Model
 """
 
 
-class HackathonManager(models.Manager):
-    # Featured Hackathons have 50 members or more
+class HackathonQueryset(models.query.QuerySet):
+    # Current condition for Featured Hackathons is having >= 50 members - set by HACKATHON_FEATURED_LIMIT
     def featured(self):
-        return self.get_queryset().annotate(num_hackers=Count('hacker')).filter(
-            num_hackers__gte=HACKATHON_FEATURED_LIMIT)
+        return self.annotate(num_hackers=Count('hacker')).filter(num_hackers__gte=HACKATHON_FEATURED_LIMIT)
+
+
+class HackathonManager(models.Manager):
+    def get_queryset(self):
+        return HackathonQueryset(self.model)
+
+    def featured(self):
+        return self.get_queryset().featured()
 
 
 class Hackathon(models.Model):
