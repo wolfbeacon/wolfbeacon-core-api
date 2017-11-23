@@ -34,6 +34,7 @@ DIETARY_RESTRICTIONS = (
     ('vegan', 'Vegan'),
     ('gluten-free', 'Gluten-free'),
     ('lactose-intolerant', 'Lactose Intolerant'),
+    ('kosher', 'Kosher'),
     ('none', 'None'),
 )
 

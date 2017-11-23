@@ -12,10 +12,10 @@ class HackathonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hackathon
         fields = ('id', 'created_at', 'updated_at', 'is_published', 'name', 'version',
-                  'description', 'logo', 'hackathon_type', 'location', 'shipping_address',
-                  'travel_reimbursements', 'social_links', 'university_name', 'contact_email',
-                  'start_time', 'end_time', 'bus_routes', 'timetable', 'sponsors', 'judges',
-                  'speakers', 'prizes',
+                  'description', 'logo', 'hackathon_type', 'location', 'latitude', 'longitude',
+                  'shipping_address', 'travel_reimbursements', 'social_links', 'university_name',
+                  'contact_email', 'start_time', 'end_time', 'bus_routes', 'timetable', 'sponsors',
+                  'judges', 'speakers', 'prizes',
 
                   'no_of_organisers', 'no_of_volunteers', 'no_of_participants', 'no_of_mentors'
                   )

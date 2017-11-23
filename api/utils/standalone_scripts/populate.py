@@ -11,6 +11,8 @@ def add_hackathon():
         "logo": "hello://google.com",
         "hackathon_type": "university",
         "location": "Toronto, ON",
+        "latitude": 43.6532,
+        "longitude": 79.3832,
         "shipping_address": "Road 123, Toronto, Canada",
         "travel_reimbursements": "Yes, depending on location",
         "university_name": "University Of Toronto",
@@ -104,10 +106,8 @@ def add_hacker():
 
 
 def add_hacker_to_event():
-    url = BASE_URL + 'hackathons/1/events/1/hackers/'
-    res = requests.post(url, json={
-        "hacker": 1
-    })
+    url = BASE_URL + 'hackathons/1/events/1/hackers/1/'
+    res = requests.post(url)
     print(res.status_code)
 
 
