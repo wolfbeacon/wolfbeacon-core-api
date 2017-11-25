@@ -1,6 +1,7 @@
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.db.models import Count
-from django.contrib.postgres.fields import JSONField
+
 from api.utils.constants import MEDIUM_FIELD_LIMIT, LONG_FIELD_LIMIT, HACKATHON_FEATURED_LIMIT, COORD_MAX_DIGITS, \
     COORD_MAX_DECIMAL_PLACES
 from api.utils.enums import HACKATHON_TYPE
@@ -15,6 +16,12 @@ class HackathonQueryset(models.query.QuerySet):
     def featured(self):
         return self.annotate(num_hackers=Count('hacker')).filter(num_hackers__gte=HACKATHON_FEATURED_LIMIT)
 
+    def start_date(self, start_date):
+        return self.filter(start__date__gte=start_date)
+
+    def end_date(self, end_date):
+        return self.filter(end__date__lte=end_date)
+
 
 class HackathonManager(models.Manager):
     def get_queryset(self):
@@ -22,6 +29,12 @@ class HackathonManager(models.Manager):
 
     def featured(self):
         return self.get_queryset().featured()
+
+    def start_date(self, start_date):
+        return self.get_queryset().start_date(start_date=start_date)
+
+    def end_date(self, end_date):
+        return self.get_queryset().end_date(end_date=end_date)
 
 
 class Hackathon(models.Model):
@@ -44,8 +57,8 @@ class Hackathon(models.Model):
     university_name = models.CharField(max_length=LONG_FIELD_LIMIT, null=True)
     contact_email = models.EmailField()
 
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start = models.DateTimeField()
+    end = models.DateTimeField()
     social_links = JSONField()
     bus_routes = JSONField()
     timetable = JSONField()
@@ -54,4 +67,5 @@ class Hackathon(models.Model):
     speakers = JSONField()
     prizes = JSONField()
 
+    # Link to HackathonManager
     objects = HackathonManager()

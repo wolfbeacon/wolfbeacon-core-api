@@ -1,6 +1,7 @@
 from api.models import Hackathon
 from api.serializers import HackathonSerializer
 from rest_framework import viewsets
+from api.utils import validators
 
 # POST Hackathon
 """
@@ -21,8 +22,8 @@ from rest_framework import viewsets
 @apiParam {String} travel_reimbursements Note about travel reimbursements
 @apiParam {String} university_name (Optional) For University MLH Rankings
 @apiParam {String} contact_email Email Id to reach out to hackathon organisers
-@apiParam {String="YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]"} start_time Denotes start time of hackathon
-@apiParam {String="YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]"} end_time Denotes end time of hackathon
+@apiParam {String="YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]"} start Denotes start time of hackathon
+@apiParam {String="YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]"} end Denotes end time of hackathon
 @apiParam {json} social_links Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
 @apiParam {json} bus_routes Bus Routes in travel arrangements 
 @apiParam {json} timetable Timetable of hackathon events and happenings
@@ -32,7 +33,7 @@ from rest_framework import viewsets
 @apiParam {json} prizes Prizes
 
 @apiParamExample {json} Request Data Example:
-{"hackathon":"hackthevalley_1","name":"Hack The Valley","description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-04 06:00:00+0800","end_time":"2017-09-05 06:00:00+0800","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{}}
+{"hackathon":"hackthevalley_1","name":"Hack The Valley","description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start":"2017-09-04 06:00:00+0800","end":"2017-09-05 06:00:00+0800","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{}}
 
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 201 Created
@@ -44,14 +45,16 @@ HTTP/1.1 201 Created
 @api {get} /hackathons/ 2. List Hackathons
 @apiName ListHackathons
 @apiGroup Hackathons
-@apiDescription Allowed additional search parameters are <br><br> <i>id, created_at, updated_at, is_published, name, version, description, hackathon_type, location, shipping_address, university_name, contact_email, start_time, end_time,</i> <br><br>
-@apiParam {boolean=true,false} featured Returns featured hackathons for featured=true
+@apiDescription Allowed additional search parameters are <br><br> <i>id, created_at, updated_at, is_published, name, version, description, hackathon_type, location, shipping_address, university_name, contact_email, start, end,</i> <br><br>
+@apiParam {boolean=true,false} featured Filters featured hackathons for featured=true
+@apiParam {String="YYYY-MM-DD"} start_date Filters Hackathons which have `start` >= `start_date` passed
+@apiParam {String="YYYY-MM-DD"} featured Filters Hackathons which have `end` <= `end_date` passed
 
 @apiParamExample Sample Request 
-https://api.wolfbeacon.com/hackathons?featured=true&hackathon_type=university
+https://api.wolfbeacon.com/hackathons?featured=true&start_date=2017-09-01&hackathon_type=university
 
 @apiSuccessExample {json} Success Response Code (HTTP/1.1 200 OK):
-[{"id":1,"created_at":"2017-10-16T16:27:27.403807Z","updated_at":"2017-10-16T16:27:27.403856Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","latitude": 43.6532,"longitude": 79.3832,"shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-03T22:00:00Z","end_time":"2017-09-04T22:00:00Z","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":1,"no_of_volunteers":0,"no_of_participants":750,"no_of_mentors":0},{"id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Noth","version":1,"description":"Hackathon at University of Waterloo","latitude": 43.6532,"longitude": 79.3832,"logo":"hello://google.com","hackathon_type":"university","location":"Waterloo, Canada","shipping_address":"Road 123, Waterloo, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"university_name":"University Of Waterloo","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-03T22:00:00Z","end_time":"2017-09-04T22:00:00Z","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":2,"no_of_volunteers":0,"no_of_participants":1200,"no_of_mentors":0}]
+[{"id":1,"created_at":"2017-10-16T16:27:27.403807Z","updated_at":"2017-10-16T16:27:27.403856Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","latitude": 43.6532,"longitude": 79.3832,"shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start":"2017-09-03T22:00:00Z","end":"2017-09-04T22:00:00Z","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":1,"no_of_volunteers":0,"no_of_participants":750,"no_of_mentors":0},{"id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Noth","version":1,"description":"Hackathon at University of Waterloo","latitude": 43.6532,"longitude": 79.3832,"logo":"hello://google.com","hackathon_type":"university","location":"Waterloo, Canada","shipping_address":"Road 123, Waterloo, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"university_name":"University Of Waterloo","contact_email":"ralphpal@wolfbeacon.com","start":"2017-09-03T22:00:00Z","end":"2017-09-04T22:00:00Z","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":2,"no_of_volunteers":0,"no_of_participants":1200,"no_of_mentors":0}]
 """
 
 # GET Hackathon
@@ -62,7 +65,7 @@ https://api.wolfbeacon.com/hackathons?featured=true&hackathon_type=university
 @apiGroup Hackathons
 
 @apiSuccessExample {json} Success Response (HTTP/1.1 200 OK):
-{"id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","latitude": 43.6532,"longitude": 79.3832,"shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"twitter":"https://twitter.com/hackthevalley","facebook":"https://facebook.com/htv"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start_time":"2017-09-04T06:00:00+08:00","end_time":"2017-09-05T06:00:00+08:00","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":0,"no_of_volunteers":0,"no_of_participants":0,"no_of_mentors":0}
+{"id":2,"created_at":"2017-10-16T16:27:45.946560Z","updated_at":"2017-10-16T16:27:45.946588Z","is_published":false,"name":"Hack The Valley","version":1,"description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","latitude": 43.6532,"longitude": 79.3832,"shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","social_links":{"twitter":"https://twitter.com/hackthevalley","facebook":"https://facebook.com/htv"},"university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start":"2017-09-04T06:00:00+08:00","end":"2017-09-05T06:00:00+08:00","bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{},"no_of_organisers":0,"no_of_volunteers":0,"no_of_participants":0,"no_of_mentors":0}
 """
 
 # PUT Hackathon
@@ -112,11 +115,25 @@ class HackathonViewSet(viewsets.ModelViewSet):
         if featured == 'true':
             queryset = queryset.featured()
 
+        # Filter Hackathons starting after start_date and ending before end_date
+        start_date = self.request.query_params.get('start_date', None)
+        if start_date:
+            # Get formatted in datetime
+            start_date = validators.validate_hackathon_url_date(start_date)
+
+            queryset = queryset.start_date(start_date)
+
+        end_date = self.request.query_params.get('end_date', None)
+        if end_date:
+            end_date = validators.validate_hackathon_url_date(end_date)
+
+            queryset = queryset.end_date(end_date)
+
         return queryset
 
     serializer_class = HackathonSerializer
     filter_fields = (
         'id', 'created_at', 'updated_at', 'is_published', 'name', 'version',
         'description', 'hackathon_type', 'location', 'shipping_address', 'university_name',
-        'contact_email', 'start_time', 'end_time',
+        'contact_email', 'start', 'end',
     )

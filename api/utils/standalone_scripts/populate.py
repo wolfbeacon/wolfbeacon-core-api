@@ -17,8 +17,8 @@ def add_hackathon():
         "travel_reimbursements": "Yes, depending on location",
         "university_name": "University Of Toronto",
         "contact_email": "ralphpal@wolfbeacon.com",
-        "start_time": "2017-09-04 06:00:00+0800",
-        "end_time": "2017-09-05 06:00:00+0800",
+        "start": "2017-10-10 06:00:00+0000",
+        "end": "2017-10-14 06:00:00+0000",
         "social_links": {
             "facebook": "https://facebook.com/htv",
             "twitter": "https://twitter.com/hackthevalley"
