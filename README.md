@@ -10,7 +10,7 @@ Written in [Python 3](https://www.python.org/downloads/release/python-352/), pow
 
 Docs are generated using [apidoc](http://apidocjs.com/). Doc strings are present in views under the `/api/views` directory. Documentation is served separately by the [wolfbeacon-apidoc-gen](https://github.com/wolfbeacon/wolfbeacon-apidoc-gen) service.
 
-There were some interesting problems we faced when building this API while trying to keep things RESTful and making it easy for devs to work with as well. [WolfBeacon Core API - Design and Conventions Explained](https://github.com/wolfbeacon/wolfbeacon-core-api/wiki/API-Design-and-Conventions-used-Explained) makes for an interesting read and justifies some of these decisions.
+There were some interesting problems we faced when building this API while trying to keep things RESTful and making it easy for devs to work with as well. [WolfBeacon Core API - API Design Decisions Explained](https://github.com/wolfbeacon/wolfbeacon-core-api/wiki/API-Design-Decisions-Explained) makes for an interesting read and justifies some of these decisions.
 
 
 ## Local Development Setup
@@ -26,15 +26,15 @@ There were some interesting problems we faced when building this API while tryin
 
   Adding the *AUTH0* configuration (used for [Auth0](https://auth0.com) Token Validation) is optional. Hence for local testing, disable it by removing `'api.middleware.auth0.Auth0Middleware',` from *MIDDLEWARE*.
 
-* Install the requirements
+* Install requirements
 
   `sudo pip install -r requirements.txt`
 
-* Run Database Migrations
+* Run database migrations
 
   `python manage.py migrate`
 
-* Start the development server
+* Start development server
 
   `python manage.py runserver`
 
