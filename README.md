@@ -30,11 +30,11 @@ There were some interesting problems we faced when building this API while tryin
 
   `sudo pip install -r requirements.txt`
 
-* Make the Database Migrations
+* Run Database Migrations
 
   `python manage.py migrate`
 
-* Run the development server
+* Start the development server
 
   `python manage.py runserver`
 
