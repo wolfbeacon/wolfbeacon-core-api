@@ -50,13 +50,3 @@ Assuming Postgres is already running in a separate container remotely accessible
 
 This should have have your app up and running, accessible on port 8000.
 
-## Simulating Production Environment
-
-For testing purposes, a production environment can be simulated using the *docker-compose* file provided which bundles the API and Postgres together.
-
-It uses a slightly modified Dockerfile alongwith an entrypoint, both located in `/.docker-compose/`
-
-* `cp wolfbeacon/settings.docker-compose.py wolfbeacon/settings.py`
-* `sudo docker-compose up --build -d`
-
-
