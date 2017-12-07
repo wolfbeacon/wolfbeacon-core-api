@@ -50,3 +50,6 @@ Assuming Postgres is already running in a separate container remotely accessible
 
 This should have have your app up and running, accessible on port 8000.
 
+## AWS CodeDeploy Env Variables
+
+`CORE_S3_CONFIG_PATH` - wolfbeacon/settings.py S3 path
