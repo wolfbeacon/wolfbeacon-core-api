@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from api.views import HackathonViewSet, UserViewSet, HackerList, HackerCreate, HackerRUD, \
-    EventCreate, EventRUD, EventList, EventHackerAddRemove, RatingViewSet
+    EventCreate, EventRUD, EventList, EventHackerAddRemove, RatingViewSet, FileUploadViewSet
 
 # Register CRUD Entities with Router
 router = DefaultRouter()
@@ -30,6 +30,8 @@ urlpatterns = [
 
     # ADD HACKERS TO EVENTS
     url(r'^hackathons/(?P<fk2>\d+)/events/(?P<fk>\d+)/hackers/(?P<pk>\d+)/$', EventHackerAddRemove.as_view()),
+
+    url(r'^file-upload/$', FileUploadViewSet.as_view({'post': 'create'})),
 
     # Router URLs
     url(r'^', include(router.urls)),
