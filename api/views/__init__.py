@@ -6,4 +6,4 @@ from api.views.user_view import UserViewSet
 from api.views.hacker_view import HackerList, HackerCreate, HackerRUD
 from api.views.event_view import EventList, EventCreate, EventRUD, EventHackerAddRemove
 from api.views.rating_view import RatingViewSet
-from api.views.file_upload_view import FileUploadViewSet
+from api.views.upload_view import UploadViewSet
