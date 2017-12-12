@@ -13,3 +13,4 @@ six==1.10.0
 uWSGI==2.0.15
 django-filter==1.0.4
 django-storages==1.6.5
+boto3==1.4.8

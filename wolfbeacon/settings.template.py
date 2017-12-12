@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api.apps.ApiConfig',
     'django_filters',
+    'storages',
 
     'django.contrib.postgres',
     'django.contrib.admin',
