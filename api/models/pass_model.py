@@ -12,7 +12,7 @@ class Pass(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     qr_code = models.ImageField(upload_to='qr_codes/', editable=False, blank=True)
-    hacker = models.ForeignKey(Hacker, on_delete=models.CASCADE)
+    hacker = models.OneToOneField(Hacker, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
 
@@ -36,8 +36,8 @@ class Pass(models.Model):
             # Convert from PIL to Django Format
             img_io = BytesIO()
             img.save(img_io, format='JPEG')
-            file_name = 'qr_code{}_{}.jpg'.format(hacker.id, hacker.hackathon_id)
-            self.datafile = InMemoryUploadedFile(img_io, None, file_name, 'image/jpeg', img_io.tell(), None)
+            file_name = 'qr_code_hacker_{}_hackathon_{}.jpg'.format(hacker.id, hacker.hackathon_id)
+            self.qr_code = InMemoryUploadedFile(img_io, None, file_name, 'image/jpeg', img_io.tell(), None)
 
             # Save (Upload QR if generated)
             super(Pass, self).save()

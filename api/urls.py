@@ -15,11 +15,8 @@ router.register(r'hackathons', HackathonViewSet,
 # RATINGS
 router.register(r'ratings', RatingViewSet)
 
-# FILE UPLOADS
-router.register(r'upload', UploadViewSet)
-
-# HACKER PASSES
-router.register(r'passes', PassViewSet)
+# FILE UPLOADS - Not Needed
+# router.register(r'upload', UploadViewSet)
 
 # Remaining URLs
 urlpatterns = [
@@ -33,9 +30,12 @@ urlpatterns = [
     url(r'^hackathons/(?P<fk>\d+)/events/$', EventCreate.as_view()),
     url(r'^events/(?P<pk>\d+)/$', EventRUD.as_view()),
     url(r'^events/$', EventList.as_view()),
-
-    # ADD HACKERS TO EVENTS
+    # Add Hackers to Events
     url(r'^hackathons/(?P<fk2>\d+)/events/(?P<fk>\d+)/hackers/(?P<pk>\d+)/$', EventHackerAddRemove.as_view()),
+
+    # HACKER PASSES
+    url(r'^passes/$', PassViewSet.as_view({'post': 'create', 'get': 'list'})),
+    url(r'^passes/(?P<pk>\d+)/$', PassViewSet.as_view({'delete': 'destroy'})),
 
     # Router URLs
     url(r'^', include(router.urls)),

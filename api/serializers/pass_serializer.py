@@ -5,4 +5,4 @@ from api.models import Pass
 class PassSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pass
-        fields = ('id', 'datafile', 'hacker')
+        fields = ('id', 'qr_code', 'hacker')
