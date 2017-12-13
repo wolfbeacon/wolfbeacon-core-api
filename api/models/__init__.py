@@ -4,3 +4,4 @@ from api.models.hackathon_model import Hackathon
 from api.models.hacker_model import Hacker
 from api.models.event_model import Event
 from api.models.rating_model import Rating
+from api.models.pass_model import Pass

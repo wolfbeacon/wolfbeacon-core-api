@@ -14,3 +14,5 @@ uWSGI==2.0.15
 django-filter==1.0.4
 django-storages==1.6.5
 boto3==1.4.8
+qrcode==5.3
+Pillow=4.3.0
