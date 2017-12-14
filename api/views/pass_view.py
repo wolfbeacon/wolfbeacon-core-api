@@ -8,8 +8,8 @@ from api.serializers import PassSerializer
 """
 @apiVersion 1.0.0
 @api {post} /passes/ 1. Create Hacker Pass
-@apiName Create Hacker Pass
-@apiGroup HackerPass
+@apiName CreateHackerPass
+@apiGroup HackerPasses
 
 @apiParam {Number} hacker ID of Hacker for whom hacker pass is to be generated
 
@@ -22,8 +22,8 @@ from api.serializers import PassSerializer
 """
 @apiVersion 1.0.0
 @api {get} /passes/ 2. List Hacker Passes
-@apiName List Hacker Passes
-@apiGroup HackerPass
+@apiName ListHackerPasses
+@apiGroup HackerPasses
 @apiDescription Additional search parameters can be <br><br> <i>hacker</i>, <i>id</i> <br><br>
 
 @apiParamExample Sample Request 
@@ -36,7 +36,7 @@ https://api.wolfbeacon.com/passes?hacker=1
 # DELETE Hacker Pass
 """
 @apiVersion 1.0.0
-@api {delete} /passes/:pass-id/ 6. Delete Hacker Pass
+@api {delete} /passes/:pass-id/ 3. Delete Hacker Pass
 @apiName DeleteHackerPass
 @apiGroup HackerPass
 @apiSuccessExample {json} Success Response Code:
