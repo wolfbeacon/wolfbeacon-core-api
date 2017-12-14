@@ -38,7 +38,7 @@ https://api.wolfbeacon.com/passes?hacker=1
 @apiVersion 1.0.0
 @api {delete} /passes/:pass-id/ 3. Delete Hacker Pass
 @apiName DeleteHackerPass
-@apiGroup HackerPass
+@apiGroup HackerPasses
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 204 NO CONTENT
 """
