@@ -6,7 +6,7 @@ from rest_framework.response import Response
 @apiName HeadersRequired
 @api {headers} /*all_endpoints*  To pass for API Authentication and Response
 @apiGroup Headers
-@apiDescription Headers that need to passed with every API request. Clients require an Auth0 access_token for Authorisation  
+@apiDescription Headers that need to passed with every API request. Clients require an Auth0 access_token for Authorization. See API Integration Docs<br><br>
 
 @apiParam {header="application/json"} Content-Type Indicates Content is JSON
 @apiParam {header="Bearer AUTH0_JWT_ACCESS_TOKEN"} Authorisation Auth0 Authentication Token
