@@ -19,6 +19,10 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     auth0_id = models.TextField(unique=True)
+
+    # Sourced from Auth0 User profile, hence TextField
+    profile_picture_link = models.TextField(null=True)
+
     username = models.CharField(max_length=SHORT_FIELD_LIMIT)
     first_name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
     last_name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)

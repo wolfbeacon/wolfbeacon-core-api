@@ -46,7 +46,7 @@ class Hackathon(models.Model):
     name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
     version = models.PositiveIntegerField(default=1)
     description = models.TextField()
-    logo = models.TextField(null=True)
+    logo_image_file = models.ImageField(upload_to='hackathon_logos/', null=True)
     hackathon_type = models.TextField(choices=HACKATHON_TYPE)
     location = models.CharField(max_length=LONG_FIELD_LIMIT)
     latitude = models.DecimalField(max_digits=COORD_MAX_DIGITS, decimal_places=COORD_MAX_DECIMAL_PLACES)

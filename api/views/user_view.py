@@ -8,8 +8,10 @@ from api.models.user_model import User
 @api {post} /users/ 1. Create User
 @apiName CreateUser
 @apiGroup Users
+@apiDescription See API Integration Docs - <a href="https://wolfbeacon.atlassian.net/wiki/spaces/WG/pages/283443451/Sign-up+and+Sign-in" target="_blank">Sign-up and Sign-in flow</a>. Again, User Auth0 Profile Structure Link can be found <a href="https://auth0.com/docs/user-profile/user-profile-structure" target="_blank">here</a> 
 
-@apiParam {String} auth0_id Auth0 ID for User
+@apiParam {String} auth0_id *user_id* field in User Auth0 Profile Structure
+@apiParam {String} profile_picture_link (Optional) *picture* field in User Auth0 Profile Structure which is basically a link to user's profile picture of signed in platform 
 @apiParam {String{150 chars}} first_name First Name
 @apiParam {String{150 chars}} last_name Last Name
 @apiParam {String{50 chars}} username Username

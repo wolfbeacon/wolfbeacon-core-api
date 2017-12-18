@@ -13,7 +13,7 @@ from api.utils import validators
 @apiParam {String{150 chars}} name Name/Title of Hackathon
 @apiParam {String} version Denotes which iteration of this hackathon
 @apiParam {String} description Short note about the uniqueness of the Hackathon
-@apiParam {String} logo (Optional) Link to Logo of Hackathon
+@apiParam {File} logo_image_file (Optional) Image file (.jpg, png) of Hackathon Logo (Multipart Request) 
 @apiParam {String="high-school","university","corporate","other"} hackathon_type Type of Hackathon denoting audience
 @apiParam {String{350 chars}} location Location of Hackathon Example: EX: 756 Finch Ave, Toronto, Canada
 @apiParam {Number} latitude Location of Hackathon Example: EX: 756 Finch Ave, Toronto, Canada
@@ -33,7 +33,7 @@ from api.utils import validators
 @apiParam {json} prizes Prizes
 
 @apiParamExample {json} Request Data Example:
-{"hackathon":"hackthevalley_1","name":"Hack The Valley","description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start":"2017-09-04 06:00:00+0800","end":"2017-09-05 06:00:00+0800","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{}}
+{"name":"Hack The Valley","description":"Hackathon at UoT Scarborough","logo":"hello://google.com","hackathon_type":"university","location":"Toronto, ON","latitude":43.6532,"longitude":79.3832,"shipping_address":"Road 123, Toronto, Canada","travel_reimbursements":"Yes, depending on location","university_name":"University Of Toronto","contact_email":"ralphpal@wolfbeacon.com","start":"2017-10-10 06:00:00+0000","end":"2017-10-14 06:00:00+0000","social_links":{"facebook":"https://facebook.com/htv","twitter":"https://twitter.com/hackthevalley"},"bus_routes":{},"timetable":{},"sponsors":{},"judges":{},"speakers":{},"prizes":{}}
 
 @apiSuccessExample {json} Success Response Code:
 HTTP/1.1 201 Created
