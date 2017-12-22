@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'django_filters',
     'storages',
+    'corsheaders',
 
     'django.contrib.postgres',
     'django.contrib.admin',
@@ -32,16 +33,17 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # CORS Middleware
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    # Include Auth0 middleware to validate all tokens
+    'api.middleware.auth0.Auth0Middleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # Include Auth0 middleware to validate all tokens
-    'api.middleware.auth0.Auth0Middleware',
 ]
 
 REST_FRAMEWORK = {
@@ -121,6 +123,9 @@ STATIC_URL = '/static/'
 
 # Additional Security Settings
 # python manage.py check --deploy
+
+# Enables CORS
+CORS_ORIGIN_ALLOW_ALL = True
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 

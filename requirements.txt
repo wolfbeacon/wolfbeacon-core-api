@@ -6,13 +6,15 @@ click==6.7
 coreapi==2.3.1
 coreschema==0.0.4
 Django==1.11.5
+django-cors-headers==2.1.0
 django-extra-fields==0.9
 django-filter==1.0.4
 django-storages==1.6.5
 djangorestframework==3.6.4
 docutils==0.14
-ecdsa==0.13
+fastecdsa==1.5.1
 future==0.16.0
+gmpy==1.17
 idna==2.6
 image==1.5.16
 itsdangerous==0.24
@@ -32,6 +34,7 @@ pytz==2017.2
 qrcode==5.3
 requests==2.18.4
 s3transfer==0.1.12
+seccure==0.3.2
 simplejson==3.11.1
 six==1.10.0
 uritemplate==3.0.0
