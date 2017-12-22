@@ -9,12 +9,12 @@ from rest_framework.response import Response
 @apiDescription Headers that need to passed with every API request. Clients require an Auth0 access_token for Authorization. See API Integration Docs<br><br>
 
 @apiParam {header="application/json"} Content-Type Indicates Content is JSON
-@apiParam {header="Bearer AUTH0_JWT_ACCESS_TOKEN"} Authorisation Auth0 Authentication Token
+@apiParam {header="Bearer AUTH0_JWT_ACCESS_TOKEN"} Authorization Auth0 Authentication Token
 
 @apiHeaderExample {json} Headers:
 {
     "Content-Type": "application/json"
-    "Authorisation": "Bearer AUTH0_JWT_ACCESS_TOKEN"
+    "Authorization": "Bearer AUTH0_JWT_ACCESS_TOKEN"
 }
 """
 
