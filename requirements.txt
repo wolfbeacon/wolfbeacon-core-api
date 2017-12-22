@@ -12,7 +12,6 @@ django-filter==1.0.4
 django-storages==1.6.5
 djangorestframework==3.6.4
 docutils==0.14
-fastecdsa==1.5.1
 future==0.16.0
 gmpy==1.17
 idna==2.6
