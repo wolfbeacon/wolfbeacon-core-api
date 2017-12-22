@@ -17,7 +17,7 @@ services:
       DATABASE_URL: postgres://postgres:Admin123@postgres/postgres
     build:
       context: .
-      dockerfile: ./.docker-compose/Dockerfile
+      dockerfile: Dockerfile
     links:
       - postgres:postgres
     ports:
