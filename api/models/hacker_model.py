@@ -1,6 +1,6 @@
 from django.db import models
 from api.models import Hackathon, User
-from api.utils.enums import HACKER_ROLES
+from api.utils.enums import HACKER_ROLES, APPLICATION_STATUS
 
 """ 
 Hacker Model
@@ -18,3 +18,4 @@ class Hacker(models.Model):
     hackathon = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
 
     role = models.TextField(choices=HACKER_ROLES)
+    application_status = models.TextField(choices=APPLICATION_STATUS)

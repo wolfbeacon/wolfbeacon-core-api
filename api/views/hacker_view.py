@@ -14,6 +14,7 @@ from api.utils import validators
 @apiParam {String} user User ID of Hacker
 @apiParam {String} hackathon Hackathon Id Hacker is to attend
 @apiParam {String="organiser","volunteer","participant","mentor"} role Role of Hacker in Hackathon
+@apiParam {String="accepted","wait-listed","applied","rejected"} application_status Hacker's Application status for particular hackathon
 @apiParamExample {json} Request Data Example:
 {"user":1,"hackathon":1,"role":"organiser"}
 @apiSuccessExample {json} Success Response Code (HTTP/1.1 200 OK):
