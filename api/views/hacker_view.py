@@ -1,4 +1,5 @@
-from rest_framework import mixins, generics
+from rest_framework import mixins
+from rest_framework.viewsets import GenericViewSet
 
 from api.models import Hacker
 from api.serializers import HackerSerializer
@@ -21,19 +22,6 @@ from api.utils import validators
 {"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","role":"organiser"}
 """
 
-
-class HackerCreate(mixins.CreateModelMixin,
-                   generics.GenericAPIView):
-    serializer_class = HackerSerializer
-    queryset = Hacker.objects.all()
-
-    def post(self, request, *args, **kwargs):
-        # assert
-        request.data['hackathon'] = self.kwargs['fk']
-
-        return self.create(request, *args, **kwargs)
-
-
 # GET Hackers
 """
 @apiVersion 1.0.0
@@ -51,33 +39,6 @@ https://api.wolfbeacon.com/v1/hackers?hackathon=1&event=2
 [{"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","role":"volunteer"},{"id":2,"hackathon":1,"user":2,"created_at":"2017-11-06T12:42:00.335711Z","updated_at":"2017-11-06T12:42:00.335746Z","role":"organiser"}]
 Success Response Code: HTTP/1.1 200 OK
 """
-
-
-class HackerList(mixins.ListModelMixin,
-                 mixins.CreateModelMixin,
-                 generics.GenericAPIView):
-    serializer_class = HackerSerializer
-
-    # Custom queryset
-    def get_queryset(self):
-
-        queryset = Hacker.objects.all()
-
-        # Filter for Hackathons
-        hackathon = self.request.query_params.get('hackathon', None)
-        if hackathon:
-            queryset = queryset.filter(hackathon=hackathon)
-
-        # Filter for Events
-        event = self.request.query_params.get('event', None)
-        if event:
-            queryset = queryset.filter(event__id=event)
-
-        return queryset
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
 
 # GET Hacker
 """
@@ -121,25 +82,54 @@ HTTP/1.1 204 NO CONTENT
 """
 
 
-class HackerRUD(mixins.RetrieveModelMixin,
-                mixins.UpdateModelMixin,
-                mixins.DestroyModelMixin,
-                generics.GenericAPIView):
+class HackerViewSet(mixins.ListModelMixin,
+                    mixins.CreateModelMixin,
+                    mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
+                    GenericViewSet):
     serializer_class = HackerSerializer
-    queryset = Hacker.objects.all()
+    filter_fields = (
+        'id', 'user', 'hackathon', 'role', 'application_status'
+    )
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+    # Custom queryset
+    def get_queryset(self):
 
-    def put(self, request, *args, **kwargs):
-        validators.validate_body_url_id([request.data['id']], [self.kwargs['pk']])
+        queryset = Hacker.objects.all()
 
-        return self.update(request, *args, **kwargs)
+        # Filter for Hackathons
+        hackathon = self.request.query_params.get('hackathon', None)
+        if hackathon:
+            queryset = queryset.filter(hackathon=hackathon)
 
-    def patch(self, request, *args, **kwargs):
-        validators.validate_body_url_id([request.data['id']], [self.kwargs['pk']])
+        # Filter for Events
+        event = self.request.query_params.get('event', None)
+        if event:
+            queryset = queryset.filter(event__id=event)
 
-        return self.partial_update(request, *args, **kwargs)
+        return queryset
 
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+    def create(self, request, *args, **kwargs):
+        # validators.validate_body_url_id(request.data['hackathon'], self.kwargs['fk'])
+
+        return super(HackerViewSet, self).create(request, *args, **kwargs)
+
+    def list(self, request, *args, **kwargs):
+        return super(HackerViewSet, self).list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        return super(HackerViewSet, self).retrieve(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        # validators.validate_body_url_id([request.data.get('id', None)], [self.kwargs['pk']])
+
+        return super(HackerViewSet, self).update(request, *args, **kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        # validators.validate_body_url_id([request.data.get('id', None)], [self.kwargs['pk']])
+
+        return super(HackerViewSet, self).partial_update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        return super(HackerViewSet, self).destroy(request, *args, **kwargs)

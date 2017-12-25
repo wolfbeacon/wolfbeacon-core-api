@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
-from api.views import HackathonViewSet, UserViewSet, HackerList, HackerCreate, HackerRUD, \
-    EventCreate, EventRUD, EventList, EventHackerAddRemove, RatingViewSet, UploadViewSet, PassViewSet
+from api.views import HackathonViewSet, UserViewSet, HackerViewSet, EventCreate, EventRUD, EventList, \
+    EventHackerAddRemove, RatingViewSet, UploadViewSet, PassViewSet
 
 # Register CRUD Entities with Router
 router = DefaultRouter()
@@ -22,9 +22,9 @@ router.register(r'ratings', RatingViewSet)
 urlpatterns = [
 
     # HACKERS
-    url(r'^hackathons/(?P<fk>\d+)/hackers/$', HackerCreate.as_view()),
-    url(r'^hackers/(?P<pk>\d+)/$', HackerRUD.as_view()),
-    url(r'^hackers/$', HackerList.as_view()),
+    url(r'^hackathons/(?P<fk>\d+)/hackers/$', HackerViewSet.as_view({'post': 'create'})),
+    url(r'^hackers/(?P<pk>\d+)/$', HackerViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})),
+    url(r'^hackers/$', HackerViewSet.as_view({'get': 'list', 'post': 'create'})),
 
     # EVENTS
     url(r'^hackathons/(?P<fk>\d+)/events/$', EventCreate.as_view()),

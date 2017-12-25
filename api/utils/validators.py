@@ -10,7 +10,7 @@ Eg. Hacker id in URL and PUT Request Body should match
 def validate_body_url_id(url_values, data_values):
     try:
         for i in range(len(url_values)):
-            if int(url_values[i]) != int(data_values[i]):
+            if url_values and int(url_values[i]) != int(data_values[i]):
                 raise Exception
     except Exception as e:
         raise validators.ValidationError(e, "id in URL and Request Body must match and be integers")
