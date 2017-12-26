@@ -14,12 +14,11 @@ from api.utils import validators
 @apiGroup Hackers
 @apiParam {String} user User ID of Hacker
 @apiParam {String} hackathon Hackathon Id Hacker is to attend
-@apiParam {String="organiser","volunteer","participant","mentor"} role Role of Hacker in Hackathon
 @apiParam {String="accepted","wait-listed","applied","rejected"} application_status Hacker's Application status for particular hackathon
 @apiParamExample {json} Request Data Example:
-{"user":1,"hackathon":1,"role":"organiser"}
+{"user":1,"hackathon":1,"application_status":"accepted"}
 @apiSuccessExample {json} Success Response Code (HTTP/1.1 200 OK):
-{"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","role":"organiser"}
+{"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","application_status":"accepted"}
 """
 
 # GET Hackers
@@ -36,7 +35,7 @@ from api.utils import validators
 https://api.wolfbeacon.com/v1/hackers?hackathon=1&event=2
 
 @apiSuccessExample {json} Sample Success Response
-[{"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","role":"volunteer"},{"id":2,"hackathon":1,"user":2,"created_at":"2017-11-06T12:42:00.335711Z","updated_at":"2017-11-06T12:42:00.335746Z","role":"organiser"}]
+[{"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z","application_status":"accepted"},{"id":2,"hackathon":1,"user":2,"created_at":"2017-11-06T12:42:00.335711Z","updated_at":"2017-11-06T12:42:00.335746Z","application_status":"rejected"}]
 Success Response Code: HTTP/1.1 200 OK
 """
 
@@ -90,7 +89,7 @@ class HackerViewSet(mixins.ListModelMixin,
                     GenericViewSet):
     serializer_class = HackerSerializer
     filter_fields = (
-        'id', 'user', 'hackathon', 'role', 'application_status'
+        'id', 'user', 'hackathon', 'application_status'
     )
 
     # Custom queryset

@@ -19,5 +19,5 @@ class HackerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Hacker
-        fields = ('id', 'hackathon', 'user', 'created_at', 'updated_at', 'role', 'application_status')
+        fields = ('id', 'hackathon', 'user', 'created_at', 'updated_at', 'application_status')
         read_only_fields = ('id', 'created_at', 'updated_at',)

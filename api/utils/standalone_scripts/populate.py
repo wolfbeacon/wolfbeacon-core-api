@@ -100,7 +100,6 @@ def add_hacker():
     res = requests.post(url, json={
         "user": 1,
         "hackathon": 1,
-        "role": "organiser",
         "application_status": "accepted"
     })
     print(res.status_code)
