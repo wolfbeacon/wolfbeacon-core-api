@@ -14,7 +14,7 @@ from api.serializers import VolunteerSerializer
 @apiParam {String} user User ID of Volunteer
 @apiParam {String} hackathon Hackathon Id Volunteer is to attend
 @apiParamExample {json} Request Data Example:
-{"user":1,"hackathon":1,"application_status":"accepted"}
+{"user":1,"hackathon":1}
 @apiSuccessExample {json} Success Response Code (HTTP/1.1 200 OK):
 {"id":1,"hackathon":1,"user":1,"created_at":"2017-11-06T09:46:31.459815Z","updated_at":"2017-11-06T09:46:31.459856Z"}
 """
