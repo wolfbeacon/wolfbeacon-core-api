@@ -1,5 +1,4 @@
-from rest_framework import mixins
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from api.models import Mentor
 from api.serializers import MentorSerializer
@@ -79,12 +78,7 @@ HTTP/1.1 204 NO CONTENT
 """
 
 
-class MentorViewSet(mixins.ListModelMixin,
-                    mixins.CreateModelMixin,
-                    mixins.RetrieveModelMixin,
-                    mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,
-                    GenericViewSet):
+class MentorViewSet(ModelViewSet):
     serializer_class = MentorSerializer
     queryset = Mentor.objects.all()
     filter_fields = (

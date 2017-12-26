@@ -1,5 +1,4 @@
-from rest_framework import mixins
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from api.models import Volunteer
 from api.serializers import VolunteerSerializer
@@ -13,6 +12,7 @@ from api.serializers import VolunteerSerializer
 @apiGroup Volunteers
 @apiParam {String} user User ID of Volunteer
 @apiParam {String} hackathon Hackathon Id Volunteer is to attend
+@apiParam {String} duty_assigned (Optional) Duty assigned to Volunteer like Photographer, Guide etc
 @apiParamExample {json} Request Data Example:
 {"user":1,"hackathon":1}
 @apiSuccessExample {json} Success Response Code (HTTP/1.1 200 OK):
@@ -79,12 +79,7 @@ HTTP/1.1 204 NO CONTENT
 """
 
 
-class VolunteerViewSet(mixins.ListModelMixin,
-                       mixins.CreateModelMixin,
-                       mixins.RetrieveModelMixin,
-                       mixins.UpdateModelMixin,
-                       mixins.DestroyModelMixin,
-                       GenericViewSet):
+class VolunteerViewSet(ModelViewSet):
     serializer_class = VolunteerSerializer
     queryset = Volunteer.objects.all()
     filter_fields = (

@@ -45,7 +45,7 @@ HTTP/1.1 201 Created
 @api {get} /hackathons/ 2. List Hackathons
 @apiName ListHackathons
 @apiGroup Hackathons
-@apiDescription Allowed additional search parameters are <br><br> <i>id, created_at, updated_at, is_published, name, version, description, hackathon_type, location, shipping_address, university_name, contact_email, start, end,</i> <br><br>
+@apiDescription Allowed additional filter parameters are <br><br> <i>id, created_at, updated_at, is_published, name, version, description, hackathon_type, location, shipping_address, university_name, contact_email, start, end,</i> <br><br>
 @apiParam {boolean=true,false} featured Filters featured hackathons for featured=true
 @apiParam {String="YYYY-MM-DD"} start_date Filters Hackathons which have `start` >= `start_date` passed
 @apiParam {String="YYYY-MM-DD"} featured Filters Hackathons which have `end` <= `end_date` passed

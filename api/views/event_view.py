@@ -1,7 +1,7 @@
-from rest_framework import mixins, generics
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from api.models import Event, Hacker
 from api.serializers import EventSerializer
@@ -30,27 +30,15 @@ from api.utils import validators
 {"id":3,"created_at":"2017-11-06T19:41:30.644678Z","updated_at":"2017-11-06T19:41:30.644721Z","hackathon":1,"type":"general-workshop","name":"Test Name","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt","no_of_attendees":0,"rating":0}
 """
 
-
-class EventCreate(mixins.CreateModelMixin,
-                  generics.GenericAPIView):
-    serializer_class = EventSerializer
-    queryset = Event.objects.all()
-
-    def post(self, request, *args, **kwargs):
-        # assert
-        request.data['hackathon'] = self.kwargs['fk']
-
-        return self.create(request, *args, **kwargs)
-
-
 # List Events
 """
 @apiVersion 1.0.0
 @api {get} /hackathons/? 2. List Events 
 @apiName ListEvents
 @apiGroup Events
-
 @apiParam {Number} hackathon Hackathon ID Event if a part of
+
+@apiDescription Allowed additional filter parameters are <br><br> <i>hackathon, type, name</i> <br><br>
 
 @apiParamExample Sample Request 
 https://api.wolfbeacon.com/v1/events?hackathon=1
@@ -58,27 +46,6 @@ https://api.wolfbeacon.com/v1/events?hackathon=1
 @apiSuccessExample {json} Sample Success Response
 [{"id":3,"created_at":"2017-11-06T19:41:30.644678Z","updated_at":"2017-11-06T19:41:30.644721Z","hackathon":1,"type":"general-workshop","name":"Test Name","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt","no_of_attendees":0,"rating":0},{"id":2,"created_at":"2017-11-06T19:41:30.439853Z","updated_at":"2017-11-06T19:41:30.439882Z","hackathon":1,"type":"general-workshop","name":"Test Name","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt","no_of_attendees":0,"rating":0}]Success Response Code: HTTP/1.1 200 OK
 """
-
-
-class EventList(mixins.ListModelMixin,
-                mixins.CreateModelMixin,
-                generics.GenericAPIView):
-    serializer_class = EventSerializer
-
-    # Custom queryset
-    def get_queryset(self):
-        queryset = Event.objects.all()
-
-        # Filter for Hackathons
-        hackathon = self.request.query_params.get('hackathon', None)
-        if hackathon:
-            queryset = queryset.filter(hackathon=hackathon)
-
-        return queryset
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
 
 # GET Event
 """
@@ -122,31 +89,45 @@ HTTP/1.1 204 NO CONTENT
 """
 
 
-class EventRUD(mixins.RetrieveModelMixin,
-               mixins.UpdateModelMixin,
-               mixins.DestroyModelMixin,
-               generics.GenericAPIView):
-    """
-    Get Visitor, ReplaceVisitor, Delete Visitor
-    """
+class EventViewSet(ModelViewSet):
     serializer_class = EventSerializer
-    queryset = Event.objects.all()
+    filter_fields = (
+        'hackathon', 'type', 'name',
+    )
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+    def get_queryset(self):
+        queryset = Event.objects.all()
 
-    def put(self, request, *args, **kwargs):
-        validators.validate_body_url_id([request.data['id']], [self.kwargs['pk']])
+        # Filter for Hackathons
+        hackathon = self.request.query_params.get('hackathon', None)
+        if hackathon:
+            queryset = queryset.filter(hackathon=hackathon)
 
-        return self.update(request, *args, **kwargs)
+        return queryset
 
-    def patch(self, request, *args, **kwargs):
-        validators.validate_body_url_id([request.data['id']], [self.kwargs['pk']])
+    def create(self, request, *args, **kwargs):
+        # request.data['hackathon'] = self.kwargs['fk']
 
-        return self.partial_update(request, *args, **kwargs)
+        return super(EventViewSet, self).create(request, *args, **kwargs)
 
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+    def list(self, request, *args, **kwargs):
+        return super(EventViewSet, self).list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        return super(EventViewSet, self).retrieve(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        # validators.validate_body_url_id([request.data['id']], [self.kwargs['pk']])
+
+        return super(EventViewSet, self).update(request, *args, **kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        # validators.validate_body_url_id([request.data['id']], [self.kwargs['pk']])
+
+        return super(EventViewSet, self).partial_update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        return super(EventViewSet, self).destroy(request, *args, **kwargs)
 
 
 # ADD Hacker to Event

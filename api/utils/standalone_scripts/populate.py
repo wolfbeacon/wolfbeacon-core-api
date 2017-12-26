@@ -79,7 +79,7 @@ def add_user():
             "2000$ AWS Credits"
         ]
     })
-    print(res.text)
+    print(res.status_code)
 
 
 def add_event():

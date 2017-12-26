@@ -1,5 +1,4 @@
-from rest_framework import mixins
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from api.models import Organizer
 from api.serializers import OrganizerSerializer
@@ -79,12 +78,7 @@ HTTP/1.1 204 NO CONTENT
 """
 
 
-class OrganizerViewSet(mixins.ListModelMixin,
-                       mixins.CreateModelMixin,
-                       mixins.RetrieveModelMixin,
-                       mixins.UpdateModelMixin,
-                       mixins.DestroyModelMixin,
-                       GenericViewSet):
+class OrganizerViewSet(ModelViewSet):
     serializer_class = OrganizerSerializer
     queryset = Organizer.objects.all()
     filter_fields = (

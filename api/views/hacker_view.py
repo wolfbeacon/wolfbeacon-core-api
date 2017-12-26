@@ -1,5 +1,4 @@
-from rest_framework import mixins
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from api.models import Hacker
 from api.serializers import HackerSerializer
@@ -81,12 +80,7 @@ HTTP/1.1 204 NO CONTENT
 """
 
 
-class HackerViewSet(mixins.ListModelMixin,
-                    mixins.CreateModelMixin,
-                    mixins.RetrieveModelMixin,
-                    mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,
-                    GenericViewSet):
+class HackerViewSet(ModelViewSet):
     serializer_class = HackerSerializer
     filter_fields = (
         'id', 'user', 'hackathon', 'application_status'

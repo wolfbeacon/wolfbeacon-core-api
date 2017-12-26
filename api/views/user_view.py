@@ -120,7 +120,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_fields = (
-        'id', 'auth0_id', 'username', 'created_at', 'updated_at', 'first_name', 'last_name', 'gender', 'email',
+        'id', 'auth0_id', 'username', 'first_name', 'last_name', 'gender', 'email',
         'phone_number', 'level_of_study', 'major_of_study', 'school_last_attended', 'graduation_year',
         'graduation_month', 'tshirt_size', 'country', 'city', 'zipcode', 'birthday', 'dietary_restrictions',
         'special_accommodations', 'experience_points',
