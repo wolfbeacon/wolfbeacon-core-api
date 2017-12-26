@@ -1,3 +1,5 @@
+from random import uniform
+
 import requests
 
 BASE_URL = 'http://localhost:8000/v1/'
@@ -36,7 +38,7 @@ def add_hackathon():
 def add_user():
     url = BASE_URL + 'users/'
     res = requests.post(url, json={
-        "auth0_id": "facebook_1234",
+        "auth0_id": str(uniform(2.5, 10.0)),
         "first_name": "John",
         "last_name": "Doe",
         "gender": "male",
@@ -77,7 +79,7 @@ def add_user():
             "2000$ AWS Credits"
         ]
     })
-    print(res.status_code)
+    print(res.text)
 
 
 def add_event():
@@ -105,6 +107,33 @@ def add_hacker():
     print(res.status_code)
 
 
+def add_organizer():
+    url = BASE_URL + 'hackathons/1/organizers/'
+    res = requests.post(url, json={
+        "user": 2,
+        "hackathon": 1
+    })
+    print(res.status_code)
+
+
+def add_volunteer():
+    url = BASE_URL + 'hackathons/1/volunteers/'
+    res = requests.post(url, json={
+        "user": 3,
+        "hackathon": 1
+    })
+    print(res.status_code)
+
+
+def add_mentor():
+    url = BASE_URL + 'hackathons/1/mentors/'
+    res = requests.post(url, json={
+        "user": 4,
+        "hackathon": 1
+    })
+    print(res.status_code)
+
+
 def add_hacker_to_event():
     url = BASE_URL + 'hackathons/1/events/1/hackers/1/'
     res = requests.post(url)
@@ -112,7 +141,16 @@ def add_hacker_to_event():
 
 
 add_hackathon()
+
 add_user()
+add_user()
+add_user()
+add_user()
+
 add_event()
 add_hacker()
+add_organizer()
+add_volunteer()
+add_mentor()
+
 add_hacker_to_event()

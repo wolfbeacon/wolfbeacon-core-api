@@ -26,7 +26,6 @@ class Pass(models.Model):
 
                 'first_name': hacker.user.first_name,
                 'last_name': hacker.user.last_name,
-                'role': hacker.role
             }
 
             # Embed data in QR

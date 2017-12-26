@@ -4,13 +4,6 @@ GENDER = (
     ('other', 'Other')
 )
 
-HACKER_ROLES = (
-    ('organiser', 'Organiser'),
-    ('participant', 'Participant'),
-    ('volunteer', 'Volunteer'),
-    ('mentor', 'Mentor'),
-)
-
 LEVEL_OF_STUDY = (
     ('high-school', 'High School'),
     ('undergraduate', 'Undergraduate'),

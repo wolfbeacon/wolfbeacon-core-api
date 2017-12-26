@@ -8,3 +8,6 @@ from api.views.event_view import EventList, EventCreate, EventRUD, EventHackerAd
 from api.views.rating_view import RatingViewSet
 from api.views.upload_view import UploadViewSet
 from api.views.pass_view import PassViewSet
+from api.views.organizer_view import OrganizerViewSet
+from api.views.volunteer_view import VolunteerViewSet
+from api.views.mentor_view import MentorViewSet

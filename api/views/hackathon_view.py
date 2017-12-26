@@ -21,7 +21,7 @@ from api.utils import validators
 @apiParam {String{350 chars}} shipping_address Address for contact or shipping goodies. Example: Apt # 708, 1365 Military Trail	
 @apiParam {String} travel_reimbursements Note about travel reimbursements
 @apiParam {String} university_name (Optional) For University MLH Rankings
-@apiParam {String} contact_email Email Id to reach out to hackathon organisers
+@apiParam {String} contact_email Email Id to reach out to hackathon organizers
 @apiParam {String="YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]"} start Denotes start time of hackathon
 @apiParam {String="YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]"} end Denotes end time of hackathon
 @apiParam {json} social_links Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`

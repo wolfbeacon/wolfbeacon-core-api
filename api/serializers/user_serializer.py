@@ -20,4 +20,4 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'created_at', 'updated_at',)
 
     def get_hackathons(self, obj):
-        return obj.hacker_set.all().values('id', 'role')
+        return obj.hacker_set.all().values()

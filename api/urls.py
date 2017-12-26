@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from api.views import HackathonViewSet, UserViewSet, HackerViewSet, EventCreate, EventRUD, EventList, \
-    EventHackerAddRemove, RatingViewSet, UploadViewSet, PassViewSet
+    EventHackerAddRemove, RatingViewSet, PassViewSet, OrganizerViewSet, VolunteerViewSet, MentorViewSet
 
 # Register CRUD Entities with Router
 router = DefaultRouter()
@@ -15,9 +15,6 @@ router.register(r'hackathons', HackathonViewSet,
 # RATINGS
 router.register(r'ratings', RatingViewSet)
 
-# FILE UPLOADS - Not Needed
-# router.register(r'upload', UploadViewSet)
-
 # Remaining URLs
 urlpatterns = [
 
@@ -25,6 +22,21 @@ urlpatterns = [
     url(r'^hackathons/(?P<fk>\d+)/hackers/$', HackerViewSet.as_view({'post': 'create'})),
     url(r'^hackers/(?P<pk>\d+)/$', HackerViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})),
     url(r'^hackers/$', HackerViewSet.as_view({'get': 'list', 'post': 'create'})),
+
+    # ORGANIZERS
+    url(r'^hackathons/(?P<fk>\d+)/organizers/$', OrganizerViewSet.as_view({'post': 'create'})),
+    url(r'^organizers/(?P<pk>\d+)/$', OrganizerViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})),
+    url(r'^organizers/$', OrganizerViewSet.as_view({'get': 'list', 'post': 'create'})),
+
+    # VOLUNTEERS
+    url(r'^hackathons/(?P<fk>\d+)/volunteers/$', VolunteerViewSet.as_view({'post': 'create'})),
+    url(r'^volunteers/(?P<pk>\d+)/$', VolunteerViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})),
+    url(r'^volunteers/$', VolunteerViewSet.as_view({'get': 'list', 'post': 'create'})),
+
+    # MENTORS
+    url(r'^hackathons/(?P<fk>\d+)/mentors/$', MentorViewSet.as_view({'post': 'create'})),
+    url(r'^mentors/(?P<pk>\d+)/$', MentorViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})),
+    url(r'^mentors/$', MentorViewSet.as_view({'get': 'list', 'post': 'create'})),
 
     # EVENTS
     url(r'^hackathons/(?P<fk>\d+)/events/$', EventCreate.as_view()),
