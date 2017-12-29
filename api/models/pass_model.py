@@ -11,8 +11,9 @@ class Pass(models.Model):
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    qr_code = models.ImageField(upload_to='qr_codes/', editable=False, blank=True)
     hacker = models.OneToOneField(Hacker, on_delete=models.CASCADE)
+
+    qr_code = models.ImageField(upload_to='qr_codes/', editable=False, blank=True)
 
     def save(self, *args, **kwargs):
 
