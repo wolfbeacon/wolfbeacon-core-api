@@ -18,11 +18,11 @@ from api.utils import validators
 @apiParam {Integer} hackathon ID of Hackathon this Event is a part of
 @apiParam {String="mini-mlh-event","general-workshop","company-workshop","speaker-session", "fireside-chats", "open-source-event", "activity"} type Type of Event
 @apiParam {String{50 chars}} name Name of Event
-@apiParam {String{150 chars}} tagline Tagline for Event
+@apiParam {String{100 chars}} tagline Tagline for Event
 @apiParam {String{350 chars}} description Description of Event
-@apiParam {json} speaker_details Speaker Details
-@apiParam {String{150 chars}} location Location of Event
+@apiParam {String{100 chars}} location Location of Event
 @apiParam {String} giveaway Event Giveaways
+@apiParam {json} speaker_details Speaker Details
 
 @apiParamExample {json} Request Data Example:
 {"hackathon":1,"name":"Test Name","type":"general-workshop","tagline":"Test Workshop","description":"Test Description","speaker_details":{},"location":"Building A","giveaway":"Tshirt"}

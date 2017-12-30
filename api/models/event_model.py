@@ -1,8 +1,6 @@
 from django.db import models
 from api.models import Hacker, Hackathon
 from django.contrib.postgres.fields import JSONField
-from api.utils.constants import SHORT_FIELD_LIMIT, MEDIUM_FIELD_LIMIT, LONG_FIELD_LIMIT
-from api.utils.enums import EVENT_TYPE
 
 """ 
 Event Model
@@ -15,13 +13,20 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     hackers = models.ManyToManyField(Hacker)
-
     hackathon = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
 
-    type = models.TextField(choices=EVENT_TYPE)
-    name = models.CharField(max_length=SHORT_FIELD_LIMIT)
-    tagline = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
-    description = models.CharField(max_length=LONG_FIELD_LIMIT)
-    speaker_details = JSONField()
-    location = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
+    type = models.TextField(choices=(
+        ('mini-mlh-event', 'Mini MLH Event'),
+        ('general-workshop', 'General Workshop'),
+        ('company-workshop', 'Company Workshop'),
+        ('speaker-session', 'Speaker Session'),
+        ('fireside-chats', 'Fireside Chats'),
+        ('open-source-event', 'General Open Source Event'),
+        ('activity', 'General Activity'),
+    ))
+    name = models.CharField(max_length=50)
+    tagline = models.CharField(max_length=100)
+    description = models.CharField(max_length=350)
+    location = models.CharField(max_length=100)
     giveaway = models.TextField(null=True)
+    speaker_details = JSONField()

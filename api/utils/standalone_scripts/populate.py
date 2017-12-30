@@ -53,6 +53,7 @@ def add_user():
         "tshirt_size": "XL",
         "country": "USA",
         "city": "Washington",
+        "zipcode": 1234123,
         "birthday": "1196-04-19",
         "social_links": {
             "github": "https://github.com/bholagabbar"

@@ -12,29 +12,29 @@ from api.models.user_model import User
 
 @apiParam {String} auth0_id *user_id* field in User Auth0 Profile Structure
 @apiParam {String} profile_picture_link (Optional) *picture* field in User Auth0 Profile Structure which is basically a link to user's profile picture of signed in platform 
-@apiParam {String{150 chars}} first_name First Name
-@apiParam {String{150 chars}} last_name Last Name
+@apiParam {String{50 chars}} first_name First Name
+@apiParam {String{50 chars}} last_name Last Name
 @apiParam {String{50 chars}} username Username
 @apiParam {String="male","female","other"} gender Gender 
+@apiParam {String="YYYY-MM-DD"} birthday Date of Birth
 @apiParam {String} email Email Id 
 @apiParam {String} phone_number (Optional) Phone Number in the format example `+999999` with a max of 15 digits
 @apiParam {String="high-school","undergraduate","graduate","doctoral","other"} level_of_study Indicates Level of Study
-@apiParam {String{150 chars}} major_of_study College Major
-@apiParam {String{150 chars}} school_last_attended (Optional) Educational Institution Attended
+@apiParam {String{100 chars}} major_of_study College Major
+@apiParam {String{100 chars}} school_last_attended (Optional) Educational Institution Attended
 @apiParam {Number{1950-}} graduation_year (Optional) Year of Graduation
 @apiParam {Number{1-12}} graduation_month (Optional) Month of Graduation
+@apiParam {String{100 chars}} street_address (Optional) Street Address
+@apiParam {String{75 chars}} city (Optional) City
+@apiParam {Number} zipcode (Optional) Zipcode
+@apiParam {String{75 chars}} country (Optional) Country
 @apiParam {String="XS","S","M","L","XL","XXL"} tshirt_size T-Shirt Size
-@apiParam {String{150 chars}} country (Optional) Country
-@apiParam {String{150 chars}} city (Optional) City
-@apiParam {Number} pincode (Optional) Pincode
-@apiParam {String{350 chars}} street_address (Optional) Street Address
-@apiParam {String="YYYY-MM-DD"} birthday Date of Birth
+@apiParam {String{1000 chars}} about_me (Optional) Description of User and Interests
 @apiParam {JSON} social_links Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
 @apiParam {String="halal","vegetarian","vegan","gluten-free","lactose-intolerant","none"} dietary_restrictions Dietary Restrictions
-@apiParam {String} special_accommodations (Optional) Special Accommodations Required
+@apiParam {String{250 chars}} special_accommodations (Optional) Special Accommodations Required
 @apiParam {List} technical_interests (Optional) List of Technology sub categories Interested In
 @apiParam {List} technologies (Optional) List of Technologies Interested In
-@apiParam {String} about_me (Optional) Description of User and Interests
 @apiParam {List} sponsors_interested_in (Optional) List of Sponsors User would like to see
 @apiParam {List} prizes_interested_in (Optional) List of Prizes User would like to see
 @apiParam {List} prizes_interested_in (Optional) List of Prizes User would like to see

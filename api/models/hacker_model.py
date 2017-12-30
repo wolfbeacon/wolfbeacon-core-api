@@ -1,6 +1,5 @@
 from django.db import models
 from api.models import Hackathon, User
-from api.utils.enums import APPLICATION_STATUS
 
 """ 
 Hacker Model
@@ -17,4 +16,9 @@ class Hacker(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
 
-    application_status = models.TextField(choices=APPLICATION_STATUS)
+    application_status = models.TextField(choices=(
+        ('accepted', 'Accepted'),
+        ('wait-listed', 'Wait Listed'),
+        ('applied', 'Applied'),
+        ('rejected', 'Rejected'),
+    ))

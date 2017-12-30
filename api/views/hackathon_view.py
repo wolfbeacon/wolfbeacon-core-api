@@ -10,17 +10,17 @@ from api.utils import validators
 @apiName CreateHackathon
 @apiGroup Hackathons 
 
-@apiParam {String{150 chars}} name Name/Title of Hackathon
+@apiParam {String{100 chars}} name Name/Title of Hackathon
 @apiParam {String} version Denotes which iteration of this hackathon
 @apiParam {String} description Short note about the uniqueness of the Hackathon
 @apiParam {File} logo_image_file (Optional) Image file (.jpg, png) of Hackathon Logo (Multipart Request) 
 @apiParam {String="high-school","university","corporate","other"} hackathon_type Type of Hackathon denoting audience
-@apiParam {String{350 chars}} location Location of Hackathon Example: EX: 756 Finch Ave, Toronto, Canada
+@apiParam {String{250 chars}} location Location of Hackathon Example: EX: 756 Finch Ave, Toronto, Canada
 @apiParam {Number} latitude Location of Hackathon Example: EX: 756 Finch Ave, Toronto, Canada
 @apiParam {Number} longitude Location of Hackathon Example: EX: 756 Finch Ave, Toronto, Canada
-@apiParam {String{350 chars}} shipping_address Address for contact or shipping goodies. Example: Apt # 708, 1365 Military Trail	
+@apiParam {String{150 chars}} shipping_address Address for contact or shipping goodies. Example: Apt # 708, 1365 Military Trail	
 @apiParam {String} travel_reimbursements Note about travel reimbursements
-@apiParam {String} university_name (Optional) For University MLH Rankings
+@apiParam {String{100 chars}} university_name (Optional) For University MLH Rankings
 @apiParam {String} contact_email Email Id to reach out to hackathon organizers
 @apiParam {String="YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]"} start Denotes start time of hackathon
 @apiParam {String="YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]"} end Denotes end time of hackathon

@@ -1,8 +1,5 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField, ArrayField
-from api.utils.enums import GENDER, LEVEL_OF_STUDY, TSHIRT_SIZES, DIETARY_RESTRICTIONS
-from api.utils.constants import MEDIUM_FIELD_LIMIT, PHONE_FIELD_LIMIT, GRAD_YEAR_LOWER_LIMIT, LONG_FIELD_LIMIT, \
-    PHONE_NUMBER_ERR_MSG, SHORT_FIELD_LIMIT
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.validators import RegexValidator
 
@@ -23,30 +20,56 @@ class User(models.Model):
     # Sourced from Auth0 User profile, hence TextField
     profile_picture_link = models.TextField(null=True)
 
-    username = models.CharField(max_length=SHORT_FIELD_LIMIT)
-    first_name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
-    last_name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
-    gender = models.TextField(choices=GENDER)
-    email = models.EmailField()
-    phone_number = models.CharField(validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$', message=PHONE_NUMBER_ERR_MSG)],
-                                    max_length=PHONE_FIELD_LIMIT, null=True)
-    level_of_study = models.TextField(choices=LEVEL_OF_STUDY)
-    major_of_study = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
-    school_last_attended = models.CharField(max_length=MEDIUM_FIELD_LIMIT, null=True)
-    graduation_year = models.PositiveIntegerField(validators=[MinValueValidator(GRAD_YEAR_LOWER_LIMIT)], null=True)
-    graduation_month = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(12)], null=True)
-    tshirt_size = models.TextField(choices=TSHIRT_SIZES)
-    country = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
-    city = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
-    zipcode = models.PositiveIntegerField(null=True)
-    street_address = models.CharField(max_length=LONG_FIELD_LIMIT, null=True)
+    username = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    gender = models.TextField(choices=(
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('other', 'Other')
+    ))
     birthday = models.DateField()
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15, validators=[
+        RegexValidator(regex=r'^\+?1?\d{9,15}$',
+                       message="Phone number format: '+999999999'. Max 15 digits allowed.")], null=True)
+    level_of_study = models.TextField(choices=(
+        ('high-school', 'High School'),
+        ('undergraduate', 'Undergraduate'),
+        ('graduate', 'Graduate'),
+        ('doctoral', 'PhD'),
+        ('other', 'Other'),
+    ))
+    major_of_study = models.CharField(max_length=100)
+    school_last_attended = models.CharField(max_length=100, null=True)
+    graduation_year = models.PositiveIntegerField(validators=[MinValueValidator(1950)], null=True)
+    graduation_month = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(12)], null=True)
+    street_address = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=75)
+    zipcode = models.PositiveIntegerField(null=True)
+    country = models.CharField(max_length=75)
+    tshirt_size = models.TextField(choices=(
+        ('XS', 'Extra Small'),
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+        ('XL', 'Extra Large'),
+        ('XXL', 'Double Extra Large'),
+    ))
+    about_me = models.CharField(max_length=1000, null=True)
     social_links = JSONField(null=True)
-    dietary_restrictions = models.TextField(choices=DIETARY_RESTRICTIONS)
-    special_accommodations = models.TextField(null=True)
+    dietary_restrictions = models.TextField(choices=(
+        ('halal', 'Halal'),
+        ('vegetarian', 'Vegetarian'),
+        ('vegan', 'Vegan'),
+        ('gluten-free', 'Gluten-free'),
+        ('lactose-intolerant', 'Lactose Intolerant'),
+        ('kosher', 'Kosher'),
+        ('none', 'None'),
+    ))
+    special_accommodations = models.CharField(max_length=250, null=True)
     technical_interests = ArrayField(models.TextField(blank=False, null=False), blank=True, default=list)
     technologies = ArrayField(models.TextField(blank=False, null=False), blank=True, default=list)
-    about_me = models.TextField(null=True)
     sponsors_interested_in = ArrayField(models.TextField(blank=False, null=False), blank=True, default=list)
     prizes_interested_in = ArrayField(models.TextField(blank=False, null=False), blank=True, default=list)
     experience_points = models.IntegerField(default=0)

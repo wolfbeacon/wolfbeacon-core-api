@@ -2,10 +2,6 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.db.models import Count
 
-from api.utils.constants import MEDIUM_FIELD_LIMIT, LONG_FIELD_LIMIT, HACKATHON_FEATURED_LIMIT, COORD_MAX_DIGITS, \
-    COORD_MAX_DECIMAL_PLACES
-from api.utils.enums import HACKATHON_TYPE
-
 """ 
 Hackathon Model
 """
@@ -14,7 +10,8 @@ Hackathon Model
 class HackathonQueryset(models.query.QuerySet):
     # Current condition for Featured Hackathons is having >= 50 members - set by HACKATHON_FEATURED_LIMIT
     def featured(self):
-        return self.annotate(num_hackers=Count('hacker')).filter(num_hackers__gte=HACKATHON_FEATURED_LIMIT)
+        return self.annotate(num_hackers=Count('hacker')).filter(
+            num_hackers__gte=50)
 
     def start_date(self, start_date):
         return self.filter(start__date__gte=start_date)
@@ -43,18 +40,23 @@ class Hackathon(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
 
-    name = models.CharField(max_length=MEDIUM_FIELD_LIMIT)
+    name = models.CharField(max_length=100)
     version = models.PositiveIntegerField(default=1)
     description = models.TextField()
     logo_image_file = models.ImageField(upload_to='hackathon_logos/', null=True)
-    hackathon_type = models.TextField(choices=HACKATHON_TYPE)
-    location = models.CharField(max_length=LONG_FIELD_LIMIT)
-    latitude = models.DecimalField(max_digits=COORD_MAX_DIGITS, decimal_places=COORD_MAX_DECIMAL_PLACES)
-    longitude = models.DecimalField(max_digits=COORD_MAX_DIGITS, decimal_places=COORD_MAX_DECIMAL_PLACES)
+    hackathon_type = models.TextField(choices=(
+        ('high-school', 'High School Hackathon'),
+        ('university', 'University Level Hackathon'),
+        ('corporate', 'Corporate Level Hackathon'),
+        ('other', 'Other')
+    ))
+    location = models.CharField(max_length=250)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
-    shipping_address = models.CharField(max_length=LONG_FIELD_LIMIT)
+    shipping_address = models.CharField(max_length=150)
     travel_reimbursements = models.TextField()
-    university_name = models.CharField(max_length=LONG_FIELD_LIMIT, null=True)
+    university_name = models.CharField(max_length=100, null=True)
     contact_email = models.EmailField()
 
     start = models.DateTimeField()
