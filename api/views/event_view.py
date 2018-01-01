@@ -133,8 +133,8 @@ class EventViewSet(ModelViewSet):
 # ADD Hacker to Event
 """
 @apiVersion 1.0.0
-@api {post} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 7. Add Hacker to Event
-@apiDescription This endpoint simply adds a Hacker attending a Hackathon to an Event of that Hackathon. Since no new Entity is being created, the request body is empty but with an HTTP 201 CREATED status code
+@api {post} /events/:event-id/hackers/:hacker-id/ 7. Add Hacker to Event
+@apiDescription This endpoint adds a Hacker attending a Hackathon to an Event of that Hackathon. Since no new Entity is being created, the request body is empty but with an HTTP 201 CREATED status code
 @apiName AddHackerToEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
@@ -144,7 +144,7 @@ HTTP/1.1 201 CREATED
 # DELETE Hacker from Event
 """
 @apiVersion 1.0.0
-@api {delete} /hackathons/:hackathon-id/events/:event-id/hackers/:hacker-id/ 8. Remove Hacker from Event 
+@api {delete} /events/:event-id/hackers/:hacker-id/ 8. Remove Hacker from Event 
 @apiName RemoveHackerFromEvent
 @apiGroup Events
 @apiSuccessExample {json} Success Response Code:
@@ -158,13 +158,11 @@ class EventHackerAddRemove(APIView):
     """
 
     def post(self, request, *args, **kwargs):
-
-        hackathon_id = self.kwargs['fk2']
         event_id = self.kwargs['fk']
         hacker_id = self.kwargs['pk']
 
         try:
-            event = Event.objects.get(hackathon=hackathon_id, id=event_id)
+            event = Event.objects.get(id=event_id)
             hacker = Hacker.objects.get(id=hacker_id)
 
             event.hackers.add(hacker)
@@ -175,13 +173,11 @@ class EventHackerAddRemove(APIView):
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, *args, **kwargs):
-
-        hackathon_id = self.kwargs['fk2']
         event_id = self.kwargs['fk']
         hacker_id = self.kwargs['pk']
 
         try:
-            event = Event.objects.get(hackathon=hackathon_id, id=event_id)
+            event = Event.objects.get(id=event_id)
             hacker = Hacker.objects.get(id=hacker_id)
 
             event.hackers.remove(hacker)
