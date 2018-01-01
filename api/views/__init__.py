@@ -11,3 +11,4 @@ from api.views.pass_view import PassViewSet
 from api.views.organizer_view import OrganizerViewSet
 from api.views.volunteer_view import VolunteerViewSet
 from api.views.mentor_view import MentorViewSet
+from api.views.team_view import TeamViewSet

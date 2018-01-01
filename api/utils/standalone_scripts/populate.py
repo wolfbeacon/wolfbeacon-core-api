@@ -141,6 +141,17 @@ def add_hacker_to_event():
     print(res.status_code)
 
 
+def create_team():
+    url = BASE_URL + 'hackathons/1/teams/'
+    res = requests.post(url, json={
+        "hackathon": 1,
+        "owner_hacker": 1,
+        "name": "ThreeJacks",
+        "organization": "XYZ University",
+    })
+    print(res.status_code)
+
+
 add_hackathon()
 
 add_user()
@@ -155,3 +166,4 @@ add_volunteer()
 add_mentor()
 
 add_hacker_to_event()
+create_team()

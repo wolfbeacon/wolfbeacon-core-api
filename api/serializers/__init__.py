@@ -8,5 +8,7 @@ from api.serializers.pass_serializer import PassSerializer
 from api.serializers.organizer_serializer import OrganizerSerializer
 from api.serializers.volunteer_serializer import VolunteerSerializer
 from api.serializers.mentor_serializer import MentorSerializer
+from api.serializers.team_serializer import TeamSerializer
+
 
 

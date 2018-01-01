@@ -3,7 +3,7 @@ from api.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    hackathons = serializers.SerializerMethodField()
+    hacker_profiles = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -15,9 +15,9 @@ class UserSerializer(serializers.ModelSerializer):
             'technologies', 'about_me', 'sponsors_interested_in', 'prizes_interested_in', 'experience_points',
             'badges_links', 'sticker_book_links',
 
-            'hackathons'
+            'hacker_profiles'
         )
         read_only_fields = ('id', 'created_at', 'updated_at',)
 
-    def get_hackathons(self, obj):
+    def get_hacker_profiles(self, obj):
         return obj.hacker_set.all().values()

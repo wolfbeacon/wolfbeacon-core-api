@@ -8,3 +8,4 @@ from api.models.pass_model import Pass
 from api.models.organizer_model import Organizer
 from api.models.volunteer_model import Volunteer
 from api.models.mentor_model import Mentor
+from .team_model import Team

@@ -69,5 +69,8 @@ class Hackathon(models.Model):
     speakers = JSONField()
     prizes = JSONField()
 
+    teams_allowed = models.BooleanField(default=True)
+    max_team_size = models.PositiveIntegerField(default=3, null=True)
+
     # Link to HackathonManager
     objects = HackathonManager()
