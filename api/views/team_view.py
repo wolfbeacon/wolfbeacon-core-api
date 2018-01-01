@@ -119,7 +119,7 @@ class TeamViewSet(ModelViewSet):
 # ADD Hacker to Team
 """
 @apiVersion 1.0.0
-@api {post} /teams/:team-id/hackers/:hacker-id/ 7. Add Hacker to Team
+@api {post} /hackathons/:hackathon-id/teams/:team-id/hackers/:hacker-id/ 7. Add Hacker to Team
 @apiDescription This endpoint adds a Hacker attending a Hackathon to an Team of that Hackathon. Since no new Entity is being created, the request body is empty but with an HTTP 201 CREATED status code
 @apiName AddHackerToTeam
 @apiGroup Teams
@@ -130,7 +130,7 @@ class TeamViewSet(ModelViewSet):
 # DELETE Hacker from Team
 """
 @apiVersion 1.0.0
-@api {delete} /teams/:team-id/hackers/:hacker-id/ 8. Remove Hacker from Team 
+@api {delete} /hackathons/:hackathon-id/teams/:team-id/hackers/:hacker-id/ 8. Remove Hacker from Team 
 @apiName RemoveHackerFromTeam
 @apiGroup Teams
 @apiSuccessExample {json} Success Response Code:
@@ -145,12 +145,13 @@ class TeamHackerAddRemove(APIView):
 
     def post(self, request, *args, **kwargs):
 
+        hackathon_id = self.kwargs['fk2']
         team_id = self.kwargs['fk']
         hacker_id = self.kwargs['pk']
 
         try:
-            hacker = Hacker.objects.get(id=hacker_id)
-            team = Team.objects.get(id=team_id)
+            hacker = Hacker.objects.get(hackathon=hackathon_id, id=hacker_id)
+            team = Team.objects.get(hackathon=hackathon_id, id=team_id)
 
             team.hacker_set.add(hacker)
 
@@ -163,12 +164,13 @@ class TeamHackerAddRemove(APIView):
 
     def delete(self, request, *args, **kwargs):
 
+        hackathon_id = self.kwargs['fk2']
         team_id = self.kwargs['fk']
         hacker_id = self.kwargs['pk']
 
         try:
-            hacker = Hacker.objects.get(id=hacker_id)
-            team = Team.objects.get(id=team_id)
+            hacker = Hacker.objects.get(hackathon=hackathon_id, id=hacker_id)
+            team = Team.objects.get(hackathon=hackathon_id, id=team_id)
 
             team.hacker_set.remove(hacker)
 

@@ -98,10 +98,10 @@ def add_event():
     print(res.status_code)
 
 
-def add_hacker():
+def add_hacker(user=1):
     url = BASE_URL + 'hackathons/1/hackers/'
     res = requests.post(url, json={
-        "user": 1,
+        "user": user,
         "hackathon": 1,
         "application_status": "accepted"
     })
@@ -152,6 +152,12 @@ def create_team():
     print(res.status_code)
 
 
+def add_hacker_to_team():
+    url = BASE_URL + 'hackathons/1/teams/1/hackers/2/'
+    res = requests.post(url)
+    print(res.status_code)
+
+
 add_hackathon()
 
 add_user()
@@ -167,3 +173,7 @@ add_mentor()
 
 add_hacker_to_event()
 create_team()
+
+add_user()
+add_hacker(user=5)
+add_hacker_to_team()

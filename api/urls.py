@@ -43,14 +43,14 @@ urlpatterns = [
     url(r'^teams/(?P<pk>\d+)/$', TeamViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})),
     url(r'^teams/$', TeamViewSet.as_view({'get': 'list'})),
     # Add Hackers to Teams
-    url(r'^teams/(?P<fk>\d+)/hackers/(?P<pk>\d+)/$', TeamHackerAddRemove.as_view()),
+    url(r'^hackathons/(?P<fk2>\d+)/teams/(?P<fk>\d+)/hackers/(?P<pk>\d+)/$', TeamHackerAddRemove.as_view()),
 
     # EVENTS
     url(r'^hackathons/(?P<fk>\d+)/events/$', EventViewSet.as_view({'post': 'create'})),
     url(r'^events/(?P<pk>\d+)/$', EventViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})),
     url(r'^events/$', EventViewSet.as_view({'get': 'list'})),
     # Add Hackers to Events
-    url(r'^events/(?P<fk>\d+)/hackers/(?P<pk>\d+)/$', EventHackerAddRemove.as_view()),
+    url(r'^hackathons/(?P<fk2>\d+)/events/(?P<fk>\d+)/hackers/(?P<pk>\d+)/$', EventHackerAddRemove.as_view()),
 
     # HACKER PASSES
     url(r'^passes/$', PassViewSet.as_view({'post': 'create', 'get': 'list'})),
