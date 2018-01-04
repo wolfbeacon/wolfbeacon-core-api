@@ -21,9 +21,9 @@ Documentation is to be used in conjunction with the [WolfBeacon Core API Integra
 
   `cp wolfbeacon/settings.template.py wolfbeacon/settings.py`
 
-* Add the *SECRET_KEY*, *DATABASES* and *AUTH0* configuration in the *settings.py* file.
+* Ensure you have PostgreSQL running. A quick way to setup Postgres is by running it as a docker container locally - `docker run -p 5432:5432 -e POSTGRES_PASSWORD=Admin123 -d postgres`
 
-  Adding the *AUTH0* configuration (used for [Auth0](https://auth0.com) Token Validation) is optional. Hence for local testing, disable it by removing `'api.middleware.auth0.Auth0Middleware',` from *MIDDLEWARE*.
+* Add values in *DATABASES* (your database configuration) and *AUTH0* keys in the *settings.py* file. Adding the *AUTH0* configuration (used for [Auth0](https://auth0.com) Token Validation) is optional. Hence for local testing, disable it by removing `'api.middleware.auth0.Auth0Middleware',` from *MIDDLEWARE*.
 
 * Install requirements
 
