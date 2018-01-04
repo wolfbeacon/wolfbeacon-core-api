@@ -1,6 +1,8 @@
 from random import uniform
 
 import requests
+import random
+import string
 
 BASE_URL = 'http://localhost:8000/v1/'
 
@@ -43,7 +45,7 @@ def add_user():
         "last_name": "Doe",
         "gender": "male",
         "username": "johndoe123",
-        "email": "john.doe@gmail.com",
+        "email": "john.doe@" + ''.join(random.choices(string.ascii_lowercase, k=10)) + ".com",
         "phone_number": "+999999999",
         "level_of_study": "undergraduate",
         "major_of_study": "Computer Science and Engineering",
