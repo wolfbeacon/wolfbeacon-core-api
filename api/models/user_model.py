@@ -29,7 +29,7 @@ class User(models.Model):
         ('other', 'Other')
     ))
     birthday = models.DateField()
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, validators=[
         RegexValidator(regex=r'^\+?1?\d{9,15}$',
                        message="Phone number format: '+999999999'. Max 15 digits allowed.")], null=True)
