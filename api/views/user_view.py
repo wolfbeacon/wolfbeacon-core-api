@@ -25,9 +25,9 @@ from api.models.user_model import User
 @apiParam {Number{1950-}} graduation_year (Optional) Year of Graduation
 @apiParam {Number{1-12}} graduation_month (Optional) Month of Graduation
 @apiParam {String{100 chars}} street_address (Optional) Street Address
-@apiParam {String{75 chars}} city (Optional) City
+@apiParam {String{75 chars}} city City
 @apiParam {Number} zipcode (Optional) Zipcode
-@apiParam {String{75 chars}} country (Optional) Country
+@apiParam {String{75 chars}} country Country
 @apiParam {String="XS","S","M","L","XL","XXL"} tshirt_size T-Shirt Size
 @apiParam {String{1000 chars}} about_me (Optional) Description of User and Interests
 @apiParam {JSON} social_links Social URLs as `{"social_platform_1":"link", "social_platform_2":"link"...}`
