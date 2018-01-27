@@ -8,7 +8,7 @@ Written in [Python 3](https://www.python.org/downloads/release/python-352/), pow
 
 #### API Documentation is available at [https://api.wolfbeacon.com/docs](https://api.wolfbeacon.com/docs)
 
-Documentation is to be used in conjunction with the [WolfBeacon Core API Integration Guide](https://wolfbeacon.atlassian.net/wiki/spaces/WG/pages/283181225/WolfBeacon+API+Integration) which describes various crucial flows like Login, Signup etc.
+Documentation is to be used with the [WolfBeacon Core API Integration Guide](https://wolfbeacon.atlassian.net/wiki/spaces/WG/pages/283181225/WolfBeacon+API+Integration) which describes various crucial flows like Login, Signup etc.
 
 **Note**: Docs are generated using [apidoc](http://apidocjs.com/) with corresponding docstrings present in view files under the `/api/views` directory. Documentation is served separately by the [wolfbeacon-apidoc-gen](https://github.com/wolfbeacon/wolfbeacon-apidoc-gen) service.
 
